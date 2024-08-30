@@ -1,0 +1,121 @@
+@import "src/styles/imports.scss";
+.table-creator-wrapper {
+  width: 85%;
+  margin: 0 auto;
+  border-radius: rem(16);
+
+  background-color: $cms-main-light-color;
+
+  .header-wrapper {
+    display: none;
+  }
+  .table-row-body-wrapper {
+    &:nth-child(odd) {
+      background-color: $cms-main-min-light-color;
+    }
+    .table-body-item {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      padding-block: rem(20);
+      padding-inline-start: rem(15);
+      font-size: rem(16);
+      font-family: $font-light;
+      flex-wrap: wrap;
+      word-break: break-word;
+
+      gap: 10px;
+      &::before {
+        content: attr(data-th) ": ";
+        display: inline-block;
+        width: rem(100);
+        font-family: $font-bold;
+      }
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .table-creator-wrapper {
+    border-radius: rem(16);
+
+    .table-row-body-wrapper {
+      .table-body-item {
+        padding-block: rem(20);
+        padding-inline-start: rem(15);
+        font-size: rem(16);
+
+        &::before {
+          width: rem(150);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .table-creator-wrapper {
+    width: 100%;
+    border-radius: rem(16);
+
+    .table-row-wrapper {
+      padding-block: rem(5);
+
+      &:nth-child(odd) {
+        background-color: $cms-main-light-color;
+      }
+      &.header-wrapper {
+        border-top-left-radius: rem(16);
+        border-top-right-radius: rem(16);
+
+        background-color: $cms-main-color;
+
+        .table-header-item {
+          color: $cms-basic-white;
+          font-family: $font-medium;
+          font-size: rem(18);
+        }
+      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: rem(60);
+      .table-item {
+        text-align: center;
+      }
+
+      .table-body-item {
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        border: none;
+        font-size: rem(16);
+
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .table-creator-wrapper {
+    border-radius: rem(16);
+
+    .table-row-wrapper {
+      padding-block: rem(5);
+
+      &.header-wrapper {
+        .table-header-item {
+          font-size: rem(18);
+        }
+      }
+
+      min-height: rem(60);
+
+      .table-body-item {
+        font-size: rem(16);
+      }
+    }
+  }
+}

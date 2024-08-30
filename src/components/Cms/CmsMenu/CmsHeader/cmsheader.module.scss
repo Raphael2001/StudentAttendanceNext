@@ -1,0 +1,42 @@
+@import "src/styles/imports.scss";
+.cms-header {
+  width: 100vw;
+  background-color: $cms-main-color;
+  display: flex;
+  justify-content: center;
+  padding: rem(10);
+  .burger-wrapper {
+    width: 25%;
+    .burger-icon {
+      width: rem(20);
+    }
+  }
+  .title-wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    .title {
+      color: white;
+      font-size: rem(20);
+    }
+  }
+  .empty {
+    width: 25%;
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .cms-header {
+    padding: rem(15) rem(10);
+    .burger-wrapper {
+      .burger-icon {
+        width: rem(20);
+      }
+    }
+    .title-wrapper {
+      .title {
+        font-size: rem(25);
+      }
+    }
+  }
+}

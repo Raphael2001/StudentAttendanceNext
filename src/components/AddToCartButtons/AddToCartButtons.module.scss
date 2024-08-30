@@ -1,0 +1,27 @@
+@import "src/styles/imports.scss";
+
+.actions {
+  width: 100%;
+  display: flex;
+  gap: rem(10);
+  .button-add-to-cart {
+    flex: 0.7;
+  }
+  .button-counter {
+    flex: 0.3;
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .actions {
+    display: flex;
+    gap: rem(10);
+
+    .button-add-to-cart {
+      flex: 0.8;
+    }
+    .button-counter {
+      flex: 0.2;
+    }
+  }
+}

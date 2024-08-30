@@ -1,0 +1,58 @@
+@import "src/styles/imports.scss";
+.media-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: rem(20);
+
+  .switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: rem(10) 0;
+
+    .switch {
+      margin-inline: rem(10);
+    }
+  }
+
+  .media-chooser {
+    margin: 0 auto;
+    border: 1px solid black;
+    height: rem(250);
+    width: rem(250);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    padding: rem(10);
+
+    .url-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .media {
+    width: rem(200);
+  }
+  .input-wrapper {
+    margin-top: rem(30);
+    width: rem(230);
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: rem(15);
+    margin-top: rem(25);
+  }
+  .button {
+    width: rem(180);
+  }
+}

@@ -1,0 +1,10 @@
+@import "src/styles/imports.scss";
+.files-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-inline-end: rem(20);
+
+  .add-button-wrapper {
+    margin: rem(20) auto;
+  }
+}

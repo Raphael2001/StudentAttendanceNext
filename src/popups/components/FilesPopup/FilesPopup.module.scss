@@ -1,0 +1,28 @@
+@import "src/styles/imports.scss";
+.media-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: rem(20);
+
+  .media-chooser {
+    padding: rem(10);
+    .media-input {
+      width: rem(300);
+    }
+  }
+
+  .input-wrapper {
+    margin-top: rem(30);
+    width: rem(230);
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: rem(15);
+    margin-top: rem(25);
+  }
+  .button {
+    width: rem(180);
+  }
+}

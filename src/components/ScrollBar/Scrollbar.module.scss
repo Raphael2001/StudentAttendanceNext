@@ -1,0 +1,43 @@
+@import "src/styles/imports.scss";
+
+.wrapper {
+  overflow: hidden;
+
+  position: relative;
+  height: 100%;
+  .container-content {
+    overflow: auto;
+    height: 100%;
+
+    @include hideScrollbar();
+  }
+
+  .scrollbar {
+    background-color: transparent;
+    border-left-width: 0;
+
+    position: absolute;
+    top: 0;
+    right: 3px;
+    height: 100%;
+    width: 3px;
+    &.hide {
+      display: none;
+    }
+    .scrollbar-thumb {
+      background-color: rgba(217, 217, 217, 1);
+      border-radius: 9999px;
+      cursor: grab;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+    .scrollbar-track {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+}

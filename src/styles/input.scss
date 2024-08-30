@@ -1,0 +1,37 @@
+input {
+  border: unset;
+  border-radius: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  &:focus {
+    border-color: inherit;
+    outline: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 0px transparent inset;
+  }
+  &:-internal-autofill-selected {
+    background-color: transparent !important;
+  }
+}
+
+textarea {
+  display: block;
+  outline: none;
+  resize: none;
+  overflow: auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}

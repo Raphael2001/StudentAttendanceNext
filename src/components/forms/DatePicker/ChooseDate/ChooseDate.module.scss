@@ -1,0 +1,22 @@
+@import "src/styles/imports.scss";
+
+.choose-date-wrapper {
+  width: rem(277);
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  height: rem(164);
+  overflow-y: scroll;
+  .option-card {
+    flex-basis: 33%;
+    font-size: rem(16);
+    line-height: rem(18);
+    color: $cms-main-color;
+    margin-top: rem(23);
+    font-family: $font-light;
+
+    &.selected {
+      font-family: $font-bold;
+    }
+  }
+}

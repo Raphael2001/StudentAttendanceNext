@@ -1,0 +1,17 @@
+@import "src/styles/imports.scss";
+
+.input {
+  width: 100%;
+
+  border-color: $grey;
+
+  @include input();
+
+  &::placeholder {
+    @include placeholder();
+  }
+  &.disabled {
+    @include input-disabled();
+  }
+  @include focus-border();
+}

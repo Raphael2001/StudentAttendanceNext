@@ -1,0 +1,29 @@
+@import "src/styles/imports.scss";
+
+$font-size: rem(20);
+$height: rem(25);
+
+.texts-wrapper {
+  display: inline-block;
+  font-size: $font-size;
+  font-family: $font;
+  .rotating-text-wrapper {
+    margin-inline-start: 3px;
+    display: inline-flex;
+    flex-direction: column;
+    height: $height;
+    overflow: hidden;
+    .text-animation {
+      transition: transform 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      height: $height;
+
+      .text-item {
+        display: block;
+        line-height: $height;
+        font-family: $font-bold;
+      }
+    }
+  }
+}

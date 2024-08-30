@@ -1,0 +1,21 @@
+@import "src/styles/imports.scss";
+
+.price {
+  font-family: $font;
+  font-size: rem(16);
+  color: darken($menu-item-blue-color, 10);
+}
+.not-in-stock {
+  color: $appleRed;
+  font-size: rem(16);
+  font-family: $font;
+}
+
+@media (min-width: em($desktop)) {
+  .price {
+    font-size: rem(18);
+  }
+  .not-in-stock {
+    font-size: rem(18);
+  }
+}

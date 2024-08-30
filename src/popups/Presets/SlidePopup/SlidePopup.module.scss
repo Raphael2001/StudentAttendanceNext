@@ -1,0 +1,88 @@
+@import "src/styles/imports";
+$border-raduis: rem(25);
+.slide-popup {
+  align-items: flex-end;
+  backdrop-filter: blur(4px);
+
+  .popup_wrapper {
+    max-height: 100%;
+
+    border-top-right-radius: $border-raduis;
+    border-top-left-radius: $border-raduis;
+    width: 100%;
+    top: 100%;
+    background-color: white;
+    transition: top 350ms cubic-bezier(0.165, 0.84, 0.44, 1); /* easeInOutExpo */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.active,
+    &.done {
+      top: 0;
+    }
+    &.exit {
+      top: 100%;
+    }
+
+    .gesture-handler {
+      width: 100%;
+      margin-bottom: rem(10);
+      align-self: center;
+      position: absolute;
+
+      top: rem(-15);
+
+      width: rem(30);
+      height: rem(5);
+      border-radius: rem(10);
+
+      background-color: $dark-grey;
+    }
+
+    .popup-container {
+      width: 100%;
+      max-height: 100%;
+      border-top-right-radius: $border-raduis;
+      border-top-left-radius: $border-raduis;
+
+      .close-icon-wrapper {
+        position: absolute;
+
+        top: rem(10);
+        left: rem(10);
+        width: rem(18);
+        height: rem(18);
+      }
+    }
+    .popup-content {
+      width: 100%;
+      max-height: 80vh;
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  $border-raduis: rem(16);
+
+  .slide-popup {
+    align-items: center;
+    justify-content: center;
+
+    .popup_wrapper {
+      max-width: rem(650);
+      border-radius: $border-raduis;
+
+      .gesture-handler {
+        display: none;
+      }
+      .popup-container {
+        border-radius: $border-raduis;
+      }
+      .popup-content {
+        max-height: rem(650);
+      }
+    }
+  }
+}

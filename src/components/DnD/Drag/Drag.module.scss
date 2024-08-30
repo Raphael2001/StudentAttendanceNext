@@ -1,0 +1,33 @@
+@import "src/styles/imports.scss";
+.dragable-item {
+  list-style: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.drag-handle {
+  display: flex;
+  width: rem(15);
+  padding: rem(15);
+  margin-inline-end: rem(5);
+  align-items: center;
+  justify-content: center;
+
+  touch-action: none;
+  border-radius: rem(5);
+  border: none;
+  outline: none;
+  appearance: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  &:focus-visible {
+    box-shadow: 0 0px 0px 2px $cms-main-color;
+  }
+  svg {
+    margin: auto;
+    height: 100%;
+    overflow: visible;
+    fill: #919eab;
+  }
+}

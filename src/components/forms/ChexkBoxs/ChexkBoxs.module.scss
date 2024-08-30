@@ -1,0 +1,16 @@
+@import "src/styles/imports.scss";
+
+.checkboxs-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: rem(6);
+  .title {
+    @include multi-inputs-placeholder();
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+  }
+}

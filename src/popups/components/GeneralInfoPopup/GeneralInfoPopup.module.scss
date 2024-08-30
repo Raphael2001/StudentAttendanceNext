@@ -1,0 +1,16 @@
+@import "src/styles/imports.scss";
+.general-info-popup {
+  .content {
+    padding: rem(30) rem(50) rem(150);
+    display: flex;
+    flex-direction: column;
+    gap: rem(30);
+    .radio-buttons-wrapper {
+      flex-direction: row;
+      align-items: center;
+      .inputs {
+        flex-direction: row;
+      }
+    }
+  }
+}

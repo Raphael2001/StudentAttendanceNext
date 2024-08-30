@@ -1,0 +1,61 @@
+@import "src/styles/imports";
+.two-action-popup {
+  :global(.popup_content) {
+    padding: rem(20) rem(15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .message {
+      text-align: center;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .actions-wrapper {
+      margin-top: auto;
+      margin-bottom: rem(15);
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .two-action-popup {
+    :global(.popup_content) {
+      padding: rem(20) rem(30);
+
+      .actions-wrapper {
+        margin-bottom: rem(15);
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .two-action-popup {
+    :global(.popup_content) {
+      padding: rem(20) rem(30);
+
+      .actions-wrapper {
+        margin-bottom: rem(15);
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .two-action-popup {
+    :global(.popup_content) {
+      padding: rem(20) rem(30);
+
+      .actions-wrapper {
+        margin-bottom: rem(15);
+      }
+    }
+  }
+}

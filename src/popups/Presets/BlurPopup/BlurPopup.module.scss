@@ -1,0 +1,30 @@
+@import "src/styles/imports";
+.blur-popup {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 200ms ease-out;
+
+  height: 100%;
+  backdrop-filter: blur(14px);
+
+  .popup_wrapper {
+    height: 100%;
+    width: 100%;
+    .close-icon-wrapper {
+      position: absolute;
+      top: rem(10);
+      left: rem(10);
+      width: rem(18);
+      height: rem(18);
+    }
+    .popup_content {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &.active,
+  &.done {
+    opacity: 1;
+  }
+}

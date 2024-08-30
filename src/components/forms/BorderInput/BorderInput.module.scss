@@ -1,0 +1,27 @@
+@import "src/styles/imports.scss";
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  .title {
+    font-size: rem(16);
+    font-family: $font;
+    padding-inline-start: rem(5);
+  }
+  .input {
+    border: 1px solid #dfe2e4;
+    border-radius: rem(10);
+    padding: rem(7);
+    @include focus-border();
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .input-wrapper {
+    .title {
+      font-size: rem(20);
+    }
+    .input {
+      padding: rem(8);
+    }
+  }
+}

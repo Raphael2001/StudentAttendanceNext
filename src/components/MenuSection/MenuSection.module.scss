@@ -1,0 +1,40 @@
+@import "src/styles/imports.scss";
+
+.menu-section-wrapper {
+  padding: rem(10) rem(20);
+
+  .menu-title {
+    font-size: rem(30);
+    font-family: $font-medium;
+  }
+  .items-wrapper {
+    margin-top: rem(30);
+    gap: rem(20);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .menu-section-wrapper {
+    .items-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .menu-section-wrapper {
+    .items-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .menu-section-wrapper {
+    .items-wrapper {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import "src/styles/imports.scss";
+.logout-wrapper {
+  padding-inline-start: rem(20);
+  padding-bottom: rem(50);
+  .logout-button {
+    .logout-image {
+      width: rem(20);
+    }
+    .logout-title {
+      margin-inline-start: rem(5);
+      font-size: rem(18);
+      font-family: $font-light;
+    }
+  }
+}
+@media (min-width: em($tablet)) {
+  .logout-wrapper {
+    padding-inline-start: rem(20);
+    padding-bottom: rem(50);
+    .logout-button {
+      .logout-image {
+        width: rem(20);
+      }
+      .logout-title {
+        margin-inline-start: rem(5);
+        font-size: rem(18);
+      }
+    }
+  }
+}
+@media (min-width: em($desktop)) {
+  .logout-wrapper {
+    padding-inline-start: rem(50);
+    padding-bottom: rem(50);
+    .logout-button {
+      .logout-image {
+        width: rem(24);
+      }
+      .logout-title {
+        margin-inline-start: rem(5);
+        font-size: rem(18);
+      }
+    }
+  }
+}

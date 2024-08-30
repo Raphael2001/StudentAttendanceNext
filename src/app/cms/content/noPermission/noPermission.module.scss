@@ -1,0 +1,17 @@
+@import "src/styles/imports.scss";
+
+.no-permission-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    margin-top: rem(50);
+    font-size: rem(30);
+    font-family: $font-bold;
+  }
+  .image-wrapper {
+    margin-top: rem(30);
+    width: rem(220);
+  }
+}

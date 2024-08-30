@@ -1,0 +1,9 @@
+@import "src/styles/imports.scss";
+
+.sort-button-wrapper {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  margin-top: rem(20);
+}

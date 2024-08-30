@@ -1,0 +1,99 @@
+@import "src/styles/imports.scss";
+.switch-wrapper {
+  width: rem(21);
+  height: rem(12);
+  border-radius: rem(6);
+  display: flex;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  align-items: center;
+  &.on {
+    background-color: rgba(1, 122, 255, 0.4);
+    .indicator {
+      background-color: rgba(1, 122, 255, 1);
+      right: rem(10);
+    }
+  }
+  &.off {
+    background-color: rgba(161, 161, 161, 1);
+    .indicator {
+      background-color: black;
+      right: rem(-5);
+    }
+  }
+  .indicator {
+    width: rem(17);
+    height: rem(17);
+    border-radius: 100%;
+    position: absolute;
+    transition: all 0.25s ease-in-out;
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .switch-wrapper {
+    width: rem(21);
+    height: rem(12);
+    border-radius: rem(6);
+
+    &.on {
+      .indicator {
+        right: rem(10);
+      }
+    }
+    &.off {
+      .indicator {
+        right: rem(-5);
+      }
+    }
+    .indicator {
+      width: rem(17);
+      height: rem(17);
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .switch-wrapper {
+    width: rem(21);
+    height: rem(12);
+    border-radius: rem(6);
+
+    &.on {
+      .indicator {
+        right: rem(10);
+      }
+    }
+    &.off {
+      .indicator {
+        right: rem(-5);
+      }
+    }
+    .indicator {
+      width: rem(17);
+      height: rem(17);
+    }
+  }
+}
+@media (min-width: em($desktop_large)) {
+  .switch-wrapper {
+    width: rem(21);
+    height: rem(12);
+    border-radius: rem(6);
+
+    &.on {
+      .indicator {
+        right: rem(10);
+      }
+    }
+    &.off {
+      .indicator {
+        right: rem(-5);
+      }
+    }
+    .indicator {
+      width: rem(17);
+      height: rem(17);
+    }
+  }
+}

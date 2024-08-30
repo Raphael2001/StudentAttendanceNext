@@ -1,0 +1,55 @@
+@import "src/styles/imports";
+
+.cms-login-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form-wrapper {
+    background: rgba(255, 255, 255);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: rem(30);
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    .theme-image {
+      flex: 1;
+      img {
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+
+    .inputs {
+      margin-top: rem(20);
+      padding-bottom: rem(50);
+      flex: 1;
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .cms-login-wrapper {
+    .login-form-wrapper {
+      border-radius: rem(30);
+      width: rem(1000);
+      flex-direction: row-reverse;
+      gap: rem(30);
+      padding-inline-start: rem(50);
+
+      .theme-image {
+        width: 50%;
+        height: rem(400);
+      }
+      .inputs {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}

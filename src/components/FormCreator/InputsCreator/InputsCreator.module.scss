@@ -1,0 +1,7 @@
+@import "src/styles/imports.scss";
+
+.input-content {
+  display: flex;
+  flex-direction: column;
+  gap: rem(30);
+}

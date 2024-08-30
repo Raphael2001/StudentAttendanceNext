@@ -1,0 +1,58 @@
+@import "src/styles/imports.scss";
+.input-wrapper {
+  display: flex;
+  width: 100%;
+  .input {
+    width: 70%;
+  }
+  .actions {
+    display: flex;
+    margin-inline-start: rem(10);
+    gap: rem(8);
+    .icon {
+      width: rem(20);
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .input-wrapper {
+    .input {
+      width: 80%;
+    }
+    .actions {
+      margin-inline-start: rem(20);
+      gap: rem(8);
+      .icon {
+        width: rem(20);
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .input-wrapper {
+    .input {
+      width: 60%;
+    }
+    .actions {
+      margin-inline-start: rem(20);
+      gap: rem(8);
+      .icon {
+        width: rem(20);
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .input-wrapper {
+    .actions {
+      margin-inline-start: rem(20);
+      gap: rem(8);
+      .icon {
+        width: rem(20);
+      }
+    }
+  }
+}

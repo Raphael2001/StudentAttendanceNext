@@ -1,0 +1,31 @@
+@import "settings";
+$colors: (
+  blue: $basic-color-blue,
+  red: $basic-color-red,
+  green: $basic-color-green,
+  yellow: $basic-color-yellow,
+  purple: $basic-color-purple,
+  pink: $basic-color-pink,
+  orange: $basic-color-orange,
+);
+
+@each $name, $color in $colors {
+  .item.#{$name} {
+    background-color: $color;
+  }
+  .light-item.#{$name} {
+    background-color: lighten($color, 30);
+  }
+  .border.#{$name} {
+    border: 1px solid $color;
+  }
+  .text.#{$name} {
+    color: $color;
+  }
+  .icon.#{$name} {
+    @include recolor($color);
+  }
+  .glass.#{$name} {
+    @include glass-effect($color);
+  }
+}

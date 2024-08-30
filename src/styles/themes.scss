@@ -1,0 +1,53 @@
+@import "mixins";
+:root {
+  --input-focus-color: #017aff;
+  --input-background-color: #{lighten(#017aff, 45%)};
+
+  --cms-basic-white: #fffff0;
+
+  --cms-main-color: #2c698f;
+  --cms-main-light-color: #{lighten(#2c698f, 60%)};
+  --cms-main-min-light-color: #{lighten(#2c698f, 55%)};
+
+  --cms-secondary-color: #{lighten(#2c698f, 25%)};
+
+  --font: "Heebo-Regular";
+  --font-light: "Heebo-Light";
+  --font-medium: "Heebo-Medium";
+  --font-semibold: "Heebo-SemiBold";
+  --font-bold: "Heebo-Bold";
+
+  .input-icon-mark {
+    @include recolor(#017aff);
+  }
+}
+
+.green {
+  --input-focus-color: #4caf50;
+
+  --input-background-color: #{lighten(#4caf50, 45%)};
+
+  --cms-main-color: #4caf50;
+  --cms-secondary-color: #{lighten(#4caf50, 25%)};
+
+  --cms-main-light-color: #{lighten(#4caf50, 47%)};
+  --cms-main-min-light-color: #{lighten(#4caf50, 40%)};
+
+  .input-icon-mark {
+    @include recolor(#4caf50);
+  }
+}
+.orange {
+  --input-focus-color: #ff6d00;
+  --input-background-color: #{lighten(#ff6d00, 45%)};
+
+  --cms-main-color: #ff6d00;
+
+  --cms-secondary-color: #{lighten(#ff6d00, 25%)};
+  --cms-main-light-color: #{lighten(#ff6d00, 47%)};
+  --cms-main-min-light-color: #{lighten(#ff6d00, 40%)};
+
+  .input-icon-mark {
+    @include recolor(#ff6d00);
+  }
+}

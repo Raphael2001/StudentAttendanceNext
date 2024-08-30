@@ -1,0 +1,36 @@
+@import "src/styles/imports.scss";
+.menu-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 300ms ease-out;
+
+  &.burger-open {
+    transform: translateX(rem(-260));
+  }
+}
+.sidebar-cms {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  .cms {
+    flex: 1;
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .menu-wrapper {
+    &.burger-open {
+      transform: translateX(rem(-350));
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .cms {
+    margin-inline-start: rem(320);
+
+    padding-inline-start: rem(30);
+    width: 100%;
+  }
+}

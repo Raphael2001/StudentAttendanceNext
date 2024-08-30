@@ -1,0 +1,20 @@
+@import "src/styles/imports.scss";
+.form {
+  margin-top: rem(30);
+  display: flex;
+  gap: rem(30);
+  flex-direction: column;
+  align-items: center;
+
+  .options {
+    display: flex;
+    gap: rem(30);
+    flex-direction: column;
+    width: 100%;
+    .ingredients-chooser {
+    }
+  }
+  .notes-input {
+    margin-top: rem(20);
+  }
+}

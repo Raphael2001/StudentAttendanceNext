@@ -1,0 +1,63 @@
+@import "src/styles/imports.scss";
+
+.product-popup {
+  .wrapper {
+    .media-wrapper {
+      width: 100%;
+      height: rem(280);
+
+      .media {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .top {
+      padding-inline: rem(10);
+      padding-bottom: rem(20);
+      .title {
+        margin-top: rem(10);
+        font-size: rem(24);
+        font-family: $font;
+      }
+      .price {
+        margin-top: rem(10);
+      }
+      .description {
+        margin-top: rem(30);
+        color: $mid-dark-grey;
+        font-family: $font;
+        font-size: rem(16);
+      }
+    }
+    .border {
+      height: 1px;
+      background-color: $grey-divider;
+      width: 100%;
+    }
+    .bottom {
+      padding-inline: rem(15);
+
+      padding-bottom: rem(80);
+    }
+    .simple-item-actions {
+      padding-inline: rem(20);
+      padding-bottom: rem(30);
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .product-popup {
+    .wrapper {
+      .top {
+        padding-inline: rem(20);
+        padding-bottom: rem(20);
+      }
+
+      .bottom {
+        padding-inline: rem(25);
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import "./mixins.scss";
+
+$font-name: "Heebo";
+
+$fontVariations: (
+  Regular: "/assets/fonts/#{$font-name}-Regular",
+  Medium: "/assets/fonts/#{$font-name}-Medium",
+  SemiBold: "/assets/fonts/#{$font-name}-SemiBold",
+  Bold: "/assets/fonts/#{$font-name}-Bold",
+  Light: "/assets/fonts/#{$font-name}-Light",
+);
+
+@each $weight, $path in $fontVariations {
+  @include font-face("#{$font-name}-#{$weight}", normal, $path);
+}

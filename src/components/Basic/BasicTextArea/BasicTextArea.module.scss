@@ -1,0 +1,15 @@
+@import "src/styles/imports.scss";
+
+.text-area {
+  width: 100%;
+
+  border-color: $grey;
+
+  @include input();
+
+  &::placeholder {
+    @include placeholder();
+  }
+
+  @include focus-border();
+}

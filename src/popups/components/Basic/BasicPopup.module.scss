@@ -1,0 +1,89 @@
+@import "src/styles/imports.scss";
+.basic-popup {
+  .popup_wrapper {
+    .popup_content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .lottie-animation {
+        margin-top: rem(5);
+        width: rem(200);
+      }
+      .title {
+        font-size: rem(24);
+        margin: 0;
+        margin-top: rem(20);
+      }
+      .message {
+        margin-top: rem(10);
+        font-size: rem(18);
+      }
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .basic-popup {
+    .popup_wrapper {
+      .popup_content {
+        .lottie-animation {
+          margin-top: rem(5);
+          width: rem(200);
+        }
+        .title {
+          font-size: rem(24);
+          margin-top: rem(20);
+        }
+        .message {
+          margin-top: rem(10);
+
+          font-size: rem(18);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .basic-popup {
+    .popup_wrapper {
+      .popup_content {
+        .lottie-animation {
+          margin-top: rem(5);
+          width: rem(200);
+        }
+        .title {
+          font-size: rem(24);
+          margin-top: rem(20);
+        }
+        .message {
+          margin-top: rem(10);
+
+          font-size: rem(18);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .basic-popup {
+    .popup_wrapper {
+      .popup_content {
+        .lottie-animation {
+          margin-top: rem(5);
+          width: rem(200);
+        }
+        .title {
+          font-size: rem(24);
+          margin-top: rem(20);
+        }
+        .message {
+          margin-top: rem(10);
+
+          font-size: rem(18);
+        }
+      }
+    }
+  }
+}

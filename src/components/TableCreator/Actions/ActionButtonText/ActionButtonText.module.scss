@@ -1,0 +1,40 @@
+@import "src/styles/imports.scss";
+.action-button-text {
+  width: rem(100);
+
+  font-size: rem(14);
+  color: white;
+
+  padding-block: rem(5);
+  border-radius: 28px;
+}
+
+@media (min-width: em($tablet)) {
+  .action-button-text {
+    width: rem(100);
+
+    font-size: rem(14);
+
+    padding-block: rem(5);
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .action-button-text {
+    width: rem(100);
+
+    font-size: rem(14);
+
+    padding-block: rem(5);
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .action-button-text {
+    width: rem(100);
+
+    font-size: rem(14);
+
+    padding-block: rem(5);
+  }
+}

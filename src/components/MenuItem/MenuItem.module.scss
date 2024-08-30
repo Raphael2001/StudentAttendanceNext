@@ -1,0 +1,105 @@
+@import "src/styles/imports.scss";
+
+.menu-item-wrapper {
+  padding: rem(10);
+
+  height: rem(150);
+  border-radius: rem(15);
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: 300ms all ease-in-out;
+  &:hover {
+    transform: scale(1.03);
+  }
+  .media-wrapper {
+    width: 40%;
+    height: 100%;
+    border-radius: rem(7);
+    .media {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    padding-inline-start: rem(15);
+    position: relative;
+    flex: 1;
+    .top {
+      .title {
+        font-size: rem(18);
+        font-family: $font;
+      }
+      .description {
+        font-family: $font-light;
+        color: $mid-dark-grey;
+        font-size: rem(12);
+      }
+    }
+    .price-wrapper {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .plus-icon-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: rem(40);
+      height: rem(38);
+      border-start-end-radius: 0.5rem;
+      border-end-start-radius: 1.5rem;
+      background-color: lighten($menu-item-blue-color, 25);
+
+      .plus-icon {
+        color: $menu-item-blue-color;
+        font-size: rem(22);
+        font-family: $font-light;
+      }
+    }
+  }
+}
+
+@media (min-width: em($tablet)) {
+  .menu-item-wrapper {
+    height: rem(160);
+
+    .content {
+      .top {
+        .title {
+          font-size: rem(20);
+        }
+        .description {
+          font-size: rem(14);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .menu-item-wrapper {
+    height: rem(170);
+
+    .content {
+      .top {
+        .title {
+          font-size: rem(22);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: em($desktop_large)) {
+  .menu-item-wrapper {
+    height: rem(170);
+  }
+}

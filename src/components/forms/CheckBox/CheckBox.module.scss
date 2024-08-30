@@ -1,0 +1,29 @@
+@import "src/styles/imports.scss";
+.checkbox-wrapper {
+  &.disabled {
+    @include input-disabled();
+  }
+  input {
+    display: none;
+  }
+  label {
+    display: flex;
+    .image-wrapper {
+      width: rem(17);
+    }
+    .label {
+      margin-inline-start: rem(5);
+      @include input-text();
+    }
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .checkbox-wrapper {
+    label {
+      .image-wrapper {
+        width: rem(20);
+      }
+    }
+  }
+}

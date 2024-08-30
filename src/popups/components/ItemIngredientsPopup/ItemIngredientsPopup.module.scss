@@ -1,0 +1,10 @@
+@import "src/styles/imports.scss";
+
+.item-ingredients-popup {
+  .form {
+    padding: rem(50) rem(50) rem(90);
+    display: flex;
+    flex-direction: column;
+    gap: rem(30);
+  }
+}
