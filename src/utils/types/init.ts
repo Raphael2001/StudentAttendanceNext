@@ -65,7 +65,6 @@ export type metaTag = {
 
 export type CmsText = {
   key: string;
-  tag: TextTagsKeys;
   value: TextValue;
 };
 
