@@ -16,8 +16,16 @@ function StudentsPage(props) {
   const students = useAppSelector((store) => store.init.students);
 
   const header = {
+    _id: {
+      title: "תעודת זהות",
+      type: TABLE_CELL_TYPES.TEXT,
+    },
     name: {
       title: "שם",
+      type: TABLE_CELL_TYPES.TEXT,
+    },
+    className: {
+      title: "כיתה",
       type: TABLE_CELL_TYPES.TEXT,
     },
   };
