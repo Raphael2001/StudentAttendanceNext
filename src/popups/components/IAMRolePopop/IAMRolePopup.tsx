@@ -25,6 +25,7 @@ function IAMRolePopup(props: Props) {
   const { dataItem } = payload;
 
   const modules = useAppSelector((store) => store.init.modules);
+  const filteredModules = modules.filter((item) => item.show !== false);
 
   const ref = useRef<SlidePopupRef>();
 
@@ -54,7 +55,7 @@ function IAMRolePopup(props: Props) {
         label: "הרשאות",
         inputType: FORM_INPUTS_TYPES.BITWISE_CHECKBOX,
         rules: ["not_empty"],
-        options: modules,
+        options: filteredModules,
         field: "title",
         bitwiseField: "bitwise",
       },

@@ -469,11 +469,31 @@ const Api = (function () {
     return ApiManager.addCall(props, API_METHODS.DELETE, "file", onSuccess);
   }
 
-  async function test(props: ApiProps = {}) {
+  async function addStudent(props: ApiProps = {}) {
     function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "students" }));
       typeof props.onSuccess === "function" && props.onSuccess(res.body);
     }
-    return ApiManager.addCall(props, API_METHODS.GET, "init", onSuccess);
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "student", onSuccess);
+  }
+
+  async function updateStudent(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "students" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "student", onSuccess);
+  }
+
+  async function deleteStudent(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "students" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "student", onSuccess);
   }
 
   return {
@@ -515,7 +535,9 @@ const Api = (function () {
     deleteIngredientsMenu,
     addFile,
     removeFile,
-    test,
+    addStudent,
+    updateStudent,
+    deleteStudent,
   };
 })();
 

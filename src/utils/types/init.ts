@@ -9,6 +9,7 @@ import {
 } from "./menus";
 import { MediaObjects } from "./media";
 import { UserType } from "./user";
+import { StudentType } from "./student";
 
 export type init = {
   texts: Array<CmsText>;
@@ -25,6 +26,7 @@ export type init = {
   modules: Array<ModuleType>;
   files: MediaObjects;
   users: Array<UserType>;
+  students: Array<StudentType>;
 };
 
 export type generalInfoValue =
@@ -92,4 +94,5 @@ export type ModuleType = {
   _id: string;
   title: string;
   route: string;
+  show?: boolean;
 };
