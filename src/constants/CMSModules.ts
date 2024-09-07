@@ -11,5 +11,6 @@ const CMS_MODULES = {
   ITEMS_MENU: "ItemsMenu",
   ITEM_INGREDIENTS: "ItemIngredients",
   STUDENTS: "Students",
+  TEACHERS: "Teachers",
 };
 export default CMS_MODULES;

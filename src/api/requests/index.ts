@@ -496,6 +496,33 @@ const Api = (function () {
     return ApiManager.addCall(props, API_METHODS.DELETE, "student", onSuccess);
   }
 
+  async function addTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "teacher", onSuccess);
+  }
+
+  async function updateTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "teacher", onSuccess);
+  }
+
+  async function deleteTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "teacher", onSuccess);
+  }
+
   return {
     initCms,
     upsertText,
@@ -538,6 +565,9 @@ const Api = (function () {
     addStudent,
     updateStudent,
     deleteStudent,
+    addTeacher,
+    updateTeacher,
+    deleteTeacher,
   };
 })();
 

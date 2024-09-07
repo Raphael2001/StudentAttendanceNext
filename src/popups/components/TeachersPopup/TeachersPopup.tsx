@@ -4,32 +4,30 @@ import React from "react";
 
 import { FormDataType } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
-import { useAppSelector } from "utils/hooks/useRedux";
 
 import Api from "api/requests";
-import { StudentType } from "utils/types/student";
+
+import { Teacher } from "utils/types/teacher";
 import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 type Payload = {
-  dataItem?: StudentType;
+  dataItem?: Teacher;
 };
 
 type Props = {
   payload: Payload;
 };
 
-function StudentPopup(props: Props) {
+export default function TeacherPopup(props: Props) {
   const { payload = {} } = props;
   const { dataItem } = payload;
 
-  const teachers = useAppSelector((store) => store.init.teachers);
-
   function onSubmit(payload, onSuccess) {
     if (dataItem) {
-      return Api.updateStudent({ payload, onSuccess });
+      return Api.updateTeacher({ payload, onSuccess });
     }
 
-    Api.addStudent({ payload, onSuccess });
+    Api.addTeacher({ payload, onSuccess });
   }
 
   const formData: FormDataType = {
@@ -42,24 +40,28 @@ function StudentPopup(props: Props) {
       },
       {
         name: "name",
-        label: "שם תלמיד",
+        label: "שם מורה",
         inputType: FORM_INPUTS_TYPES.INPUT,
         rules: ["not_empty"],
       },
       {
-        name: "className",
-        label: "שם כיתה",
+        name: "schoolName",
+        label: "שם ביה״ס",
         inputType: FORM_INPUTS_TYPES.INPUT,
         rules: ["not_empty"],
       },
 
       {
-        name: "teacherId",
-        label: "מורה",
-        inputType: FORM_INPUTS_TYPES.AUTO_COMPLETE,
-        rules: ["not_empty"],
-        options: teachers,
-        field: "name",
+        name: "phone",
+        label: "טלפון",
+        inputType: FORM_INPUTS_TYPES.INPUT,
+        rules: ["not_empty", "cell"],
+      },
+      {
+        name: "mail",
+        label: "מייל",
+        inputType: FORM_INPUTS_TYPES.INPUT,
+        rules: ["not_empty", "email"],
       },
     ],
     initialData: dataItem,
@@ -73,5 +75,3 @@ function StudentPopup(props: Props) {
     />
   );
 }
-
-export default StudentPopup;

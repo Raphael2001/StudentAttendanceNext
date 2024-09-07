@@ -26,6 +26,7 @@ import { useAppSelector } from "utils/hooks/useRedux";
 import ProductPopup from "./components/ProductPopup/ProductPopup";
 import FilesPopup from "./components/FilesPopup/FilesPopup";
 import StudentPopup from "./components/StudentsPopup/StudentsPopup";
+import TeacherPopup from "./components/TeachersPopup/TeachersPopup";
 
 export default function Popups({ className = "" }) {
   const popupsArray = useAppSelector((store) => store.popupsArray);
@@ -87,6 +88,7 @@ export default function Popups({ className = "" }) {
       [POPUP_TYPES.PRODUCT]: <ProductPopup key={key} payload={payload} />,
       [POPUP_TYPES.FILES]: <FilesPopup key={key} payload={payload} />,
       [POPUP_TYPES.STUDENT]: <StudentPopup key={key} payload={payload} />,
+      [POPUP_TYPES.TEACHER]: <TeacherPopup key={key} payload={payload} />,
     };
 
     const popupToReturn =
