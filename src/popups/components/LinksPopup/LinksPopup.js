@@ -2,15 +2,13 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import styles from "./LinksPopup.module.scss";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-
 import LINKS_TYPES from "constants/LinksTypes";
-import FormCreator from "components/FormCreator/FormCreator";
+
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import Api from "api/requests";
 import useMultiLangData from "utils/hooks/useMultiLangData";
 import { useAppSelector } from "utils/hooks/useRedux";
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 function LinksPopup(props) {
   const { payload = {} } = props;
@@ -22,8 +20,6 @@ function LinksPopup(props) {
   const [formData, setFormData] = useState({ inputs: [] });
 
   const { initialData, transformPayload } = useMultiLangData(dataItem);
-
-  const ref = useRef();
 
   useEffect(() => {
     const form = {
@@ -76,7 +72,7 @@ function LinksPopup(props) {
     setFormData(form);
   }, [languages, initialData, media]);
 
-  function onSubmit(formPayload) {
+  function onSubmit(formPayload, onSuccess) {
     const payload = transformPayload(formPayload);
 
     if (dataItem?._id) {
@@ -84,23 +80,14 @@ function LinksPopup(props) {
     }
 
     Api.upsertLink({ payload, onSuccess });
-    function onSuccess() {
-      animateOut();
-    }
   }
 
-  const animateOut = () => ref.current.animateOut();
-
   return (
-    <SlidePopup ref={ref} className={styles["links-popup"]}>
-      <div className={styles["content"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={dataItem?._id ? "עדכון" : "יצירה"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      hasDataItem={!!dataItem}
+      formData={formData}
+      onSubmit={onSubmit}
+    />
   );
 }
 

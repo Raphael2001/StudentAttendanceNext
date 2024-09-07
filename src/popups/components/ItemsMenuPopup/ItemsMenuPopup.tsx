@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import styles from "./ItemsMenuPopup.module.scss";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-import { SlidePopupRef } from "utils/types/popup";
-import FormCreator from "components/FormCreator/FormCreator";
 import { FormDataType, FormInputData } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import { useAppSelector } from "utils/hooks/useRedux";
 import Api from "api/requests";
 import useMultiLangData from "utils/hooks/useMultiLangData";
 import { CmsItemsMenu } from "utils/types/menus";
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 type Props = {
   payload: Payload;
@@ -25,8 +22,6 @@ function ItemsMenuPopup(props: Props) {
   const { payload = {} } = props;
 
   const { dataItem } = payload;
-
-  const ref = useRef<SlidePopupRef>();
 
   const languages = useAppSelector((store) => store.init?.languages);
   const items = useAppSelector((store) => store.init.items);
@@ -84,7 +79,7 @@ function ItemsMenuPopup(props: Props) {
     setFormData(form);
   }, [languages, initialData]);
 
-  function onSubmit(formPayload) {
+  function onSubmit(formPayload, onSuccess) {
     const payload = transformPayload(formPayload);
 
     if (dataItem?._id) {
@@ -96,20 +91,12 @@ function ItemsMenuPopup(props: Props) {
     Api.addItemsMenu({ payload, onSuccess });
   }
 
-  function onSuccess() {
-    ref.current?.animateOut();
-  }
-
   return (
-    <SlidePopup className={styles["items-menu-popup"]} ref={ref}>
-      <div className={styles["form"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={"הוסף"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      onSubmit={onSubmit}
+      hasDataItem={!!dataItem}
+      formData={formData}
+    />
   );
 }
 

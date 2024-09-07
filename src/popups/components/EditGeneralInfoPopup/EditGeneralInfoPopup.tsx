@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useRef } from "react";
-
-import styles from "./EditGeneralInfoPopup.module.scss";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
+import React from "react";
 
 import useGeneralInfo from "utils/hooks/useGeneralInfo";
-import { SlidePopupRef } from "utils/types/popup";
+
 import { FormDataType } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
-import FormCreator from "components/FormCreator/FormCreator";
+
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 type Props = {
   payload: Payload;
@@ -20,14 +18,11 @@ type Payload = {
 
 function EditGeneralInfoPopup({ payload }: Props) {
   const { name } = payload;
-  const ref = useRef<SlidePopupRef>();
 
   const { value, cmsTitle, upsertGeneralInfo } = useGeneralInfo(name);
 
-  const animateOut = () => ref.current?.animateOut();
-
-  function onSubmit(payload) {
-    upsertGeneralInfo(value, animateOut, payload["title"]);
+  function onSubmit(payload, onSuccess) {
+    upsertGeneralInfo(value, onSuccess, payload["title"]);
   }
 
   const formData: FormDataType = {
@@ -43,15 +38,11 @@ function EditGeneralInfoPopup({ payload }: Props) {
   };
 
   return (
-    <SlidePopup className={styles["edit-general-params-popup"]} ref={ref}>
-      <div className={styles["content"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={"עדכן"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      hasDataItem={true}
+      formData={formData}
+      onSubmit={onSubmit}
+    />
   );
 }
 
