@@ -523,6 +523,38 @@ const Api = (function () {
     return ApiManager.addCall(props, API_METHODS.DELETE, "teacher", onSuccess);
   }
 
+  async function addInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "instructor", onSuccess);
+  }
+
+  async function updateInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "instructor", onSuccess);
+  }
+
+  async function deleteInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(
+      props,
+      API_METHODS.DELETE,
+      "instructor",
+      onSuccess
+    );
+  }
+
   return {
     initCms,
     upsertText,
@@ -568,6 +600,9 @@ const Api = (function () {
     addTeacher,
     updateTeacher,
     deleteTeacher,
+    addInstructor,
+    updateInstructor,
+    deleteInstructor,
   };
 })();
 

@@ -11,6 +11,7 @@ import { MediaObjects } from "./media";
 import { UserType } from "./user";
 import { StudentType } from "./student";
 import { Teacher } from "./teacher";
+import { Instructor } from "./instructor";
 
 export type init = {
   texts: Array<CmsText>;
@@ -29,6 +30,7 @@ export type init = {
   users: Array<UserType>;
   students: Array<StudentType>;
   teachers: Array<Teacher>;
+  instructors: Array<Instructor>;
 };
 
 export type generalInfoValue =

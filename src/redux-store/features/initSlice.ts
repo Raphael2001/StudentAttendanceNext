@@ -18,6 +18,9 @@ const initialState: init = {
   ingredientsMenus: [],
   files: {},
   users: [],
+  instructors: [],
+  students: [],
+  teachers: [],
 };
 
 export const initSlice = createSlice({

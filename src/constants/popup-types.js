@@ -18,6 +18,7 @@ const POPUP_TYPES = {
   FILES: "FILES",
   STUDENT: "STUDENT",
   TEACHER: "TEACHER",
+  INSTRUCTOR: "INSTRUCTOR",
 };
 
 export default POPUP_TYPES;
