@@ -34,6 +34,7 @@ export type ApiProps = {
 export type apiConfig = {
   showLoader?: boolean;
   url?: string;
+  isFormData?: boolean;
 };
 
 export type ApiCallData = {

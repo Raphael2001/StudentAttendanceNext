@@ -45,6 +45,7 @@ function TeachersPage(props) {
       header={header}
       module={CMS_MODULES.TEACHERS}
       popup={POPUP_TYPES.TEACHER}
+      uploadFile
     />
   );
 }

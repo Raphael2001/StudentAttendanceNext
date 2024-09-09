@@ -6,5 +6,7 @@
 
   .add-button-wrapper {
     margin: rem(20) auto;
+    display: flex;
+    gap: rem(16);
   }
 }

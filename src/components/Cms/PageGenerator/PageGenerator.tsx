@@ -14,6 +14,7 @@ import TableCreator from "components/TableCreator/TableCreator";
 import { ApiProps } from "utils/types/api";
 import { useRouter } from "next/navigation";
 import usePopup from "utils/hooks/usePopup";
+import POPUP_TYPES from "constants/popup-types";
 
 type Props = {
   data: Array<any>;
@@ -26,6 +27,7 @@ type Props = {
   overrideUpdatePopup?: string;
   showDeleteAction?: boolean;
   shoUpdateAction?: boolean;
+  uploadFile?: boolean;
 };
 
 function PageGenerator(props: Props) {
@@ -40,6 +42,7 @@ function PageGenerator(props: Props) {
     overrideUpdatePopup,
     showDeleteAction = true,
     shoUpdateAction = true,
+    uploadFile = false,
   } = props;
   const openPopup = usePopup();
 
@@ -79,6 +82,10 @@ function PageGenerator(props: Props) {
     if (popup) {
       openPopup(popup);
     }
+  }
+
+  function uploadFileButton() {
+    openPopup(POPUP_TYPES.UPLOAD_EXCEL_FILE, { moduleName: module });
   }
 
   const updateAction = {
@@ -121,6 +128,9 @@ function PageGenerator(props: Props) {
     <div className={styles["page-wrapper"]}>
       <div className={styles["add-button-wrapper"]}>
         <CmsButton onClick={createNew} text="הוסף חדש" />
+        {uploadFile && (
+          <CmsButton onClick={uploadFileButton} text="העלת קובץ" />
+        )}
       </div>
 
       <TableCreator data={dataArray} header={tableHeader} />

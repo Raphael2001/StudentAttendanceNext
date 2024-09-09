@@ -1,5 +1,6 @@
 import ApiManager from "api/ApiManager";
 import API_METHODS from "constants/ApiMethods";
+import CMS_MODULES from "constants/CMSModules";
 import LOCAL_STORAGE_KEYS from "constants/LocalStorage";
 import Store from "redux-store";
 import {
@@ -9,6 +10,7 @@ import {
   deleteGeneralInfoAction,
   deleteKeyById,
   deleteTextAction,
+  insertManyByKey,
   removeFileAction,
   removeMediaAction,
   setGeneralInfo,
@@ -555,6 +557,31 @@ const Api = (function () {
     );
   }
 
+  async function uploadExcelFile(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      switch (props.payload.moduleName) {
+        case CMS_MODULES.STUDENTS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "students" })
+          );
+        case CMS_MODULES.TEACHERS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "teachers" })
+          );
+        case CMS_MODULES.INSTRUCTORS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "instructors" })
+          );
+      }
+
+      // Store.dispatch(deleteKeyById({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    props.config = { ...props.config, isFormData: true };
+    return ApiManager.addCall(props, API_METHODS.POST, "excelFile", onSuccess);
+  }
+
   return {
     initCms,
     upsertText,
@@ -603,6 +630,7 @@ const Api = (function () {
     addInstructor,
     updateInstructor,
     deleteInstructor,
+    uploadExcelFile,
   };
 })();
 

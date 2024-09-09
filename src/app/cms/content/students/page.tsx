@@ -37,6 +37,7 @@ function StudentsPage(props) {
       header={header}
       module={CMS_MODULES.STUDENTS}
       popup={POPUP_TYPES.STUDENT}
+      uploadFile
     />
   );
 }

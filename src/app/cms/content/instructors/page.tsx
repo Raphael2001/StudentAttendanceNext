@@ -24,7 +24,6 @@ export default function InstructorsPage(props) {
       title: "שם",
       type: TABLE_CELL_TYPES.TEXT,
     },
-
     phone: {
       title: "טלפון",
       type: TABLE_CELL_TYPES.TEXT,
@@ -38,6 +37,7 @@ export default function InstructorsPage(props) {
       header={header}
       module={CMS_MODULES.INSTRUCTORS}
       popup={POPUP_TYPES.INSTRUCTOR}
+      uploadFile
     />
   );
 }

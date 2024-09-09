@@ -16,8 +16,12 @@ const BaseApiManager = (function () {
     );
   }
 
-  function getHeaders() {
-    return { "Content-Type": "application/json; charset=UTF-8" };
+  function getHeaders(isFormData = false) {
+    if (isFormData) {
+      return { "Content-Type": "multipart/form-data" };
+    } else {
+      return { "Content-Type": "application/json; charset=UTF-8" };
+    }
   }
 
   function onFailure(response: string) {
