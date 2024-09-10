@@ -28,6 +28,10 @@ function StudentsPage(props) {
       title: "כיתה",
       type: TABLE_CELL_TYPES.TEXT,
     },
+    schoolName: {
+      title: "שם בית ספר",
+      type: TABLE_CELL_TYPES.TEXT,
+    },
   };
   return (
     <PageGenerator

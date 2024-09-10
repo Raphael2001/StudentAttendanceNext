@@ -3,4 +3,5 @@ export type StudentType = {
   _id: string;
   className: string;
   teacherId: string;
+  schoolName: string;
 };

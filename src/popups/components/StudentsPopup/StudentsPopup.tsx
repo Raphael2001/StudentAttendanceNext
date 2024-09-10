@@ -52,6 +52,12 @@ function StudentPopup(props: Props) {
         inputType: FORM_INPUTS_TYPES.INPUT,
         rules: ["not_empty"],
       },
+      {
+        name: "schoolName",
+        label: "שם בית ספר",
+        inputType: FORM_INPUTS_TYPES.INPUT,
+        rules: ["not_empty"],
+      },
 
       {
         name: "teacherId",
