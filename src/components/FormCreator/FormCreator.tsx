@@ -6,7 +6,6 @@ import styles from "./FormCreator.module.scss";
 import InputsCreator from "./InputsCreator/InputsCreator";
 import CmsButton from "components/CmsButton/CmsButton";
 import { FormDataType, FormInputData, onChangeValue } from "utils/types/form";
-import { copy } from "utils/functions";
 import useValidate from "utils/hooks/useValidate";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 
@@ -54,11 +53,12 @@ const FormCreator = forwardRef((props: Props, ref) => {
         };
       }
     }
+
     setForm(formData);
   }, [initialData, inputs]);
 
   function onChange(name: string, value: onChangeValue) {
-    const newState = copy(form);
+    const newState = { ...form };
 
     const { valid, msg } = validate(value, form[name].rules);
 
@@ -78,7 +78,7 @@ const FormCreator = forwardRef((props: Props, ref) => {
 
     let formValid = true;
     const payload = {};
-    const newState = copy(form);
+    const newState = { ...form };
 
     for (const key in form) {
       const validationObj = validate(form[key].value, form[key].rules);

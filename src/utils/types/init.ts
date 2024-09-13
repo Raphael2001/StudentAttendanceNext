@@ -12,6 +12,7 @@ import { UserType } from "./user";
 import { StudentType } from "./student";
 import { Teacher } from "./teacher";
 import { Instructor } from "./instructor";
+import { Course } from "./course";
 
 export type init = {
   texts: Array<CmsText>;
@@ -31,6 +32,7 @@ export type init = {
   students: Array<StudentType>;
   teachers: Array<Teacher>;
   instructors: Array<Instructor>;
+  courses: Array<Course>;
 };
 
 export type generalInfoValue =

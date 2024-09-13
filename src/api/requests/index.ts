@@ -582,6 +582,33 @@ const Api = (function () {
     return ApiManager.addCall(props, API_METHODS.POST, "excelFile", onSuccess);
   }
 
+  async function addCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "course", onSuccess);
+  }
+
+  async function updateCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "course", onSuccess);
+  }
+
+  async function deleteCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "course", onSuccess);
+  }
+
   return {
     initCms,
     upsertText,
@@ -631,6 +658,9 @@ const Api = (function () {
     updateInstructor,
     deleteInstructor,
     uploadExcelFile,
+    addCourse,
+    updateCourse,
+    deleteCourse,
   };
 })();
 

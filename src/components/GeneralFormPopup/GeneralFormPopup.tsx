@@ -9,15 +9,24 @@ import { FormDataType } from "utils/types/form";
 
 import styles from "./GeneralFormPopup.module.scss";
 import { FormPayloadType } from "utils/types/general";
+import { clsx } from "utils/functions";
 
 type Props = {
   hasDataItem: boolean;
   formData: FormDataType;
   onSubmit: (payload: FormPayloadType, onSuccess: () => void) => void;
+  formClassName?: string;
+  className?: string;
 };
 
 export default function GeneralFormPopup(props: Props) {
-  const { hasDataItem = false, formData, onSubmit } = props;
+  const {
+    hasDataItem = false,
+    formData,
+    onSubmit,
+    formClassName,
+    className,
+  } = props;
 
   const ref = useRef<SlidePopupRef>();
 
@@ -30,8 +39,11 @@ export default function GeneralFormPopup(props: Props) {
   }
 
   return (
-    <SlidePopup className={styles["general-form-popup"]} ref={ref}>
-      <div className={styles["form"]}>
+    <SlidePopup
+      className={clsx(styles["general-form-popup"], className)}
+      ref={ref}
+    >
+      <div className={clsx(styles["form"], formClassName)}>
         <FormCreator
           formData={formData}
           buttonText={!hasDataItem ? "הוסף" : "עדכן"}

@@ -91,3 +91,31 @@ export function createSortObject(objectsList) {
 export function getMediaPath(src) {
   return `${ApiValidationService.getCdn()}/${src}`;
 }
+
+export function formatDate(date) {
+  if (date) {
+    return (
+      date.getDate() +
+      "/" +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      "/" +
+      getYear(date)
+    );
+  }
+
+  return null;
+}
+
+function getYear(date) {
+  return date?.getFullYear()?.toString();
+}
+
+export function convertStringToDate(dateString) {
+  // Split the string by '/' to get day, month, and year
+  const [day, month, year] = dateString.split("/");
+
+  // Create a new Date object (note: months are 0-indexed, so subtract 1 from month)
+  const date = new Date(year, month - 1, day);
+
+  return date;
+}

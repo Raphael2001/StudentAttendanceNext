@@ -37,6 +37,7 @@ export default function InstructorPopup(props: Props) {
         label: "תעודת זהות",
         inputType: FORM_INPUTS_TYPES.INPUT,
         rules: ["not_empty"],
+        isDisabled: !!dataItem,
       },
       {
         name: "name",

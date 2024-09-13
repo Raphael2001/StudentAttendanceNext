@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   clsx,
   formatTime,
@@ -9,6 +9,7 @@ import {
 
 import styles from "./TimePicker.module.scss";
 import BasicInputErrrorMsg from "components/Basic/BasicInputErrrorMsg/BasicInputErrrorMsg";
+import { useOutsideClick } from "utils/hooks/useOutsideClick";
 
 type Props = {
   startHour?: number;
@@ -47,6 +48,10 @@ function TimePicker(props: Props) {
   const [hours, setHours] = useState<Array<string>>([]);
   const [isOpen, setIsOpen] = useState(isOpenAtStart);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(wrapperRef, closePicker);
+
   useEffect(() => {
     const minutes = getMinutesByInterval(minuteInterval);
     setMinutes(minutes);
@@ -71,11 +76,18 @@ function TimePicker(props: Props) {
   }
 
   function closePicker() {
+    if (selectedHour && !selectedMinute) {
+      onMinutePickedHandler("00");
+    }
+    if (!selectedHour && selectedMinute) {
+      onHourPickedHandler("00");
+    }
+
     setIsOpen(false);
   }
 
   return (
-    <div className={styles["time-picker-container"]}>
+    <div className={styles["time-picker-container"]} ref={wrapperRef}>
       {placeholder && (
         <span className={styles["placeholder"]}>{placeholder}</span>
       )}

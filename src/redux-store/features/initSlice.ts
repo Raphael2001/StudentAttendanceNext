@@ -21,6 +21,7 @@ const initialState: init = {
   instructors: [],
   students: [],
   teachers: [],
+  courses: [],
 };
 
 export const initSlice = createSlice({
