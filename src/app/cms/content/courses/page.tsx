@@ -26,6 +26,10 @@ export default function CoursePage(props) {
       title: "שם",
       type: TABLE_CELL_TYPES.TEXT,
     },
+    days: {
+      title: "ימי הקורס",
+      type: TABLE_CELL_TYPES.TEXT,
+    },
     instructorId: {
       title: "מדריך",
       type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,

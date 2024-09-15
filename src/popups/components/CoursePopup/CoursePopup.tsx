@@ -93,6 +93,12 @@ function CoursePopup(props: Props) {
         inputType: FORM_INPUTS_TYPES.TIME_PICKER,
         rules: ["not_empty"],
       },
+      {
+        name: "days",
+        label: "ימי הקורס",
+        inputType: FORM_INPUTS_TYPES.INPUT,
+        rules: ["not_empty"],
+      },
 
       {
         name: "instructorId",
