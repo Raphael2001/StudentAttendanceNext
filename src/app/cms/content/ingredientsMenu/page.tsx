@@ -2,17 +2,10 @@
 
 import React from "react";
 
-import styles from "./ingredientsMenu.module.scss";
-import CmsButton from "components/CmsButton/CmsButton";
-import TableCreator from "components/TableCreator/TableCreator";
-import useDeleteItem from "utils/hooks/useDeleteItem";
-
 import CMS_MODULES from "constants/CMSModules";
 import Api from "api/requests";
 import TABLE_CELL_TYPES from "constants/TableCellType";
-import usePermission from "utils/hooks/usePermission";
-import TABLE_COLORS from "constants/TableColors";
-import { useRouter } from "next/navigation";
+
 import { Routes } from "constants/routes";
 import { useAppSelector } from "utils/hooks/useRedux";
 import PageGenerator from "components/Cms/PageGenerator/PageGenerator";
