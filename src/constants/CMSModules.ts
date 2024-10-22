@@ -10,6 +10,7 @@ const CMS_MODULES = {
   ITEMS: "Items",
   ITEMS_MENU: "ItemsMenu",
   ITEM_INGREDIENTS: "ItemIngredients",
+  INGREDIENTS_MENU: "IngredientsMenu",
   STUDENTS: "Students",
   TEACHERS: "Teachers",
   INSTRUCTORS: "Instructors",
