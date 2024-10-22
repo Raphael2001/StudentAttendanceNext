@@ -22,12 +22,9 @@ export default async function LocaleLayout({
   const apiValidationData: ValidationResponseType =
     await ISR.serverValidation();
 
-  const body = await ISR.init(locale);
-
   return (
     <AppWrapper
       color="site"
-      data={body}
       className="rtl"
       apiValidationData={apiValidationData}
     >
