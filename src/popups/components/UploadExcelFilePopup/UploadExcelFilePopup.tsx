@@ -7,6 +7,7 @@ import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 
 import Api from "api/requests";
 import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
+import useNotificationsHandler from "utils/hooks/useNotificationsHandler";
 
 type Payload = {
   moduleName: string;
@@ -20,9 +21,16 @@ export default function UploadExcelFilePopup(props: Props) {
   const { payload } = props;
   const { moduleName } = payload;
 
+  const { onSuccessNotification } = useNotificationsHandler();
+
   function onSubmit(payload, onSuccess) {
     payload.moduleName = moduleName;
-    Api.uploadExcelFile({ payload, onSuccess });
+
+    function onSuccessHandler() {
+      onSuccessNotification();
+      onSuccess();
+    }
+    Api.uploadExcelFile({ payload, onSuccess: onSuccessHandler });
   }
 
   const formData: FormDataType = {

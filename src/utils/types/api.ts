@@ -14,7 +14,7 @@ export type clientSettings = {
   method: string;
   url: string;
   headers: any;
-  withCredentials: true;
+  withCredentials: boolean;
   data?: any;
   params?: any;
 };

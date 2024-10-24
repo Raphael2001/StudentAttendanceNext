@@ -1,6 +1,12 @@
 "use client";
 
-import React, { ComponentType, forwardRef, useEffect, useState } from "react";
+import React, {
+  ComponentType,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import styles from "./FormCreator.module.scss";
 import InputsCreator from "./InputsCreator/InputsCreator";
@@ -35,13 +41,14 @@ const FormCreator = forwardRef((props: Props, ref) => {
     }
   }
 
-  useEffect(() => {
+  const initializeForm = useCallback(() => {
     const formData = {};
+
     if (Array.isArray(inputs)) {
-      for (const key in inputs) {
-        const input = inputs[key];
+      inputs.forEach((input) => {
         let initialValue = defaultValue(input);
-        if (initialData && initialData[input.name]) {
+
+        if (initialData && initialData.hasOwnProperty(input.name)) {
           initialValue = initialData[input.name];
         }
 
@@ -49,13 +56,17 @@ const FormCreator = forwardRef((props: Props, ref) => {
           value: initialValue,
           valid: false,
           errorMessage: "",
-          rules: input.rules,
+          rules: input.rules || [],
         };
-      }
+      });
     }
 
     setForm(formData);
-  }, [initialData, inputs]);
+  }, [inputs, initialData]); // Memoize function with dependencies
+
+  useEffect(() => {
+    initializeForm();
+  }, [initializeForm]); // Include the memoized function in dependencies
 
   function onChange(name: string, value: onChangeValue) {
     const newState = { ...form };

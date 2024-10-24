@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 import POPUP_TYPES from "constants/popup-types";
-import { clsx, generateUniqueId } from "utils/functions";
+import { clsx } from "utils/functions";
 
 // popup components
 import ApiErrorPopup from "./components/ApiErrorPopup/ApiErrorPopup";
@@ -110,13 +110,15 @@ export default function Popups({ className = "" }) {
 
   const renderPopups = () => {
     const popupsToRender = popupsArray.map((popup) => {
-      const key = generateUniqueId();
-
-      const popupComponent = getPopupComponent(key, popup.type, popup.payload);
+      const popupComponent = getPopupComponent(
+        popup.key,
+        popup.type,
+        popup.payload
+      );
       return (
         <div
           className={`priority-` + popup.priority}
-          key={"popup-" + key + popup.type}
+          key={"popup-" + popup.key + popup.type}
         >
           {popupComponent}
         </div>

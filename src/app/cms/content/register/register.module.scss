@@ -1,0 +1,8 @@
+@import "src/styles/imports.scss";
+.page-wrapper {
+  width: 100%;
+  margin-top: rem(30);
+  display: flex;
+
+  justify-content: center;
+}
