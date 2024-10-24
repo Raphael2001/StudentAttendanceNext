@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { generateUniqueId } from "utils/functions";
 import { Popup } from "utils/types/popup";
 
 type PopupPayload = {
@@ -13,7 +12,7 @@ export const popupsSlice = createSlice({
   initialState: [],
   reducers: {
     addPopup: (state: Popup[], action: PayloadAction<PopupPayload>) => {
-      const key = generateUniqueId(8);
+      const key = crypto.randomUUID();
 
       const { payload = {}, type, priority = 1 } = action.payload;
 
