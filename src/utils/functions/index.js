@@ -2,7 +2,7 @@ import jwt_decode from "jwt-decode";
 import ApiValidationService from "services/ApiValidationService";
 
 // generate unique IDs
-export function generateUniqueId(length) {
+export function generateUniqueId(length = 16) {
   const result = [];
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

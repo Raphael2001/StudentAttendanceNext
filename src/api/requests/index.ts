@@ -572,6 +572,8 @@ const Api = (function () {
           Store.dispatch(
             insertManyByKey({ value: res.body, name: "instructors" })
           );
+        case CMS_MODULES.COURSES:
+          Store.dispatch(insertManyByKey({ value: res.body, name: "courses" }));
       }
 
       // Store.dispatch(deleteKeyById({ value: res.body, name: "instructors" }));
