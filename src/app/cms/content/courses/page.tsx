@@ -18,7 +18,7 @@ export default function CoursePage(props) {
   const instructors = useAppSelector((store) => store.init.instructors);
 
   const header: TableHeader = {
-    courseId: {
+    _id: {
       title: "מזהה קורס",
       type: TABLE_CELL_TYPES.TEXT,
     },

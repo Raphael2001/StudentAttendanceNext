@@ -30,8 +30,6 @@ function CoursePopup(props: Props) {
   function onSubmit(formPayload, onSuccess) {
     const payload = formatPayload(formPayload);
     if (dataItem) {
-      payload["_id"] = dataItem["_id"];
-
       return Api.updateCourse({ payload, onSuccess });
     }
 
@@ -63,7 +61,7 @@ function CoursePopup(props: Props) {
   const formData: FormDataType = {
     inputs: [
       {
-        name: "courseId",
+        name: "_id",
         label: "מזהה קורס",
         inputType: FORM_INPUTS_TYPES.INPUT,
         rules: ["not_empty"],
