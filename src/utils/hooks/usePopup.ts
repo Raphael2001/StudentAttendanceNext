@@ -3,7 +3,7 @@ import { useAppDispatch } from "./useRedux";
 
 function usePopup() {
   const dispatch = useAppDispatch();
-  function openPopup(type: string, payload?: Object, priority?: number) {
+  return (type: string, payload?: Object, priority?: number) => {
     dispatch(
       addPopup({
         type,
@@ -11,9 +11,7 @@ function usePopup() {
         priority,
       })
     );
-  }
-
-  return openPopup;
+  };
 }
 
 export default usePopup;
