@@ -1,4 +1,4 @@
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import ApiValidationService from "services/ApiValidationService";
 
 // generate unique IDs
@@ -51,7 +51,7 @@ export function formatTime(time) {
 }
 
 export function parseJWT(token) {
-  const decoded = jwt_decode(token);
+  const decoded = jwtDecode(token);
   return decoded;
 }
 
