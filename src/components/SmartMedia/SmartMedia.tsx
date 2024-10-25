@@ -4,7 +4,7 @@ import React from "react";
 import { Media, MediaTypes, MimeTypes, Src } from "utils/types/media";
 import BaseImage from "components/BaseVideoImage/BaseImage";
 import BaseVideo from "components/BaseVideoImage/BaseVideo";
-import { getMediaPath } from "utils/functions";
+import { getMediaPath } from "utils/functions/mediaFunctions";
 
 type Props = {
   className?: string;

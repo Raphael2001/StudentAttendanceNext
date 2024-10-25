@@ -88,9 +88,6 @@ export function createSortObject(objectsList) {
   }, {});
   return result;
 }
-export function getMediaPath(src) {
-  return `${ApiValidationService.getCdn()}/${src}`;
-}
 
 export function formatDate(date) {
   if (date) {

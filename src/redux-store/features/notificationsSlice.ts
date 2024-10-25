@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { copy, generateUniqueId } from "utils/functions";
+import { copy } from "utils/functions";
 import { notification } from "utils/types/notification";
 
 type NotificationsState = notification[];
@@ -12,7 +12,7 @@ export const notificationsSlice = createSlice({
       state: NotificationsState,
       action: PayloadAction<notification>
     ) => {
-      const id: string = generateUniqueId(16);
+      const id: string = crypto.randomUUID();
       state.push({
         type: action.payload.type,
         payload: { ...action.payload.payload, id },
