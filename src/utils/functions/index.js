@@ -1,5 +1,4 @@
-import { jwtDecode } from "jwt-decode";
-import ApiValidationService from "services/ApiValidationService";
+import jwtDecode from "jwt-decode";
 
 // generate unique IDs
 export function generateUniqueId(length = 16) {
