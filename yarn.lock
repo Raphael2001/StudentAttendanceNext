@@ -1859,19 +1859,19 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-negotiator@^0.6.3:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.4.tgz#777948e2452651c570b712dd01c23e262713fff7"
-  integrity sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==
+negotiator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-1.0.0.tgz#b6c91bb47172d69f93cfd7c357bbb529019b5f6a"
+  integrity sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==
 
-next-intl@^3.14.1:
-  version "3.23.2"
-  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.23.2.tgz#2ab3ee3d05cb692f3fad41dff52757ade595572d"
-  integrity sha512-SCYEG2i0kYz+OupN6+qH9T+GDRfLCmJuT835uI9ac7AOlYCUbBizj28cti+oGhDkIjueZrweVw7iEiTkqCpKpQ==
+next-intl@^3.23.5:
+  version "3.23.5"
+  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.23.5.tgz#a46ed0cb2e896e1e762bc0c1409af5a092288fc5"
+  integrity sha512-mUuz3JFRdtWpyYEPN8xUXpkn4qEnAADxA5GQjUGobbLY32kWrYfZYs4MrYHAVl2zAAbPcD9oisXF0q8B1ifszA==
   dependencies:
     "@formatjs/intl-localematcher" "^0.5.4"
-    negotiator "^0.6.3"
-    use-intl "^3.23.2"
+    negotiator "^1.0.0"
+    use-intl "^3.23.5"
 
 next@^14.2.5:
   version "14.2.15"
@@ -2558,10 +2558,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-intl@^3.23.2:
-  version "3.23.2"
-  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.23.2.tgz#26534f96877b7db15de18f71f75befcbca378a8d"
-  integrity sha512-lrKb5M6zr9YoHK+OuUsRApPPNEMHX8ntx0PDGZ0fxlMmj6W2u/3y++UB4uE/o0C8Jyn7oiHCjShYjgPjDaB1cg==
+use-intl@^3.23.5:
+  version "3.23.5"
+  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.23.5.tgz#cad200d2e7c0334095a590e66448bc1ab15a3ffc"
+  integrity sha512-t+iwRqyAzKUY3E0DbA70eTsNxLKr6RndqdIOedqIQPfcNNkFxHs3g6+6i0PWXAGYRXaqOzzE3ZWYFOMCmnUkWg==
   dependencies:
     "@formatjs/fast-memoize" "^2.2.0"
     intl-messageformat "^10.5.14"
