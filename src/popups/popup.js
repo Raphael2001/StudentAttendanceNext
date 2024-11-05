@@ -30,6 +30,7 @@ import TeacherPopup from "./components/TeachersPopup/TeachersPopup";
 import InstructorPopup from "./components/InstructorPopup/InstructorPopup";
 import UploadExcelFilePopup from "./components/UploadExcelFilePopup/UploadExcelFilePopup";
 import CoursePopup from "./components/CoursePopup/CoursePopup";
+import LeadSentSuccess from "./components/LeadSentSuccess/LeadSentSuccess";
 
 export default function Popups({ className = "" }) {
   const popupsArray = useAppSelector((store) => store.popupsArray);
@@ -97,6 +98,9 @@ export default function Popups({ className = "" }) {
         <UploadExcelFilePopup key={key} payload={payload} />
       ),
       [POPUP_TYPES.COURSE]: <CoursePopup key={key} payload={payload} />,
+      [POPUP_TYPES.LEAD_SENT_SUCCESS]: (
+        <LeadSentSuccess key={key} payload={payload} />
+      ),
     };
 
     const popupToReturn =
