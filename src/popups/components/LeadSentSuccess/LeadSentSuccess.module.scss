@@ -1,0 +1,24 @@
+@import "src/styles/imports.scss";
+.lead-sent-popup {
+  .lead-sent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    .title {
+      font-family: $font-medium;
+      .name {
+        color: $basic-color-blue;
+      }
+    }
+    .content {
+      font-family: $font;
+      margin-top: rem(10);
+      font-size: rem(16);
+    }
+    .btn {
+      margin-top: rem(50);
+    }
+  }
+}
