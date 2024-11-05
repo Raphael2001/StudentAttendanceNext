@@ -1,0 +1,28 @@
+@import "src/styles/imports.scss";
+.contact-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+  padding-top: rem(50);
+  .title {
+    font-size: rem(30);
+    font-family: $font-medium;
+  }
+  .subtitle {
+    font-size: rem(22);
+    font-family: $font;
+  }
+  .form {
+    margin-top: rem(50);
+    width: 80%;
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .contact-page-wrapper {
+    .form {
+      width: 50%;
+    }
+  }
+}
