@@ -1,29 +1,18 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
-import styles from "./CreateUserPopup.module.scss";
-import { SlidePopupRef } from "utils/types/popup";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-import FormCreator from "components/FormCreator/FormCreator";
 import { FormDataType } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import { useAppSelector } from "utils/hooks/useRedux";
 import Api from "api/requests";
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
-type Props = {};
-
-function CreateUserPopup(props: Props) {
-  const ref = useRef<SlidePopupRef>();
-
+function CreateUserPopup() {
   const roles = useAppSelector((store) => store.init.iamRoles);
 
-  function onSubmit(payload) {
+  function onSubmit(payload, onSuccess) {
     Api.createUser({ payload, onSuccess });
-  }
-
-  function onSuccess() {
-    ref.current?.animateOut();
   }
 
   const formData: FormDataType = {
@@ -52,15 +41,11 @@ function CreateUserPopup(props: Props) {
   };
 
   return (
-    <SlidePopup className={styles["create-user-popup"]} ref={ref}>
-      <div className={styles["form"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={"הוסף"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      formData={formData}
+      onSubmit={onSubmit}
+      hasDataItem={false}
+    />
   );
 }
 

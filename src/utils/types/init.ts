@@ -9,6 +9,10 @@ import {
 } from "./menus";
 import { MediaObjects } from "./media";
 import { UserType } from "./user";
+import { StudentType } from "./student";
+import { Teacher } from "./teacher";
+import { Instructor } from "./instructor";
+import { Course } from "./course";
 
 export type init = {
   texts: Array<CmsText>;
@@ -25,6 +29,10 @@ export type init = {
   modules: Array<ModuleType>;
   files: MediaObjects;
   users: Array<UserType>;
+  students: Array<StudentType>;
+  teachers: Array<Teacher>;
+  instructors: Array<Instructor>;
+  courses: Array<Course>;
 };
 
 export type generalInfoValue =
@@ -65,7 +73,6 @@ export type metaTag = {
 
 export type CmsText = {
   key: string;
-  tag: TextTagsKeys;
   value: TextValue;
 };
 
@@ -93,4 +100,5 @@ export type ModuleType = {
   _id: string;
   title: string;
   route: string;
+  show?: boolean;
 };

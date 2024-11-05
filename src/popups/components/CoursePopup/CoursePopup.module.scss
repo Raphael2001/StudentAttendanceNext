@@ -1,0 +1,15 @@
+@import "src/styles/imports.scss";
+
+.course-popup {
+  .form {
+    padding-bottom: rem(90);
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .course-popup {
+    .form {
+      padding-bottom: rem(200);
+    }
+  }
+}

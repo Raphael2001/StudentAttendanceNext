@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
-import styles from "./GeneralInfoPopup.module.scss";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
 import GeneralInfoInputTypes from "constants/GeneralInfoInputTypes";
 
-import FormCreator from "components/FormCreator/FormCreator";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 
 import Api from "api/requests";
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 const options = [
   {
@@ -24,10 +22,8 @@ const options = [
   },
 ];
 
-function GeneralInfoPopup(props) {
-  const ref = useRef();
-
-  function onSubmit(formPayload) {
+function GeneralInfoPopup() {
+  function onSubmit(formPayload, onSuccess) {
     const multiValuesId = formPayload.multiValues;
     const option = options.find((o) => o._id === multiValuesId);
     const payload = {
@@ -37,10 +33,6 @@ function GeneralInfoPopup(props) {
       inputType: formPayload.inputType,
     };
     Api.upsertGeneralInfo({ payload, onSuccess });
-
-    function onSuccess() {
-      ref.current.animateOut();
-    }
   }
 
   const formData = {
@@ -76,15 +68,11 @@ function GeneralInfoPopup(props) {
   };
 
   return (
-    <SlidePopup className={styles["general-info-popup"]} ref={ref}>
-      <div className={styles["content"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={"יצירה"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      formData={formData}
+      onSubmit={onSubmit}
+      hasDataItem={false}
+    />
   );
 }
 

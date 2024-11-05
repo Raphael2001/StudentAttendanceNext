@@ -12,12 +12,15 @@ export const popupsSlice = createSlice({
   initialState: [],
   reducers: {
     addPopup: (state: Popup[], action: PayloadAction<PopupPayload>) => {
+      const key = crypto.randomUUID();
+
       const { payload = {}, type, priority = 1 } = action.payload;
 
       const popup = {
         payload,
         type,
         priority,
+        key,
       };
       state.push(popup);
       state.sort((a, b) => a.priority - b.priority);

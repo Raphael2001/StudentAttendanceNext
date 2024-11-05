@@ -1,13 +1,8 @@
 import styles from "./home.module.scss";
-import { unstable_setRequestLocale } from "next-intl/server";
-import Menus from "components/Menus/Menus";
+import { setRequestLocale } from "next-intl/server";
 
 export default function Home({ params: { locale } }) {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
-  return (
-    <main className={styles.main}>
-      <Menus />
-    </main>
-  );
+  return <main className={styles.main}></main>;
 }

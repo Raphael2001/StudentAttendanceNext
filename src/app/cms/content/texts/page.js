@@ -15,7 +15,6 @@ export default function TextsPage(props) {
 
   const header = {
     key: { title: "מפתח", type: TABLE_CELL_TYPES.TEXT },
-    tag: { title: "תגית", type: TABLE_CELL_TYPES.TEXT },
   };
 
   return (

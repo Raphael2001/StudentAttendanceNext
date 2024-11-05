@@ -18,6 +18,10 @@ const initialState: init = {
   ingredientsMenus: [],
   files: {},
   users: [],
+  instructors: [],
+  students: [],
+  teachers: [],
+  courses: [],
 };
 
 export const initSlice = createSlice({
@@ -138,6 +142,12 @@ export const initSlice = createSlice({
       delete files[fileId];
       state.files = files;
     },
+    insertManyByKey: (state, action) => {
+      const { name, value } = action.payload;
+
+      state[name] = [...state[name], ...value];
+      return state;
+    },
   },
 });
 
@@ -157,6 +167,7 @@ export const {
   upsertTextAction,
   addFileAction,
   removeFileAction,
+  insertManyByKey,
 } = initSlice.actions;
 
 export default initSlice.reducer;

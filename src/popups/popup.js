@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 import POPUP_TYPES from "constants/popup-types";
-import { clsx, generateUniqueId } from "utils/functions";
+import { clsx } from "utils/functions";
 
 // popup components
 import ApiErrorPopup from "./components/ApiErrorPopup/ApiErrorPopup";
@@ -25,6 +25,11 @@ import ItemIngredientsPopup from "./components/ItemIngredientsPopup/ItemIngredie
 import { useAppSelector } from "utils/hooks/useRedux";
 import ProductPopup from "./components/ProductPopup/ProductPopup";
 import FilesPopup from "./components/FilesPopup/FilesPopup";
+import StudentPopup from "./components/StudentsPopup/StudentsPopup";
+import TeacherPopup from "./components/TeachersPopup/TeachersPopup";
+import InstructorPopup from "./components/InstructorPopup/InstructorPopup";
+import UploadExcelFilePopup from "./components/UploadExcelFilePopup/UploadExcelFilePopup";
+import CoursePopup from "./components/CoursePopup/CoursePopup";
 
 export default function Popups({ className = "" }) {
   const popupsArray = useAppSelector((store) => store.popupsArray);
@@ -85,6 +90,13 @@ export default function Popups({ className = "" }) {
       ),
       [POPUP_TYPES.PRODUCT]: <ProductPopup key={key} payload={payload} />,
       [POPUP_TYPES.FILES]: <FilesPopup key={key} payload={payload} />,
+      [POPUP_TYPES.STUDENT]: <StudentPopup key={key} payload={payload} />,
+      [POPUP_TYPES.TEACHER]: <TeacherPopup key={key} payload={payload} />,
+      [POPUP_TYPES.INSTRUCTOR]: <InstructorPopup key={key} payload={payload} />,
+      [POPUP_TYPES.UPLOAD_EXCEL_FILE]: (
+        <UploadExcelFilePopup key={key} payload={payload} />
+      ),
+      [POPUP_TYPES.COURSE]: <CoursePopup key={key} payload={payload} />,
     };
 
     const popupToReturn =
@@ -98,13 +110,15 @@ export default function Popups({ className = "" }) {
 
   const renderPopups = () => {
     const popupsToRender = popupsArray.map((popup) => {
-      const key = generateUniqueId();
-
-      const popupComponent = getPopupComponent(key, popup.type, popup.payload);
+      const popupComponent = getPopupComponent(
+        popup.key,
+        popup.type,
+        popup.payload
+      );
       return (
         <div
           className={`priority-` + popup.priority}
-          key={"popup-" + key + popup.type}
+          key={"popup-" + popup.key + popup.type}
         >
           {popupComponent}
         </div>

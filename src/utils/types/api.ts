@@ -14,7 +14,7 @@ export type clientSettings = {
   method: string;
   url: string;
   headers: any;
-  withCredentials: true;
+  withCredentials: boolean;
   data?: any;
   params?: any;
 };
@@ -34,6 +34,7 @@ export type ApiProps = {
 export type apiConfig = {
   showLoader?: boolean;
   url?: string;
+  isFormData?: boolean;
 };
 
 export type ApiCallData = {

@@ -152,8 +152,6 @@ export default function IngredientsForm(props: Props) {
     };
 
     console.log("payload", JSON.stringify(payload));
-
-    Api.test();
   }
 
   return (

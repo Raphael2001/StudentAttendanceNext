@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useMemo } from "react";
 
-import styles from "./IAMRolePopup.module.scss";
-import { SlidePopupRef } from "utils/types/popup";
-import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-import FormCreator from "components/FormCreator/FormCreator";
 import { FormDataType } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import { useAppSelector } from "utils/hooks/useRedux";
 import { IAMRoleType } from "utils/types/init";
 import Api from "api/requests";
+import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 
 type Payload = {
   dataItem?: IAMRoleType;
@@ -25,20 +22,18 @@ function IAMRolePopup(props: Props) {
   const { dataItem } = payload;
 
   const modules = useAppSelector((store) => store.init.modules);
+  const filteredModules = useMemo(
+    () => modules.filter((item) => item.show !== false),
+    [modules]
+  );
 
-  const ref = useRef<SlidePopupRef>();
-
-  function onSubmit(payload) {
+  function onSubmit(payload, onSuccess) {
     if (dataItem) {
       payload["id"] = dataItem["_id"];
       return Api.updateRole({ payload, onSuccess });
     }
 
     Api.createRole({ payload, onSuccess });
-  }
-
-  function onSuccess() {
-    ref.current?.animateOut();
   }
 
   const formData: FormDataType = {
@@ -54,7 +49,7 @@ function IAMRolePopup(props: Props) {
         label: "הרשאות",
         inputType: FORM_INPUTS_TYPES.BITWISE_CHECKBOX,
         rules: ["not_empty"],
-        options: modules,
+        options: filteredModules,
         field: "title",
         bitwiseField: "bitwise",
       },
@@ -63,15 +58,11 @@ function IAMRolePopup(props: Props) {
   };
 
   return (
-    <SlidePopup className={styles["role-popup"]} ref={ref}>
-      <div className={styles["form"]}>
-        <FormCreator
-          formData={formData}
-          buttonText={!dataItem ? "הוסף" : "עדכן"}
-          onSubmit={onSubmit}
-        />
-      </div>
-    </SlidePopup>
+    <GeneralFormPopup
+      hasDataItem={!!dataItem}
+      onSubmit={onSubmit}
+      formData={formData}
+    />
   );
 }
 

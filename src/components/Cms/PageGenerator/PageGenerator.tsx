@@ -14,6 +14,7 @@ import TableCreator from "components/TableCreator/TableCreator";
 import { ApiProps } from "utils/types/api";
 import { useRouter } from "next/navigation";
 import usePopup from "utils/hooks/usePopup";
+import POPUP_TYPES from "constants/popup-types";
 
 type Props = {
   data: Array<any>;
@@ -25,7 +26,8 @@ type Props = {
   popup?: string;
   overrideUpdatePopup?: string;
   showDeleteAction?: boolean;
-  shoUpdateAction?: boolean;
+  showUpdateAction?: boolean;
+  uploadFile?: boolean;
 };
 
 function PageGenerator(props: Props) {
@@ -39,7 +41,8 @@ function PageGenerator(props: Props) {
     deleteApi = () => {},
     overrideUpdatePopup,
     showDeleteAction = true,
-    shoUpdateAction = true,
+    showUpdateAction = true,
+    uploadFile = false,
   } = props;
   const openPopup = usePopup();
 
@@ -81,6 +84,10 @@ function PageGenerator(props: Props) {
     }
   }
 
+  function uploadFileButton() {
+    openPopup(POPUP_TYPES.UPLOAD_EXCEL_FILE, { moduleName: module });
+  }
+
   const updateAction = {
     color: TABLE_COLORS.GREEN,
     text: "עדכון",
@@ -95,14 +102,14 @@ function PageGenerator(props: Props) {
 
   const getActions = useCallback(() => {
     const actions: Array<TableAction> = [];
-    if (shoUpdateAction) {
+    if (showUpdateAction) {
       actions.push(updateAction);
     }
     if (showDeleteAction) {
       actions.push(deleteAction);
     }
     return actions;
-  }, [showDeleteAction, showDeleteAction]);
+  }, [showDeleteAction, showUpdateAction]);
 
   const actions = getActions();
 
@@ -121,6 +128,9 @@ function PageGenerator(props: Props) {
     <div className={styles["page-wrapper"]}>
       <div className={styles["add-button-wrapper"]}>
         <CmsButton onClick={createNew} text="הוסף חדש" />
+        {uploadFile && (
+          <CmsButton onClick={uploadFileButton} text="העלת קובץ" />
+        )}
       </div>
 
       <TableCreator data={dataArray} header={tableHeader} />

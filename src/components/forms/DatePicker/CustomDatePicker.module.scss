@@ -86,7 +86,7 @@ $disabled: #b6b6b6;
         :global(.react-datepicker) {
           width: rem(279);
           border: 1px solid $border;
-          padding-bottom: rem(25);
+          padding-bottom: 0;
           :global(.react-datepicker__triangle) {
             display: block;
             transform: translate3d(0, 0px, 0px) !important;

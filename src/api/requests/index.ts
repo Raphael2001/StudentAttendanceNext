@@ -1,5 +1,6 @@
 import ApiManager from "api/ApiManager";
 import API_METHODS from "constants/ApiMethods";
+import CMS_MODULES from "constants/CMSModules";
 import LOCAL_STORAGE_KEYS from "constants/LocalStorage";
 import Store from "redux-store";
 import {
@@ -9,6 +10,7 @@ import {
   deleteGeneralInfoAction,
   deleteKeyById,
   deleteTextAction,
+  insertManyByKey,
   removeFileAction,
   removeMediaAction,
   setGeneralInfo,
@@ -469,11 +471,144 @@ const Api = (function () {
     return ApiManager.addCall(props, API_METHODS.DELETE, "file", onSuccess);
   }
 
-  async function test(props: ApiProps = {}) {
+  async function addStudent(props: ApiProps = {}) {
     function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "students" }));
       typeof props.onSuccess === "function" && props.onSuccess(res.body);
     }
-    return ApiManager.addCall(props, API_METHODS.GET, "init", onSuccess);
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "student", onSuccess);
+  }
+
+  async function updateStudent(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "students" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "student", onSuccess);
+  }
+
+  async function deleteStudent(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "students" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "student", onSuccess);
+  }
+
+  async function addTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "teacher", onSuccess);
+  }
+
+  async function updateTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "teacher", onSuccess);
+  }
+
+  async function deleteTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "teachers" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "teacher", onSuccess);
+  }
+
+  async function addInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "instructor", onSuccess);
+  }
+
+  async function updateInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "instructor", onSuccess);
+  }
+
+  async function deleteInstructor(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(
+      props,
+      API_METHODS.DELETE,
+      "instructor",
+      onSuccess
+    );
+  }
+
+  async function uploadExcelFile(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      switch (props.payload.moduleName) {
+        case CMS_MODULES.STUDENTS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "students" })
+          );
+        case CMS_MODULES.TEACHERS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "teachers" })
+          );
+        case CMS_MODULES.INSTRUCTORS:
+          Store.dispatch(
+            insertManyByKey({ value: res.body, name: "instructors" })
+          );
+        case CMS_MODULES.COURSES:
+          Store.dispatch(insertManyByKey({ value: res.body, name: "courses" }));
+      }
+
+      // Store.dispatch(deleteKeyById({ value: res.body, name: "instructors" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    props.config = { ...props.config, isFormData: true };
+    return ApiManager.addCall(props, API_METHODS.POST, "excelFile", onSuccess);
+  }
+
+  async function addCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(addNewKey({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.POST, "course", onSuccess);
+  }
+
+  async function updateCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(updateKey({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.PUT, "course", onSuccess);
+  }
+
+  async function deleteCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      Store.dispatch(deleteKeyById({ value: res.body, name: "courses" }));
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(props, API_METHODS.DELETE, "course", onSuccess);
   }
 
   return {
@@ -515,7 +650,19 @@ const Api = (function () {
     deleteIngredientsMenu,
     addFile,
     removeFile,
-    test,
+    addStudent,
+    updateStudent,
+    deleteStudent,
+    addTeacher,
+    updateTeacher,
+    deleteTeacher,
+    addInstructor,
+    updateInstructor,
+    deleteInstructor,
+    uploadExcelFile,
+    addCourse,
+    updateCourse,
+    deleteCourse,
   };
 })();
 

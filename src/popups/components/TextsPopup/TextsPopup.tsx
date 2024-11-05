@@ -55,15 +55,6 @@ function TextsPopup(props: Props) {
       form.inputs.push(inputData);
     }
 
-    const inputData: FormInputData = {
-      name: "tag",
-      inputType: FORM_INPUTS_TYPES.SELECT,
-      label: "תגית",
-      rules: ["not_empty"],
-      options: Object.values(TEXT_TAGS),
-      field: "_id",
-    };
-    form.inputs.push(inputData);
     form.initialData = formatDataToInitialData(dataItem);
 
     setFormData(form);
