@@ -19,11 +19,7 @@ import IAMRolePopup from "./components/IAMRolePopop/IAMRolePopup";
 import CreateUserPopup from "./components/CreateUserPopup/CreateUserPopup";
 import TrashPopup from "./components/TrashPopup/TrashPopup";
 import UpdateUserPopup from "./components/UpdateUserPopup/UpdateUserPopup";
-import ItemsPopup from "./components/ItemsPopup/ItemsPopup";
-import ItemsMenuPopup from "./components/ItemsMenuPopup/ItemsMenuPopup";
-import ItemIngredientsPopup from "./components/ItemIngredientsPopup/ItemIngredientsPopup";
 import { useAppSelector } from "utils/hooks/useRedux";
-import ProductPopup from "./components/ProductPopup/ProductPopup";
 import FilesPopup from "./components/FilesPopup/FilesPopup";
 import StudentPopup from "./components/StudentsPopup/StudentsPopup";
 import TeacherPopup from "./components/TeachersPopup/TeachersPopup";
@@ -84,12 +80,7 @@ export default function Popups({ className = "" }) {
       [POPUP_TYPES.UPDATE_USER]: (
         <UpdateUserPopup key={key} payload={payload} />
       ),
-      [POPUP_TYPES.ITEMS]: <ItemsPopup key={key} payload={payload} />,
-      [POPUP_TYPES.ITEMS_MENU]: <ItemsMenuPopup key={key} payload={payload} />,
-      [POPUP_TYPES.ITEM_INGREDIENTS]: (
-        <ItemIngredientsPopup key={key} payload={payload} />
-      ),
-      [POPUP_TYPES.PRODUCT]: <ProductPopup key={key} payload={payload} />,
+
       [POPUP_TYPES.FILES]: <FilesPopup key={key} payload={payload} />,
       [POPUP_TYPES.STUDENT]: <StudentPopup key={key} payload={payload} />,
       [POPUP_TYPES.TEACHER]: <TeacherPopup key={key} payload={payload} />,
