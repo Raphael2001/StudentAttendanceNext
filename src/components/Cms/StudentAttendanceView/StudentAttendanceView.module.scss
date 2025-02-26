@@ -1,0 +1,19 @@
+@import "src/styles/imports.scss";
+
+.attendance-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding-top: rem(50);
+  .attendance-page-header {
+    display: flex;
+    gap: rem(20);
+    .auto-complete {
+      width: rem(300);
+    }
+  }
+  .table {
+    margin-top: rem(20);
+  }
+}
