@@ -40,23 +40,12 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {} }: Props) {
     apiCall(value, setData);
   }
 
-  const deleteAction = {
-    color: TABLE_COLORS.RED,
-    text: "מחיקה",
-    onClick: () => {},
-  };
-
   const basicHeader = {
     studentId: { title: "תעודת זהות", type: TABLE_CELL_TYPES.TEXT },
     studentName: { title: "שם", type: TABLE_CELL_TYPES.TEXT },
     ...extraHeaders,
     totalAbsent: { title: "סהכ נוכחות", type: TABLE_CELL_TYPES.TEXT },
     totalPresent: { title: "סהכ חיסורים", type: TABLE_CELL_TYPES.TEXT },
-    // actions: {
-    //   title: "פעולות",
-    //   type: TABLE_CELL_TYPES.ACTION_BUTTONS,
-    //   actions: [deleteAction],
-    // },
   };
 
   return (
