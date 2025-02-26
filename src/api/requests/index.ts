@@ -610,6 +610,30 @@ const Api = (function () {
     props.headers = await accessTokenHeaders();
     return ApiManager.addCall(props, API_METHODS.DELETE, "course", onSuccess);
   }
+  async function getAttendanceByTeacher(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(
+      props,
+      API_METHODS.GET,
+      "attendanceByTeacher",
+      onSuccess
+    );
+  }
+  async function getAttendanceByCourse(props: ApiProps = {}) {
+    function onSuccess(res: ApiResponse) {
+      typeof props.onSuccess === "function" && props.onSuccess(res.body);
+    }
+    props.headers = await accessTokenHeaders();
+    return ApiManager.addCall(
+      props,
+      API_METHODS.GET,
+      "attendanceByCourse",
+      onSuccess
+    );
+  }
 
   return {
     initCms,
@@ -663,6 +687,8 @@ const Api = (function () {
     addCourse,
     updateCourse,
     deleteCourse,
+    getAttendanceByTeacher,
+    getAttendanceByCourse,
   };
 })();
 

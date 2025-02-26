@@ -5,4 +5,5 @@ export type Course = {
   endDate: string;
   time: string;
   days: string;
+  name: string;
 };

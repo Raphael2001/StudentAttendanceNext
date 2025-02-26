@@ -16,5 +16,6 @@ const CMS_MODULES = {
   INSTRUCTORS: "Instructors",
   COURSES: "Courses",
   REGISTER: "Register",
+  ATTENDANCE: "Attendance",
 };
 export default CMS_MODULES;
