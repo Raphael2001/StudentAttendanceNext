@@ -16,9 +16,17 @@ function AttendanceByTeacher() {
     extraParams: { [key: string]: string },
     onSuccess: (data: any) => void
   ) {
+    function onSuccessHandler(data: any) {
+      if (data.url) {
+        window.open(data.url, "_blank");
+      } else {
+        onSuccess(data);
+      }
+    }
+
     Api.getAttendanceByTeacher({
       payload: { teacherId, ...extraParams },
-      onSuccess,
+      onSuccess: onSuccessHandler,
     });
   }
 
