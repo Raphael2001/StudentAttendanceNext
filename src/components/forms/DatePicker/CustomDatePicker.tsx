@@ -50,7 +50,7 @@ const months = [
 ];
 
 type Props = {
-  value: Date;
+  value: Date | undefined;
   minDate?: Date;
   placeholder?: string;
   icon?: string;

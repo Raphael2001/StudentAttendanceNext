@@ -12,20 +12,34 @@ import TABLE_COLORS from "constants/TableColors";
 import usePermission from "utils/hooks/usePermission";
 import CMS_MODULES from "constants/CMSModules";
 import { TableHeader } from "utils/types/table";
+import CustomDatePicker from "components/forms/DatePicker/CustomDatePicker";
+import { formatDate } from "utils/functions";
 type option = {
   _id: string;
   name: string;
 };
 type Props = {
   options: Array<option>;
-  apiCall: (id: string, onSuccess: (data: any) => void) => void;
+  apiCall: (
+    id: string,
+    extraParams: { [key: string]: string },
+    onSuccess: (data: any) => void
+  ) => void;
   extraHeaders?: TableHeader;
+  dateFilter?: boolean;
 };
 
-function StudentAttendanceView({ options, apiCall, extraHeaders = {} }: Props) {
+function StudentAttendanceView({
+  options,
+  apiCall,
+  extraHeaders = {},
+  dateFilter = false,
+}: Props) {
   usePermission(CMS_MODULES.ATTENDANCE);
 
   const [value, setValue] = useState<string>("");
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
   const [data, setData] = useState();
 
   function onChange(name: string, option: any) {
@@ -36,8 +50,23 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {} }: Props) {
     }
   }
 
+  function onChangeDatePicker(name: string, date: Date) {
+    if (name === "startDate") {
+      setStartDate(date);
+    } else {
+      setEndDate(date);
+    }
+  }
+
   function getData() {
-    apiCall(value, setData);
+    const extra = {};
+    if (startDate) {
+      extra["startDate"] = formatDate(startDate);
+    }
+    if (endDate) {
+      extra["endDate"] = formatDate(startDate);
+    }
+    apiCall(value, extra, setData);
   }
 
   const basicHeader = {
@@ -58,6 +87,26 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {} }: Props) {
           field="name"
           className={styles["auto-complete"]}
         />
+
+        {dateFilter && (
+          <>
+            <CustomDatePicker
+              minDate={new Date(2000, 0, 1)}
+              placeholder="תאריך התחלה"
+              name="startDate"
+              onChange={onChangeDatePicker}
+              value={startDate}
+            />
+            <CustomDatePicker
+              minDate={startDate ?? new Date(2000, 0, 1)}
+              placeholder="תאריך סיום"
+              name="endDate"
+              onChange={onChangeDatePicker}
+              value={endDate}
+            />
+          </>
+        )}
+
         <CmsButton
           text={"חיפוש"}
           className="create"
