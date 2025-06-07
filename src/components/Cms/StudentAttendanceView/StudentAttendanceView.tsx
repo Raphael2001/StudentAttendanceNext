@@ -58,14 +58,15 @@ function StudentAttendanceView({
     }
   }
 
-  function getData() {
-    const extra = {};
+  function getData(action = "search") {
+    const extra = { action };
     if (startDate) {
       extra["startDate"] = formatDate(startDate);
     }
     if (endDate) {
       extra["endDate"] = formatDate(startDate);
     }
+
     apiCall(value, extra, setData);
   }
 
@@ -110,7 +111,13 @@ function StudentAttendanceView({
         <CmsButton
           text={"חיפוש"}
           className="create"
-          onClick={getData}
+          onClick={() => getData("search")}
+          isDisabled={!value}
+        />
+        <CmsButton
+          text={"ייצוא"}
+          className="create"
+          onClick={() => getData("export")}
           isDisabled={!value}
         />
       </div>
