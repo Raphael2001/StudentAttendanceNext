@@ -8,12 +8,25 @@
   padding-top: rem(50);
   .attendance-page-header {
     display: flex;
+    flex-direction: column;
     gap: rem(20);
     .auto-complete {
-      width: rem(300);
+      width: rem(218);
     }
   }
   .table {
     margin-top: rem(20);
+  }
+}
+
+@media (min-width: em($desktop)) {
+  .attendance-page {
+    .attendance-page-header {
+      flex-direction: row;
+
+      .auto-complete {
+        width: rem(300);
+      }
+    }
   }
 }
