@@ -11,14 +11,20 @@ import StudentAttendanceView from "components/Cms/StudentAttendanceView/StudentA
 function AttendanceByTeacher() {
   const teachers = useAppSelector((store) => store.init.teachers) ?? [];
 
-  function getData(teacherId: string, onSuccess: (data: any) => void) {
+  function getData(
+    teacherId: string,
+    extraParams: { [key: string]: string },
+    onSuccess: (data: any) => void
+  ) {
     Api.getAttendanceByTeacher({
-      payload: { teacherId },
+      payload: { teacherId, ...extraParams },
       onSuccess,
     });
   }
 
-  return <StudentAttendanceView options={teachers} apiCall={getData} />;
+  return (
+    <StudentAttendanceView options={teachers} apiCall={getData} dateFilter />
+  );
 }
 
 export default AttendanceByTeacher;

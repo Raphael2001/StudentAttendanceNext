@@ -12,9 +12,13 @@ import TABLE_CELL_TYPES from "constants/TableCellType";
 function AttendanceByCourse() {
   const courses = useAppSelector((store) => store.init.courses) ?? [];
 
-  function getData(courseId: string, onSuccess: (data: any) => void) {
+  function getData(
+    courseId: string,
+    extraParams: { [key: string]: string },
+    onSuccess: (data: any) => void
+  ) {
     Api.getAttendanceByCourse({
-      payload: { courseId },
+      payload: { courseId, ...extraParams },
       onSuccess,
     });
   }
