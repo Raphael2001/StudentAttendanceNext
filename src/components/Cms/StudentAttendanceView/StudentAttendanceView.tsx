@@ -64,7 +64,7 @@ function StudentAttendanceView({
       extra["startDate"] = formatDate(startDate);
     }
     if (endDate) {
-      extra["endDate"] = formatDate(startDate);
+      extra["endDate"] = formatDate(endDate);
     }
 
     apiCall(value, extra, setData);
