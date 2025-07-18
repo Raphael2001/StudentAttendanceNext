@@ -7,9 +7,11 @@ type PopupPayload = {
   priority?: number;
 };
 
+const initialState: Popup[] = [];
+
 export const popupsSlice = createSlice({
   name: "popupsArray",
-  initialState: [],
+  initialState: initialState,
   reducers: {
     addPopup: (state: Popup[], action: PayloadAction<PopupPayload>) => {
       const key = crypto.randomUUID();

@@ -1,8 +1,9 @@
 import { combineSlices } from "@reduxjs/toolkit";
-import { apiQueueSlice } from "redux-store/features/apiQueueSlice";
 import { apiValidationSlice } from "redux-store/features/apiValidationSlice";
 import { burgerSlice } from "redux-store/features/burgerStateSlice";
+import { cmsSideBarSlice } from "redux-store/features/cmsSideBarSlice";
 import { deviceSlice } from "redux-store/features/deviceSlice";
+import { dynamicPageSlice } from "redux-store/features/dynamicPage";
 import { initAppSlice } from "redux-store/features/initAppSlice";
 import { initSlice } from "redux-store/features/initSlice";
 import { loaderSlice } from "redux-store/features/loaderSlice";
@@ -13,7 +14,6 @@ import { userDataSlice } from "redux-store/features/userDataSlice";
 
 const rootReducer = combineSlices(
   initSlice,
-  apiQueueSlice,
   burgerSlice,
   deviceSlice,
   loaderSlice,
@@ -22,7 +22,9 @@ const rootReducer = combineSlices(
   tokensSlice,
   userDataSlice,
   initAppSlice,
-  apiValidationSlice
+  apiValidationSlice,
+  dynamicPageSlice,
+  cmsSideBarSlice,
 );
 
 export default rootReducer;

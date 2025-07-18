@@ -1,0 +1,76 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.notifications-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 1000000;
+
+	.notification-wrapper {
+		transform: translateX(functions.rem(250));
+		margin-top: functions.rem(10);
+		width: functions.rem(250);
+		max-height: functions.rem(90);
+
+		transition: all 500ms ease-in-out;
+
+		&.active,
+		&.done {
+			transform: translateX(functions.rem(5));
+		}
+		&.exit {
+			opacity: 0.3;
+		}
+
+		.container {
+			align-items: center;
+
+			width: 100%;
+			height: 100%;
+			padding-top: functions.rem(10);
+			padding-bottom: functions.rem(15);
+			padding-inline: functions.rem(15);
+			display: flex;
+			position: relative;
+			border-radius: functions.rem(16);
+
+			.close-icon-wrapper {
+				position: absolute;
+				top: functions.rem(5);
+				left: functions.rem(5);
+				width: functions.rem(15);
+				cursor: pointer;
+				.close-icon {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			.icon-wrapper {
+				width: functions.rem(30);
+				height: functions.rem(30);
+				object-fit: contain;
+				margin-inline-end: functions.rem(10);
+				.icon {
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.text-wrapper {
+				display: flex;
+				flex-direction: column;
+				.title {
+					font-family: settings.$font-bold;
+					font-size: functions.rem(18);
+				}
+				.text {
+					font-family: settings.$font;
+					font-size: functions.rem(14);
+					line-height: functions.rem(18);
+				}
+			}
+		}
+	}
+}

@@ -1,8 +1,8 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
 .page-wrapper {
-  width: 100%;
-  margin-top: rem(30);
-  display: flex;
+	width: 100%;
+	margin-top: functions.rem(30);
+	display: flex;
 
-  justify-content: center;
+	justify-content: center;
 }

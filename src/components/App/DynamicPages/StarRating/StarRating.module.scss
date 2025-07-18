@@ -1,0 +1,6 @@
+@use "styles/functions";
+
+.star-rating {
+	display: flex;
+	gap: functions.rem(4);
+}

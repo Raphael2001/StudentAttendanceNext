@@ -1,0 +1,12 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.list-wrapper {
+	display: flex;
+	flex-direction: column;
+	//gap: functions.rem(20);
+	//padding: functions.rem(20);
+}

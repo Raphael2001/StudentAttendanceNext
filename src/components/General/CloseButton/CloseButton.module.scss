@@ -1,0 +1,13 @@
+@use "styles/functions";
+
+.close-icon-wrapper {
+	background-color: white;
+	backdrop-filter: blur(16px);
+	border-radius: 100%;
+	padding: functions.rem(5);
+	box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+	.close-icon {
+		width: functions.rem(16);
+		height: functions.rem(16);
+	}
+}

@@ -4,12 +4,12 @@ import { Routes } from "constants/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import { useAppSelector } from "utils/hooks/useRedux";
-import { moduleType } from "utils/types/init";
+import { CMSModule } from "utils/types/init";
 
 function usePermission(moduleId: string) {
   const permission = useAppSelector((store) => store.userData.permission);
-  const modules: Array<moduleType> = useAppSelector(
-    (store) => store.init.modules
+  const modules: Array<CMSModule> = useAppSelector(
+    (store) => store.init.modules,
   );
   const router = useRouter();
 

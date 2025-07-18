@@ -1,0 +1,14 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.text-cell-wrapper {
+	display: flex;
+	align-items: center;
+	gap: functions.rem(10);
+	.text-cell {
+		flex: 1;
+	}
+}

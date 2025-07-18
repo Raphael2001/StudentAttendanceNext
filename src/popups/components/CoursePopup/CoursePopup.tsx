@@ -2,123 +2,124 @@
 
 import React, { useMemo } from "react";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import { useAppSelector } from "utils/hooks/useRedux";
 
-import Api from "api/requests";
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 import { Course } from "utils/types/course";
 
-import styles from "./CoursePopup.module.scss";
 import { convertStringToDate, formatDate } from "utils/functions";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import Api from "api";
+import { FormData } from "utils/types/form";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 
 type Payload = {
-  dataItem?: Course;
+	dataItem?: Course;
 };
 
 type Props = {
-  payload: Payload;
+	payload: Payload;
+	popupIndex: number;
 };
 
 function CoursePopup(props: Props) {
-  const { payload = {} } = props;
-  const { dataItem } = payload;
+	const { payload, popupIndex } = props;
+	const { dataItem } = payload;
 
-  const instructors = useAppSelector((store) => store.init.instructors);
+	const instructors = useAppSelector((store) => store.init.instructors);
 
-  function onSubmit(formPayload, onSuccess) {
-    const payload = formatPayload(formPayload);
-    if (dataItem) {
-      return Api.updateCourse({ payload, onSuccess });
-    }
+	function onSubmit(formPayload, onSuccess) {
+		const payload = formatPayload(formPayload);
+		if (dataItem) {
+			Api.cms.course.PUT({ payload, config: { onSuccess } });
+		} else {
+			Api.cms.course.POST({ payload, config: { onSuccess } });
+		}
+	}
 
-    Api.addCourse({ payload, onSuccess });
-  }
+	function transformInitialData(initialData?: Course) {
+		if (initialData) {
+			const data = JSON.parse(JSON.stringify(initialData));
+			data.endDate = convertStringToDate(initialData.endDate);
+			data.startDate = convertStringToDate(initialData.startDate);
+			const [hour, minute] = initialData.time.split(":");
+			data.time = { hour, minute };
+			return data;
+		}
+		return undefined;
+	}
 
-  function transformInitialData(initialData?: Course) {
-    if (initialData) {
-      const data = JSON.parse(JSON.stringify(initialData));
-      data.endDate = convertStringToDate(initialData.endDate);
-      data.startDate = convertStringToDate(initialData.startDate);
-      const [hour, minute] = initialData.time.split(":");
-      data.time = { hour, minute };
-      return data;
-    }
-    return undefined;
-  }
+	function formatPayload(formPayload) {
+		const payload = { ...formPayload };
+		payload.endDate = formatDate(formPayload.endDate);
+		payload.startDate = formatDate(formPayload.startDate);
+		payload.time = `${formPayload.time.hour}:${formPayload.time.minute}`;
+		return payload;
+	}
 
-  function formatPayload(formPayload) {
-    const payload = { ...formPayload };
-    payload.endDate = formatDate(formPayload.endDate);
-    payload.startDate = formatDate(formPayload.startDate);
-    payload.time = `${formPayload.time.hour}:${formPayload.time.minute}`;
-    return payload;
-  }
+	const initialData = useMemo(() => transformInitialData(dataItem), [dataItem]);
 
-  const initialData = useMemo(() => transformInitialData(dataItem), [dataItem]);
+	const formData: FormData = {
+		inputs: [
+			{
+				name: "_id",
+				label: "מזהה קורס",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
 
-  const formData: FormDataType = {
-    inputs: [
-      {
-        name: "_id",
-        label: "מזהה קורס",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-        isDisabled: !!dataItem,
-      },
-      {
-        name: "name",
-        label: "שם קורס",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-      },
-      {
-        name: "startDate",
-        label: "תאריך התחלה",
-        inputType: FORM_INPUTS_TYPES.DATE_PICKER,
-        rules: ["not_empty"],
-      },
-      {
-        name: "endDate",
-        label: "תאריך סיום",
-        inputType: FORM_INPUTS_TYPES.DATE_PICKER,
-        rules: ["not_empty"],
-      },
-      {
-        name: "time",
-        label: "שעת הקורס",
-        inputType: FORM_INPUTS_TYPES.TIME_PICKER,
-        rules: ["not_empty"],
-      },
-      {
-        name: "days",
-        label: "ימי הקורס",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-      },
+				isDisabled: !!dataItem,
+			},
+			{
+				name: "name",
+				label: "שם קורס",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "startDate",
+				label: "תאריך התחלה",
+				inputType: FORM_INPUTS_TYPES.DATE_PICKER,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "endDate",
+				label: "תאריך סיום",
+				inputType: FORM_INPUTS_TYPES.DATE_PICKER,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "time",
+				label: "שעת הקורס",
+				inputType: FORM_INPUTS_TYPES.TIME_PICKER,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "days",
+				label: "ימי הקורס",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
 
-      {
-        name: "instructorId",
-        label: "מדריך",
-        inputType: FORM_INPUTS_TYPES.AUTO_COMPLETE,
-        rules: ["not_empty"],
-        options: instructors,
-        field: "name",
-      },
-    ],
-    initialData: initialData,
-  };
+			{
+				name: "instructorId",
+				label: "מדריך",
+				inputType: FORM_INPUTS_TYPES.AUTO_COMPLETE,
+				schema: VALIDATION_SCHEMES.RequiredString,
+				options: instructors,
+				field: "name",
+			},
+		],
+		initialData: initialData,
+	};
 
-  return (
-    <GeneralFormPopup
-      hasDataItem={!!dataItem}
-      formData={formData}
-      onSubmit={onSubmit}
-      formClassName={styles["form"]}
-      className={styles["course-popup"]}
-    />
-  );
+	return (
+		<GeneralFormPopup
+			hasDataItem={!!dataItem}
+			formData={formData}
+			onSubmit={onSubmit}
+			popupIndex={popupIndex}
+		/>
+	);
 }
 
 export default CoursePopup;

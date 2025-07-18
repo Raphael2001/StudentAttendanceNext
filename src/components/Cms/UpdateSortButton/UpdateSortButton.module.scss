@@ -1,0 +1,11 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+
+.sort-button-wrapper {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  margin-top: functions.rem(20);
+}

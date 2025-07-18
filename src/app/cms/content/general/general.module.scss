@@ -1,4 +1,9 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .general-info-wrapper {
-  padding-block: rem(30);
+  padding-block: functions.rem(30);
+  .sync-db-btn {
+    margin-top: functions.rem(15);
+  }
 }

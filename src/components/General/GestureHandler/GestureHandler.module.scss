@@ -1,0 +1,16 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.gesture-handler {
+	align-self: center;
+	position: absolute;
+
+	top: functions.rem(-15);
+
+	width: functions.rem(30);
+	height: functions.rem(5);
+	border-radius: functions.rem(10);
+
+	background-color: settings.$dark-grey;
+}

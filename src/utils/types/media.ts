@@ -24,10 +24,6 @@ export type Media = {
   alt: string;
 };
 
-export type MediaObjects = {
-  [key: string]: Media;
-};
-
 export const emptyMedia: Media = {
   name: "",
   _id: "",

@@ -1,4 +1,6 @@
-@import "src/styles/imports";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .api-error-popup {
   .api-error-wrapper {
     width: 100%;
@@ -7,93 +9,93 @@
     align-items: center;
     flex-direction: column;
     .error-animation-wrapper {
-      margin-top: rem(70);
-      width: rem(100);
+      margin-top: functions.rem(70);
+      width: functions.rem(100);
     }
     .texts-wrapper {
       display: flex;
       flex-direction: column;
-      margin-top: rem(20);
+      margin-top: functions.rem(20);
       align-items: center;
       .title {
         margin: 0;
-        font-size: rem(20);
-        line-height: rem(24);
-        font-family: $font-semibold;
+        font-size: functions.rem(20);
+        line-height: functions.rem(24);
+        font-family: settings.$font-semibold;
       }
       .text {
-        margin-top: rem(7);
-        font-size: rem(16);
-        line-height: rem(18);
-        font-family: $font-light;
+        margin-top: functions.rem(7);
+        font-size: functions.rem(16);
+        line-height: functions.rem(18);
+        font-family: settings.$font-light;
       }
     }
   }
 }
 
-@media (min-width: em($tablet)) {
+@media (min-width: functions.em(settings.$tablet)) {
   .api-error-popup {
     .api-error-wrapper {
       .error-animation-wrapper {
-        margin-top: rem(90);
-        width: rem(170);
+        margin-top: functions.rem(90);
+        width: functions.rem(170);
       }
       .texts-wrapper {
-        margin-top: rem(50);
+        margin-top: functions.rem(50);
         .title {
-          font-size: rem(24);
-          line-height: rem(30);
+          font-size: functions.rem(24);
+          line-height: functions.rem(30);
         }
         .text {
-          margin-top: rem(7);
-          font-size: rem(20);
-          line-height: rem(22);
-        }
-      }
-    }
-  }
-}
-
-@media (min-width: em($desktop)) {
-  .api-error-popup {
-    .api-error-wrapper {
-      .error-animation-wrapper {
-        margin-top: rem(90);
-        width: rem(170);
-      }
-      .texts-wrapper {
-        margin-top: rem(50);
-        .title {
-          font-size: rem(24);
-          line-height: rem(30);
-        }
-        .text {
-          margin-top: rem(7);
-          font-size: rem(20);
-          line-height: rem(22);
+          margin-top: functions.rem(7);
+          font-size: functions.rem(20);
+          line-height: functions.rem(22);
         }
       }
     }
   }
 }
 
-@media (min-width: em($desktop_large)) {
+@media (min-width: functions.em(settings.$desktop)) {
   .api-error-popup {
     .api-error-wrapper {
       .error-animation-wrapper {
-        margin-top: rem(90);
-        width: rem(170);
+        margin-top: functions.rem(90);
+        width: functions.rem(170);
       }
       .texts-wrapper {
-        margin-top: rem(50);
+        margin-top: functions.rem(50);
         .title {
-          font-size: rem(24);
-          line-height: rem(30);
+          font-size: functions.rem(24);
+          line-height: functions.rem(30);
         }
         .text {
-          margin-top: rem(7);
-          font-size: rem(20);
-          line-height: rem(22);
+          margin-top: functions.rem(7);
+          font-size: functions.rem(20);
+          line-height: functions.rem(22);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: functions.em(settings.$desktop_large)) {
+  .api-error-popup {
+    .api-error-wrapper {
+      .error-animation-wrapper {
+        margin-top: functions.rem(90);
+        width: functions.rem(170);
+      }
+      .texts-wrapper {
+        margin-top: functions.rem(50);
+        .title {
+          font-size: functions.rem(24);
+          line-height: functions.rem(30);
+        }
+        .text {
+          margin-top: functions.rem(7);
+          font-size: functions.rem(20);
+          line-height: functions.rem(22);
         }
       }
     }

@@ -5,6 +5,7 @@ const TABLE_COLORS = {
   YELLOW: "yellow",
   PURPLE: "purple",
   PINK: "pink",
+  GREY: "grey",
 };
 
 export default TABLE_COLORS;

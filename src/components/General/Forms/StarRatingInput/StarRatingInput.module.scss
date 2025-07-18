@@ -1,0 +1,16 @@
+@use "styles/functions";
+
+@use "styles/mixins";
+
+.star-rating-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	.placeholder {
+		@include mixins.placeholder();
+	}
+	.stars {
+		display: flex;
+		gap: functions.rem(4);
+	}
+}

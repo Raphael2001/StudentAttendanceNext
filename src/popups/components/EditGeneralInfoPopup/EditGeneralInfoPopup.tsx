@@ -2,36 +2,41 @@
 
 import React from "react";
 
-import useGeneralInfo from "utils/hooks/useGeneralInfo";
+import { FormData } from "utils/types/form";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
-
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import Api from "api";
+import { GeneralInfo } from "utils/types/init";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 
 type Props = {
   payload: Payload;
+  popupIndex: number;
 };
 type Payload = {
-  name: string;
+  dataItem: GeneralInfo;
 };
 
-function EditGeneralInfoPopup({ payload }: Props) {
-  const { name } = payload;
+function EditGeneralInfoPopup({ payload, popupIndex }: Props) {
+  const { dataItem } = payload;
+  const { _id, cmsTitle } = dataItem;
 
-  const { value, cmsTitle, upsertGeneralInfo } = useGeneralInfo(name);
+  const translate = useCMSTranslate();
 
   function onSubmit(payload, onSuccess) {
-    upsertGeneralInfo(value, onSuccess, payload["title"]);
+    const data = { _id, cmsTitle: payload["title"] };
+    Api.cms.generalInfo.PUT({ payload: data, config: { onSuccess } });
   }
 
-  const formData: FormDataType = {
+  const formData: FormData = {
     inputs: [
       {
         name: "title",
-        label: "כותרת",
+        label: translate("general_info_title"),
         inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
+        schema: VALIDATION_SCHEMES.RequiredString,
       },
     ],
     initialData: { title: cmsTitle },
@@ -39,6 +44,7 @@ function EditGeneralInfoPopup({ payload }: Props) {
 
   return (
     <GeneralFormPopup
+      popupIndex={popupIndex}
       hasDataItem={true}
       formData={formData}
       onSubmit={onSubmit}

@@ -1,0 +1,20 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.radio-buttons-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: functions.rem(6);
+	.title {
+		@include mixins.multi-inputs-placeholder();
+	}
+	.inputs {
+		display: flex;
+		flex-direction: column;
+		gap: functions.rem(6);
+	}
+}

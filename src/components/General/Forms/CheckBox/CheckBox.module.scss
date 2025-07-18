@@ -1,0 +1,36 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.checkbox-wrapper {
+	&.disabled {
+		@include mixins.input-disabled();
+	}
+	input {
+		display: none;
+	}
+	label {
+		display: flex;
+		.image-wrapper {
+			width: functions.rem(17);
+			height: functions.rem(17);
+		}
+		.label {
+			margin-inline-start: functions.rem(5);
+			@include mixins.input-text();
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.checkbox-wrapper {
+		label {
+			.image-wrapper {
+				width: functions.rem(20);
+				height: functions.rem(20);
+			}
+		}
+	}
+}

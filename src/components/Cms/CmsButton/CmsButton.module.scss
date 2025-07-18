@@ -1,0 +1,48 @@
+@use "styles/functions";
+@use "styles/settings";
+.button {
+	font-size: functions.rem(16);
+	padding: functions.rem(5) functions.rem(20);
+	border-radius: functions.rem(8);
+	font-family: settings.$font-light;
+
+	position: relative;
+	overflow: hidden;
+	.content {
+		display: flex;
+		align-items: center;
+		gap: functions.rem(3);
+		.icon {
+			width: functions.rem(22);
+			height: functions.rem(22);
+		}
+	}
+
+	&.disabled {
+		opacity: 0.4;
+		pointer-events: none;
+		cursor: not-allowed;
+	}
+}
+
+@media (min-width: functions.em(settings.$tablet)) {
+	.button {
+		font-size: functions.rem(18);
+	}
+}
+
+.ripple-creator {
+	&.ripple {
+		position: absolute;
+		border-radius: 50%;
+		transform: scale(0);
+		animation: ripple 600ms linear;
+		background-color: rgba(255, 255, 255, 0.7);
+	}
+}
+@keyframes ripple {
+	to {
+		transform: scale(4);
+		opacity: 0;
+	}
+}

@@ -1,0 +1,20 @@
+import { SVGProps } from "utils/types/svg";
+
+export default function Star(props: SVGProps) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width={512}
+			height={512}
+			viewBox="0 0 512 512"
+			{...props}
+			stroke="#222222"
+			strokeWidth={10}
+		>
+			<path
+				d="M457.888 210.672l-139.504-20.272-62.384-126.4-62.384 126.4-139.504 20.272 100.944 98.384-23.84 138.928 124.768-65.6 124.768 65.6-23.84-138.928c0 0 100.944-98.384 100.944-98.384z"
+				fill="none"
+			/>
+		</svg>
+	);
+}

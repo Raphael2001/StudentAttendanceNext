@@ -1,12 +1,14 @@
-@import "src/styles/imports";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .rotating-texts-inputs-wrapper {
-  margin-bottom: rem(25);
+  margin-bottom: functions.rem(25);
   display: flex;
 
   flex-direction: column;
-  gap: rem(15);
+  gap: functions.rem(15);
   .row {
     display: flex;
-    gap: rem(25);
+    gap: functions.rem(25);
   }
 }

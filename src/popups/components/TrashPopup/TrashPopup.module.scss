@@ -1,44 +1,35 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .trash-popup {
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-    .animation-wrapper {
-      width: rem(250);
-    }
-    .title {
-      margin-top: rem(15);
-      font-size: rem(22);
-      font-family: $font;
-    }
-    .discliamer {
-      font-size: rem(16);
-      font-family: $font-light;
-    }
-    .actions {
-      display: flex;
-      flex-direction: column;
-      margin-block: rem(25);
-      align-items: center;
-      gap: rem(15);
-      .button {
-        &.ok {
-          background-color: $basic-color-green;
-        }
-        &.cancel {
-          background-color: $basic-color-red;
-        }
-
-        width: rem(140);
-        height: rem(35);
-        font-size: rem(18);
-        font-size: $font;
-
-        color: white;
-        border-radius: rem(33);
-      }
-    }
-  }
+		.animation-wrapper {
+			width: functions.rem(250);
+		}
+		.title {
+			margin-top: functions.rem(15);
+			font-size: functions.rem(22);
+			font-family: settings.$font;
+		}
+		.disclaimer {
+			font-size: functions.rem(16);
+			font-family: settings.$font-light;
+		}
+		.actions {
+			display: flex;
+			flex-direction: column;
+			margin-block: functions.rem(25);
+			align-items: center;
+			gap: functions.rem(15);
+			.button {
+				width: functions.rem(140);
+				height: functions.rem(35);
+				border-radius: functions.rem(33);
+			}
+		}
+	}
 }

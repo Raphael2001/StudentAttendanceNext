@@ -1,28 +1,23 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .media-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: rem(20);
-
-  .media-chooser {
-    padding: rem(10);
-    .media-input {
-      width: rem(300);
-    }
-  }
+  padding-block: functions.rem(20);
 
   .input-wrapper {
-    margin-top: rem(30);
-    width: rem(230);
+    margin-top: functions.rem(30);
+    width: functions.rem(230);
   }
   .actions {
     display: flex;
     flex-direction: column;
-    gap: rem(15);
-    margin-top: rem(25);
+    gap: functions.rem(15);
+    margin-top: functions.rem(25);
   }
   .button {
-    width: rem(180);
+    width: functions.rem(180);
   }
 }

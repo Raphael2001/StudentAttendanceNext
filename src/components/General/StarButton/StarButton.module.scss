@@ -1,0 +1,22 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.star-button {
+	&.disabled {
+		cursor: default;
+	}
+	svg.star {
+		width: functions.rem(25);
+		height: functions.rem(25);
+		path {
+			stroke-width: 5px;
+		}
+		&.filled {
+			path {
+				fill: settings.$gold;
+				stroke: settings.$gold;
+			}
+		}
+	}
+}

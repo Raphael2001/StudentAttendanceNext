@@ -1,6 +1,8 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 
 .actions {
   display: flex;
-  gap: rem(10);
+  gap: functions.rem(10);
 }

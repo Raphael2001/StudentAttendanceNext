@@ -1,0 +1,12 @@
+@use "styles/functions";
+@use "styles/settings";
+.button {
+  background-color: settings.$appleYellow;
+  border-radius: functions.rem(8);
+  .text {
+    color: settings.$appleRed;
+    font-family: settings.$font-medium;
+    font-size: functions.rem(16);
+    padding: functions.rem(5) functions.rem(10);
+  }
+}

@@ -1,7 +1,0 @@
-@import "src/styles/imports.scss";
-
-.action-button-icon {
-  border-radius: 100%;
-  border: 1px transparent solid;
-  @include focus-border();
-}

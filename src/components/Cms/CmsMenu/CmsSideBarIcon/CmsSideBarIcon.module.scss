@@ -1,0 +1,17 @@
+@use "styles/functions";
+@use "styles/settings";
+
+.icon {
+  min-width: functions.rem(20);
+  min-height: functions.rem(20);
+  max-width: functions.rem(20);
+  max-height: functions.rem(20);
+  * {
+    stroke: settings.$cms-basic-white;
+  }
+  &.active {
+    * {
+      stroke: settings.$cms-main-color;
+    }
+  }
+}

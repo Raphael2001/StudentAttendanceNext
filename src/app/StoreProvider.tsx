@@ -1,6 +1,7 @@
 "use client";
 
 import { setupListeners } from "@reduxjs/toolkit/query";
+import ApiValidationService from "api/base/ApiValidationService";
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { Provider } from "react-redux";
@@ -8,13 +9,13 @@ import { AppStore, makeStore } from "redux-store";
 import { setApiValidationAction } from "redux-store/features/apiValidationSlice";
 import { setInitApp } from "redux-store/features/initAppSlice";
 import DeviceState from "utils/deviceState";
+import { ValidationApiResponse } from "utils/types/apiResponse";
 import { InitApp } from "utils/types/initApp";
-import { ValidationResponseType } from "utils/types/vaildation";
 
 interface Props {
   readonly children: ReactNode;
   data?: InitApp;
-  apiValidationData?: ValidationResponseType;
+  apiValidationData?: ValidationApiResponse;
 }
 
 export const StoreProvider = ({ children, data, apiValidationData }: Props) => {
@@ -27,6 +28,7 @@ export const StoreProvider = ({ children, data, apiValidationData }: Props) => {
       storeRef.current.dispatch(setInitApp(data));
     }
     if (apiValidationData) {
+      ApiValidationService.setApiData(apiValidationData);
       storeRef.current.dispatch(setApiValidationAction(apiValidationData));
     }
   }

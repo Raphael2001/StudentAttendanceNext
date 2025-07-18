@@ -1,44 +1,29 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .logout-wrapper {
-  padding-inline-start: rem(20);
-  padding-bottom: rem(50);
+  padding-inline-start: functions.rem(20);
+  padding-bottom: functions.rem(30);
   .logout-button {
     .logout-image {
-      width: rem(20);
+      width: functions.rem(20);
+      path {
+        stroke: settings.$cms-basic-white;
+      }
     }
     .logout-title {
-      margin-inline-start: rem(5);
-      font-size: rem(18);
-      font-family: $font-light;
-    }
-  }
-}
-@media (min-width: em($tablet)) {
-  .logout-wrapper {
-    padding-inline-start: rem(20);
-    padding-bottom: rem(50);
-    .logout-button {
-      .logout-image {
-        width: rem(20);
+      margin-inline-start: functions.rem(5);
+      font-size: functions.rem(18);
+      font-family: settings.$font-light;
+      color: settings.$cms-basic-white;
+      width: 0;
+      transition: all 200ms ease-in;
+      opacity: 0;
+      &.show-text {
+        opacity: 1;
       }
-      .logout-title {
-        margin-inline-start: rem(5);
-        font-size: rem(18);
-      }
-    }
-  }
-}
-@media (min-width: em($desktop)) {
-  .logout-wrapper {
-    padding-inline-start: rem(50);
-    padding-bottom: rem(50);
-    .logout-button {
-      .logout-image {
-        width: rem(24);
-      }
-      .logout-title {
-        margin-inline-start: rem(5);
-        font-size: rem(18);
+      &.sidebar-open {
+        width: auto;
       }
     }
   }

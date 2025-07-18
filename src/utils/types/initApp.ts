@@ -1,3 +1,4 @@
+import { TextTagsKeys } from "./init";
 import { Media } from "./media";
 
 export type InitApp = {
@@ -6,7 +7,12 @@ export type InitApp = {
   ingredientsMenus: IngredientsMenus;
 };
 export type Texts = {
-  [key: string]: string;
+  [key: string]: TextType;
+};
+
+export type TextType = {
+  tag: TextTagsKeys;
+  text: string;
 };
 
 export type Menu = {

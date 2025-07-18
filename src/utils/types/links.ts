@@ -1,6 +1,6 @@
 import { MediaType } from "./media";
 
-export interface LinkType {
+export interface Link {
   _id: string;
   link: string;
   linkType: string;
@@ -9,7 +9,7 @@ export interface LinkType {
   titles?: LinkTitles;
 }
 
-export interface LinkTypeInit {
+export interface LinkInit {
   _id: string;
   link: string;
   linkType: string;

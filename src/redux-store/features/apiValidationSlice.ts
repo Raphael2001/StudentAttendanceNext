@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ValidationResponseType } from "utils/types/vaildation";
+import { ValidationApiResponse } from "utils/types/apiResponse";
 
-const apiValidationState: ValidationResponseType = {
+const apiValidationState: ValidationApiResponse = {
   creditName: "",
   creditUrl: "",
   project: {
@@ -19,8 +19,8 @@ export const apiValidationSlice = createSlice({
   initialState: apiValidationState,
   reducers: {
     setApiValidationAction: (
-      state: ValidationResponseType,
-      action: PayloadAction<ValidationResponseType>
+      state: ValidationApiResponse,
+      action: PayloadAction<ValidationApiResponse>,
     ) => {
       return action.payload;
     },

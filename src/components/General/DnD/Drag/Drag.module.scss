@@ -1,0 +1,37 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.draggable-item {
+	list-style: none;
+}
+.drag-handle {
+	display: flex;
+	width: functions.rem(15);
+	padding: functions.rem(15);
+	margin-inline-end: functions.rem(5);
+	align-items: center;
+	justify-content: center;
+
+	touch-action: none;
+	border-radius: functions.rem(5);
+	border: none;
+	outline: none;
+	appearance: none;
+	background-color: transparent;
+	-webkit-tap-highlight-color: transparent;
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+	&:focus-visible {
+		box-shadow: 0 0 0 2px settings.$cms-main-color;
+	}
+	svg {
+		margin: auto;
+		height: 100%;
+		overflow: visible;
+		fill: #919eab;
+	}
+}

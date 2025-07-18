@@ -1,11 +1,11 @@
-export type notificationPayload = {
+export type NotificationPayload = {
   id?: string;
   title?: string;
   text?: string;
   timer?: number;
 };
 
-export type notification = {
+export type Notification = {
   type: string;
-  payload: notificationPayload;
+  payload: NotificationPayload;
 };

@@ -1,3 +1,4 @@
+@use "sass:color";
 $main-html-font-size: 100%;
 
 $background-color: #ffffff;
@@ -9,6 +10,12 @@ $dark-grey: #565555;
 $text-black: #0c0803;
 $mid-dark-grey: #707173;
 $grey: #595959;
+$gold: #ffd700;
+$blackish: #222222;
+
+$dp-text: #565555;
+$dp-title: $blackish;
+$dp-link: #0047ab;
 
 $cmsRed: #d63646;
 $cmsBlue: #0f476f;
@@ -35,6 +42,15 @@ $button-color-warning: #ea580b;
 $button-color-help: #9333e9;
 $button-color-danger: #dc2625;
 
+$button-colors: (
+	"default": $button-color-default,
+	"success": $button-color-success,
+	"info": $button-color-info,
+	"warning": $button-color-warning,
+	"help": $button-color-help,
+	"danger": $button-color-danger,
+);
+
 /* fonts */
 $font: var(--font);
 $font-light: var(--font-light);
@@ -49,35 +65,44 @@ $desktop: 1200;
 $desktop_large: 1500;
 $desktop_max: 1920;
 
-/************* cms login *************/
-$button-background-login: linear-gradient(
-  62deg,
-  rgba(39, 64, 96, 1) 0%,
-  rgba(27, 40, 69, 1) 100%
-);
-$background-color-login: linear-gradient(
-  120deg,
-  rgba(32, 164, 243, 1) 0%,
-  rgba(39, 64, 96, 1) 50%,
-  rgba(27, 40, 69, 1) 100%
-);
-/************* end *************/
+$button-background-login: linear-gradient(62deg, rgba(39, 64, 96, 1) 0%, rgba(27, 40, 69, 1) 100%);
+$background-color-login: linear-gradient(120deg, rgba(32, 164, 243, 1) 0%, rgba(39, 64, 96, 1) 50%, rgba(27, 40, 69, 1) 100%);
 
-/************* cms main *************/
 $cms-basic-white: var(--cms-basic-white);
 $cms-main-color: var(--cms-main-color);
 $cms-secondary-color: var(--cms-secondary-color);
 $cms-main-light-color: var(--cms-main-light-color);
 $cms-main-min-light-color: var(--cms-main-min-light-color);
 
-/************* end *************/
-
-/************* inputs *************/
-
 $input-focus-color: var(--input-focus-color);
 $input-background-color: var(--input-background-color);
-
-/************* end *************/
+$input-background-hover-color-light: var(--input-background-hover-color-light);
+$input-background-hover-color-dark: var(--input-background-hover-color-dark);
 
 $menu-item-blue-color: #7cb9e8;
-$button-color-default: darken(#7cb9e8, 20);
+$button-color-default: color.adjust(#7cb9e8, $lightness: -20%);
+
+$table-border-color: #ddd;
+$table-header-color: #232323;
+$table-header-background-color: #f8f8fa;
+$table-background-color: #ffffff;
+
+$color-filters: (
+	"white": invert(100%) sepia(0%) saturate(0%) hue-rotate(26deg) brightness(102%) contrast(103%),
+	"black": invert(0%) sepia(100%) saturate(7444%) hue-rotate(165deg) brightness(108%) contrast(89%),
+	"#341be6": invert(14%) sepia(72%) saturate(6074%) hue-rotate(250deg) brightness(85%) contrast(116%),
+	"#16a349": invert(42%) sepia(88%) saturate(632%) hue-rotate(95deg) brightness(97%) contrast(83%),
+	"#0084c7": invert(36%) sepia(56%) saturate(4132%) hue-rotate(178deg) brightness(92%) contrast(101%),
+	"#ea580b": invert(51%) sepia(56%) saturate(6915%) hue-rotate(3deg) brightness(98%) contrast(91%),
+	"#9333e9": invert(23%) sepia(76%) saturate(3841%) hue-rotate(264deg) brightness(94%) contrast(94%),
+	"#dc2625": brightness(0) saturate(100%) invert(23%) sepia(92%) saturate(1722%) hue-rotate(339deg) brightness(96%) contrast(109%),
+	"cms-blue": invert(32%) sepia(82%) saturate(3190%) hue-rotate(202deg) brightness(102%) contrast(102%),
+	"cms-green": invert(56%) sepia(15%) saturate(1785%) hue-rotate(73deg) brightness(103%) contrast(81%),
+	"cms-orange": invert(47%) sepia(50%) saturate(3686%) hue-rotate(3deg) brightness(102%) contrast(108%),
+	"#0f7aaf": invert(35%) sepia(44%) saturate(5607%) hue-rotate(180deg) brightness(87%) contrast(88%),
+	"#ff605c": invert(73%) sepia(100%) saturate(3801%) hue-rotate(320deg) brightness(95%) contrast(117%),
+	"#50c778": invert(67%) sepia(49%) saturate(458%) hue-rotate(87deg) brightness(91%) contrast(92%),
+	"#e7c704": invert(84%) sepia(41%) saturate(4646%) hue-rotate(9deg) brightness(105%) contrast(97%),
+	"#8963c6": invert(50%) sepia(16%) saturate(5112%) hue-rotate(229deg) brightness(83%) contrast(84%),
+	"#fc93e8": invert(72%) sepia(24%) saturate(1185%) hue-rotate(281deg) brightness(104%) contrast(98%),
+);

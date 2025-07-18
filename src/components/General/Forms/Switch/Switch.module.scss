@@ -1,0 +1,102 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.switch-wrapper {
+	width: functions.rem(21);
+	height: functions.rem(12);
+	border-radius: functions.rem(6);
+	display: flex;
+	transition: all 0.25s ease-in-out;
+	position: relative;
+	align-items: center;
+	&.on {
+		background-color: rgba(1, 122, 255, 0.4);
+		.indicator {
+			background-color: rgba(1, 122, 255, 1);
+			right: functions.rem(10);
+		}
+	}
+	&.off {
+		background-color: rgba(161, 161, 161, 1);
+		.indicator {
+			background-color: black;
+			right: functions.rem(-5);
+		}
+	}
+	.indicator {
+		width: functions.rem(17);
+		height: functions.rem(17);
+		border-radius: 100%;
+		position: absolute;
+		transition: all 0.25s ease-in-out;
+	}
+}
+
+@media (min-width: functions.em(settings.$tablet)) {
+	.switch-wrapper {
+		width: functions.rem(21);
+		height: functions.rem(12);
+		border-radius: functions.rem(6);
+
+		&.on {
+			.indicator {
+				right: functions.rem(10);
+			}
+		}
+		&.off {
+			.indicator {
+				right: functions.rem(-5);
+			}
+		}
+		.indicator {
+			width: functions.rem(17);
+			height: functions.rem(17);
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.switch-wrapper {
+		width: functions.rem(21);
+		height: functions.rem(12);
+		border-radius: functions.rem(6);
+
+		&.on {
+			.indicator {
+				right: functions.rem(10);
+			}
+		}
+		&.off {
+			.indicator {
+				right: functions.rem(-5);
+			}
+		}
+		.indicator {
+			width: functions.rem(17);
+			height: functions.rem(17);
+		}
+	}
+}
+@media (min-width: functions.em(settings.$desktop_large)) {
+	.switch-wrapper {
+		width: functions.rem(21);
+		height: functions.rem(12);
+		border-radius: functions.rem(6);
+
+		&.on {
+			.indicator {
+				right: functions.rem(10);
+			}
+		}
+		&.off {
+			.indicator {
+				right: functions.rem(-5);
+			}
+		}
+		.indicator {
+			width: functions.rem(17);
+			height: functions.rem(17);
+		}
+	}
+}

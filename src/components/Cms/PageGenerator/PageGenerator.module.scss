@@ -1,12 +1,19 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
 .page-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding-inline-end: rem(20);
+	display: flex;
+	flex-direction: column;
 
-  .add-button-wrapper {
-    margin: rem(20) auto;
-    display: flex;
-    gap: rem(16);
-  }
+	.header {
+		margin-inline-start: auto;
+		margin-block: functions.rem(20);
+		display: flex;
+		gap: functions.rem(10);
+	}
+	.filter-section {
+		margin-inline: auto;
+		margin-bottom: functions.rem(20);
+	}
+	.pagination {
+		margin-top: functions.rem(20);
+	}
 }

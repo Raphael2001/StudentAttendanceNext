@@ -3,19 +3,19 @@
 import { RefObject, useEffect } from "react";
 
 function useResizeObserver(
-  ref: RefObject<HTMLElement>,
-  onSizeChange: () => void
+  ref: RefObject<HTMLElement | null>,
+  onSizeChange: () => void,
 ) {
   useEffect(() => {
     const ro = new ResizeObserver(() => {
       onSizeChange();
     });
 
-    if (ref.current) {
+    if (ref && ref.current) {
       ro.observe(ref.current);
       return () => ro.disconnect();
     }
-  }, [ref.current]);
+  }, [ref?.current]);
 }
 
 export default useResizeObserver;

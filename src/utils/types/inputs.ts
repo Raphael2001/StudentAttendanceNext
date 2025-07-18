@@ -1,9 +1,9 @@
 import { KeyboardEvent } from "react";
 
-export type inputEvent = React.ChangeEvent<HTMLInputElement>;
-export type textAreaEvent = React.ChangeEvent<HTMLTextAreaElement>;
+export type InputEvent = React.ChangeEvent<HTMLInputElement>;
+export type TextAreaEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
-export type onChangeCheckboxValue = {
+export type OnChangeCheckboxValue = {
   id: string;
   values: Array<string>;
   name: string;
@@ -13,10 +13,10 @@ export type GeneralOptionItem = {
   _id: string;
 };
 
-export type onKeyDownButton = KeyboardEvent<HTMLButtonElement>;
-export type onKeyDownInput = KeyboardEvent<HTMLInputElement>;
+export type OnKeyDownButton = KeyboardEvent<HTMLButtonElement>;
+export type OnKeyDownInput = KeyboardEvent<HTMLInputElement>;
 
-export type optionColorType = {
+export type OptionColor = {
   color: string;
   _id: string;
   text: string;

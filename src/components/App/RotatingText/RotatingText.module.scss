@@ -1,0 +1,31 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+
+$font-size: functions.rem(20);
+$height: functions.rem(25);
+
+.texts-wrapper {
+	display: inline-block;
+	font-size: $font-size;
+	font-family: settings.$font;
+	.rotating-text-wrapper {
+		margin-inline-start: 3px;
+		display: inline-flex;
+		flex-direction: column;
+		height: $height;
+		overflow: hidden;
+		.text-animation {
+			transition: transform 0.5s ease-in-out;
+			display: flex;
+			flex-direction: column;
+			height: $height;
+
+			.text-item {
+				display: block;
+				line-height: $height;
+				font-family: settings.$font-bold;
+			}
+		}
+	}
+}
