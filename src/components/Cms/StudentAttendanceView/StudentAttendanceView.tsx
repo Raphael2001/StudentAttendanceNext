@@ -58,7 +58,9 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {}, dateFilter
 			extra["endDate"] = formatDate(endDate);
 		}
 
-		apiCall(value, extra, setData);
+		apiCall(value, extra,(response)=>{
+			setData(response.body);
+		});
 	}
 
 	const basicHeader = {
