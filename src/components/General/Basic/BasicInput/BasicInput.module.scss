@@ -1,0 +1,21 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.input {
+	width: 100%;
+
+	border-color: settings.$grey;
+
+	@include mixins.input();
+
+	&::placeholder {
+		@include mixins.placeholder();
+	}
+	&.disabled {
+		@include mixins.input-disabled();
+	}
+	@include mixins.focus-border();
+}

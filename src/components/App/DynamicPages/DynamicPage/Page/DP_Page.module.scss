@@ -1,0 +1,18 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.dynamic-page {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	gap: functions.rem(15);
+	margin-inline: auto;
+	padding-block: functions.rem(10);
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.dynamic-page {
+		width: 60%;
+	}
+}

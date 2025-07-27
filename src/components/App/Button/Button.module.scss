@@ -1,0 +1,71 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+@use "ButtonBasic.module";
+.button {
+	gap: functions.rem(8);
+
+	font-family: settings.$font;
+	&.EXTRA_SMALL {
+		padding: functions.rem(5) functions.rem(10);
+		font-size: functions.rem(14);
+		.icon {
+			width: functions.rem(14);
+		}
+	}
+	&.SMALL {
+		padding: functions.rem(6) functions.rem(16);
+		font-size: functions.rem(16);
+		.icon {
+			width: functions.rem(16);
+		}
+	}
+	&.MEDIUM {
+		padding: functions.rem(6) functions.rem(30);
+		font-size: functions.rem(18);
+		.icon {
+			width: functions.rem(16);
+		}
+	}
+	&.LARGE {
+		padding: functions.rem(6) functions.rem(45);
+		font-size: functions.rem(20);
+		.icon {
+			width: functions.rem(18);
+		}
+	}
+}
+
+.icon-button {
+	&.EXTRA_SMALL {
+		width: functions.rem(26);
+		height: functions.rem(26);
+		.icon {
+			width: functions.rem(14);
+		}
+	}
+	&.SMALL {
+		width: functions.rem(30);
+		height: functions.rem(30);
+		.icon {
+			width: functions.rem(16);
+		}
+	}
+	&.MEDIUM {
+		width: functions.rem(34);
+		height: functions.rem(34);
+		.icon {
+			width: functions.rem(18);
+		}
+	}
+	&.LARGE {
+		width: functions.rem(38);
+		height: functions.rem(38);
+		.icon {
+			width: functions.rem(20);
+		}
+	}
+}

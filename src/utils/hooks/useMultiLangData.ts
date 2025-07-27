@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from "react";
 import { useAppSelector } from "./useRedux";
-import { FormPayloadType } from "utils/types/general";
+import { FormPayload } from "utils/types/general";
 
 function useMultiLangData(item?: Object) {
   const languages = useAppSelector((store) => store.init?.languages);
@@ -35,11 +35,11 @@ function useMultiLangData(item?: Object) {
       }
       return undefined;
     },
-    [languages]
+    [languages],
   );
 
-  function transformPayload(payload: FormPayloadType): FormPayloadType {
-    const result: FormPayloadType = {};
+  function transformPayload(payload: FormPayload): FormPayload {
+    const result: FormPayload = {};
 
     // Process each key in the payload
     Object.keys(payload).forEach((key) => {

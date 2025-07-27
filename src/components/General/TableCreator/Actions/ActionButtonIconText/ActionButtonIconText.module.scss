@@ -1,0 +1,16 @@
+@use "styles/functions";
+
+.action-button-text {
+	width: functions.rem(100);
+	font-size: functions.rem(14);
+	padding-block: functions.rem(5);
+	border-radius: functions.rem(7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: functions.rem(9);
+	.action-button-icon {
+		width: functions.rem(10);
+		height: functions.rem(10);
+	}
+}

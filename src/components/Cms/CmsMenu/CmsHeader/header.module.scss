@@ -1,0 +1,44 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+.cms-header {
+  width: 100vw;
+  background-color: settings.$cms-main-color;
+  display: flex;
+  justify-content: center;
+  padding: functions.rem(10);
+  .burger-wrapper {
+    width: 25%;
+    .burger-icon {
+      width: functions.rem(20);
+    }
+  }
+  .title-wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    .title {
+      color: white;
+      font-size: functions.rem(20);
+    }
+  }
+  .empty {
+    width: 25%;
+  }
+}
+
+@media (min-width: functions.em(settings.$tablet)) {
+  .cms-header {
+    padding: functions.rem(15) functions.rem(10);
+    .burger-wrapper {
+      .burger-icon {
+        width: functions.rem(20);
+      }
+    }
+    .title-wrapper {
+      .title {
+        font-size: functions.rem(25);
+      }
+    }
+  }
+}

@@ -1,104 +1,90 @@
 import TEXT_TAGS from "constants/TextTags";
-import { LinkType } from "./links";
+import { Link } from "./links";
 import { RotatingTextItem } from "./rotatingText";
-import {
-  CmsIngredient,
-  CmsIngredientMenu,
-  CmsItem,
-  CmsItemsMenu,
-} from "./menus";
-import { MediaObjects } from "./media";
+
+import { Media } from "./media";
 import { UserType } from "./user";
-import { StudentType } from "./student";
+import { MetaTags } from "./metaTags";
+import { DynamicPage, DynamicPageComponentTypes } from "./dynamicPages";
+import { Student } from "./student";
 import { Teacher } from "./teacher";
 import { Instructor } from "./instructor";
 import { Course } from "./course";
 
-export type init = {
-  texts: Array<CmsText>;
-  media: MediaObjects;
-  languages: Array<language>;
-  generalInfo: Array<GeneralInfo>;
-  links: Array<LinkType>;
-  metaTags: Array<metaTags>;
-  iamRoles: Array<IAMRoleType>;
-  itemsMenu: Array<CmsItemsMenu>;
-  items: Array<CmsItem>;
-  itemIngredients: Array<CmsIngredient>;
-  ingredientsMenus: Array<CmsIngredientMenu>;
-  modules: Array<ModuleType>;
-  files: MediaObjects;
-  users: Array<UserType>;
-  students: Array<StudentType>;
-  teachers: Array<Teacher>;
-  instructors: Array<Instructor>;
-  courses: Array<Course>;
+export type Init = {
+	texts: Array<CmsText>;
+	media: Array<Media>;
+	languages: Array<Language>;
+	generalInfo: Array<GeneralInfo>;
+	links: Array<Link>;
+	metaTags: Array<MetaTags>;
+	iamRoles: Array<IAMRole>;
+	modules: Array<CMSModule>;
+	files: Array<Media>;
+	users: Array<UserType>;
+	syncOptions: Array<SyncOption>;
+	dynamicPages: Array<DynamicPage>;
+	dynamicPagesComponentsTypes: DynamicPageComponentTypes;
+
+	students: Array<Student>;
+	teachers: Array<Teacher>;
+	instructors: Array<Instructor>;
+	courses: Array<Course>;
 };
 
-export type generalInfoValue =
-  | Array<generalInfoItem>
-  | RotatingTextItem
-  | generalInfoItem;
+export type GeneralInfoValue = Array<GeneralInfoItem> | RotatingTextItem | GeneralInfoItem;
 
-export type generalInfoItem = {
-  _id: string;
-  data: string;
+export type GeneralInfoItem = {
+	_id: string;
+	data: string;
 };
 
 export type GeneralInfo = {
-  cmsTitle?: string;
-  inputType: string;
-  name: string;
-  value: generalInfoValue;
-  _id?: string;
+	cmsTitle: string;
+	inputType: string;
+	name: string;
+	value: GeneralInfoValue;
+	_id: string;
 };
 
-export type language = {
-  _id: string;
-  lang: string;
-};
-
-export type metaTags = {
-  _id: string;
-  route: string;
-  langId: string;
-  fields: Array<metaTag>;
-};
-
-export type metaTag = {
-  metaTagId: string;
-  type: string;
-  value: string;
+export type Language = {
+	_id: string;
+	lang: string;
+	langId: string;
 };
 
 export type CmsText = {
-  key: string;
-  value: TextValue;
+	key: string;
+	tag: TextTagsKeys;
+	value: TextValue;
 };
 
 type TextValue = {
-  [key: string]: string;
+	[key: string]: string;
 };
 
 export type TextTagsKeys = keyof typeof TEXT_TAGS;
 
-export type moduleType = {
-  bitwise: number;
-  _id: string;
-  title: string;
-  route: string;
+export type IAMRole = {
+	_id: string;
+	title: string;
+	permissionBitwise: number;
 };
 
-export type IAMRoleType = {
-  _id: string;
-  title: string;
-  permissionBitwise: number;
+export type CMSModule = {
+	bitwise: number;
+	_id: string;
+	route?: CMSModuleRoute;
+	routes: Array<CMSModuleRoute>;
+	title?: string;
 };
 
-export type ModuleType = {
-  bitwise: number;
-  _id: string;
-  title: string;
-  route: string;
-  show?: boolean;
+export type CMSModuleRoute = {
+	href: string;
+	title: string;
+};
+
+export type SyncOption = {
+	id: string;
+	title: string;
 };

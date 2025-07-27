@@ -1,0 +1,20 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.text-area {
+	width: 100%;
+
+	border-color: settings.$grey;
+	padding-inline: functions.rem(3);
+
+	@include mixins.input();
+
+	&::placeholder {
+		@include mixins.placeholder();
+	}
+
+	@include mixins.focus-border();
+}

@@ -1,0 +1,29 @@
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.select-wrapper {
+	width: 100%;
+	position: relative;
+	height: fit-content;
+
+	.button-select {
+		justify-content: flex-start;
+		width: 100%;
+		border-bottom: 1px solid settings.$grey;
+		&:focus {
+			border-color: settings.$input-focus-color;
+		}
+
+		&.disabled {
+			@include mixins.input-disabled();
+		}
+
+		.placeholder {
+			@include mixins.placeholder();
+		}
+		.select-text {
+			@include mixins.input();
+		}
+	}
+}

@@ -1,0 +1,63 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.input-wrapper {
+	display: flex;
+	width: 100%;
+	.input {
+		width: 70%;
+	}
+	.actions {
+		display: flex;
+		margin-inline-start: functions.rem(10);
+		gap: functions.rem(8);
+		.icon {
+			width: functions.rem(20);
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$tablet)) {
+	.input-wrapper {
+		.input {
+			width: 80%;
+		}
+		.actions {
+			margin-inline-start: functions.rem(20);
+			gap: functions.rem(8);
+			.icon {
+				width: functions.rem(20);
+			}
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.input-wrapper {
+		.input {
+			width: 60%;
+		}
+		.actions {
+			margin-inline-start: functions.rem(20);
+			gap: functions.rem(8);
+			.icon {
+				width: functions.rem(20);
+			}
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop_large)) {
+	.input-wrapper {
+		.actions {
+			margin-inline-start: functions.rem(20);
+			gap: functions.rem(8);
+			.icon {
+				width: functions.rem(20);
+			}
+		}
+	}
+}

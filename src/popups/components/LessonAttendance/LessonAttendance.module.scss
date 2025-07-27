@@ -1,0 +1,12 @@
+@use "styles/functions";
+@use "styles/settings";
+.lesson-attendance-form {
+	width: 90%;
+	margin: auto;
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.lesson-attendance-form {
+		width: 80%;
+	}
+}

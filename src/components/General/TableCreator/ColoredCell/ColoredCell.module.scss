@@ -1,0 +1,98 @@
+@use "sass:color";
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+$yellow-color: #ffd700;
+.colored-cell-container {
+	position: relative;
+	width: functions.rem(120);
+	display: block;
+
+	&.active {
+		.colored-cel-wrapper {
+			border-bottom-left-radius: unset;
+			border-bottom-right-radius: unset;
+		}
+		.arrow {
+			transform: translateY(-50%) rotate(90deg);
+		}
+	}
+	.arrow {
+		width: functions.rem(20);
+		height: functions.rem(20);
+
+		position: absolute;
+		left: functions.rem(5);
+		top: 50%;
+		transform: translateY(-50%) rotate(-90deg);
+		transition: all 300ms ease-in;
+		pointer-events: none;
+	}
+
+	.colored-cel-wrapper {
+		width: 100%;
+		text-align: center;
+		font-size: functions.rem(14);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: functions.rem(7);
+		font-family: settings.$font;
+		padding-block: functions.rem(5);
+		cursor: default;
+		&.select {
+			cursor: pointer;
+		}
+	}
+	.options-wrapper {
+		position: absolute;
+		width: 100%;
+
+		z-index: 10000;
+		background-color: white;
+		box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+		height: unset;
+		.options-content {
+			max-height: 0;
+			transition: 200ms all ease-in-out;
+		}
+
+		&.active {
+			.options-content {
+				max-height: functions.rem(140);
+			}
+
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+		.option-item {
+			height: functions.rem(40);
+			width: 100%;
+
+			font-family: settings.$font-light;
+			font-size: functions.rem(14);
+			&:hover {
+				background-color: color.adjust($yellow-color, $lightness: 35%);
+			}
+			&:active {
+				background-color: color.adjust($yellow-color, $lightness: 20%);
+			}
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.colored-cell-container {
+		position: relative;
+		width: 30%;
+		min-width: functions.rem(100);
+
+		.colored-cel-wrapper {
+			font-size: functions.rem(16);
+			padding-block: functions.rem(7);
+		}
+	}
+}

@@ -1,0 +1,16 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+.footer-wrapper {
+  background-color: settings.$text-black;
+  color: white;
+  font-family: settings.$font;
+  font-size: functions.rem(14);
+  display: flex;
+  justify-content: space-between;
+  padding: functions.rem(15) functions.rem(15);
+  align-items: center;
+  .credit-link {
+    direction: ltr;
+  }
+}

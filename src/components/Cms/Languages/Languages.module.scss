@@ -1,75 +1,76 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
 .cms-languages-wrapper {
-  .languages-header-titles {
-    display: flex;
-    justify-content: space-between;
-    margin-top: rem(10);
+	.languages-header-titles {
+		display: flex;
+		justify-content: space-between;
+		margin-top: functions.rem(10);
 
-    .header-title {
-      width: 33%;
-      text-align: center;
-    }
-  }
-  .input-wrapper {
-    width: 33%;
-    .input {
-      width: 100%;
-      font-size: rem(16);
-    }
-  }
-  .new-language-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: rem(10);
+		.header-title {
+			width: 33%;
+			text-align: center;
+		}
+	}
+	.input-wrapper {
+		width: 33%;
+		.input {
+			width: 100%;
+			font-size: functions.rem(16);
+		}
+	}
+	.new-language-row {
+		display: flex;
+		justify-content: space-between;
+		margin-top: functions.rem(10);
 
-    .button-wrapper {
-      display: flex;
-      width: 33%;
-      justify-content: center;
-    }
-  }
+		.button-wrapper {
+			display: flex;
+			width: 33%;
+			justify-content: center;
+		}
+	}
 
-  .language-row-wrapper {
-    display: flex;
-    justify-content: space-between;
+	.language-row-wrapper {
+		display: flex;
+		justify-content: space-between;
 
-    margin-top: rem(20);
-    .language-id {
-      width: 33%;
-      text-align: center;
-    }
-    .buttons-wrapper {
-      display: flex;
-      width: 33%;
-      justify-content: space-between;
-    }
-  }
-  .lang-table {
-    margin-top: rem(20);
-    margin-bottom: rem(30);
-  }
+		margin-top: functions.rem(20);
+		.language-id {
+			width: 33%;
+			text-align: center;
+		}
+		.buttons-wrapper {
+			display: flex;
+			width: 33%;
+			justify-content: space-between;
+		}
+	}
+	.lang-table {
+		margin-top: functions.rem(20);
+		margin-bottom: functions.rem(30);
+	}
 }
 
-@media (min-width: em($desktop)) {
-  .cms-languages-wrapper {
-    width: 60%;
-    .languages-header-titles {
-      margin-top: rem(10);
-    }
-    .input-wrapper {
-      padding-inline: rem(10);
-      .input {
-        font-size: rem(16);
-      }
-    }
-    .new-language-row {
-      margin-top: rem(10);
-    }
+@media (min-width: functions.em(settings.$desktop)) {
+	.cms-languages-wrapper {
+		width: 60%;
+		.languages-header-titles {
+			margin-top: functions.rem(10);
+		}
+		.input-wrapper {
+			padding-inline: functions.rem(10);
+			.input {
+				font-size: functions.rem(16);
+			}
+		}
+		.new-language-row {
+			margin-top: functions.rem(10);
+		}
 
-    .language-row-wrapper {
-      margin-top: rem(20);
-    }
-    .lang-table {
-    }
-  }
+		.language-row-wrapper {
+			margin-top: functions.rem(20);
+		}
+		.lang-table {
+		}
+	}
 }

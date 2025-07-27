@@ -1,9 +1,11 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 
 .field {
 }
 
 .row {
   display: flex;
-  gap: rem(20);
+  gap: functions.rem(20);
 }

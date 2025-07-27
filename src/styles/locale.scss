@@ -1,0 +1,33 @@
+@mixin left($value) {
+  :global(.rtl) & {
+    left: $value;
+    right: unset;
+  }
+
+  :global(.ltr) & {
+    right: $value;
+    left: unset;
+  }
+}
+
+@mixin right($value) {
+  :global(.rtl) & {
+    right: $value;
+    left: unset;
+  }
+
+  :global(.ltr) & {
+    left: $value;
+    right: unset;
+  }
+}
+
+@mixin rotate($value) {
+  :global(.rtl) & {
+    rotate: #{$value}deg;
+  }
+
+  :global(.ltr) & {
+    rotate: calc(180deg - #{$value}deg);
+  }
+}

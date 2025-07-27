@@ -1,0 +1,70 @@
+.loader-wrapper {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba($color: #000000, $alpha: 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10000;
+	animation: fadeIn 600ms ease-in-out forwards;
+}
+.loader {
+	width: 100px;
+	height: 40px;
+	--g: radial-gradient(farthest-side, #0000 calc(95% - 3px), #fff calc(100% - 3px) 98%, #0000 101%) no-repeat;
+	background: var(--g), var(--g), var(--g);
+	background-size: 30px 30px;
+	animation: l9 1s infinite alternate;
+}
+@keyframes l9 {
+	0% {
+		background-position:
+			0 50%,
+			50% 50%,
+			100% 50%;
+	}
+	20% {
+		background-position:
+			0 0,
+			50% 50%,
+			100% 50%;
+	}
+	40% {
+		background-position:
+			0 100%,
+			50% 0,
+			100% 50%;
+	}
+	60% {
+		background-position:
+			0 50%,
+			50% 100%,
+			100% 0;
+	}
+	80% {
+		background-position:
+			0 50%,
+			50% 50%,
+			100% 100%;
+	}
+	100% {
+		background-position:
+			0 50%,
+			50% 50%,
+			100% 50%;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

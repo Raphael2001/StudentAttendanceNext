@@ -1,0 +1,32 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.input-wrapper {
+	position: relative;
+	width: 100%;
+	.title {
+		font-size: functions.rem(16);
+		font-family: settings.$font;
+		padding-inline-start: functions.rem(5);
+	}
+	.input {
+		border: 1px solid #dfe2e4;
+		border-radius: functions.rem(10);
+		padding: functions.rem(7);
+		@include mixins.focus-border();
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.input-wrapper {
+		.title {
+			font-size: functions.rem(20);
+		}
+		.input {
+			padding: functions.rem(8);
+		}
+	}
+}

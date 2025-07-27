@@ -1,4 +1,6 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 
 .no-permission-wrapper {
   display: flex;
@@ -6,12 +8,12 @@
   align-items: center;
 
   .title {
-    margin-top: rem(50);
-    font-size: rem(30);
-    font-family: $font-bold;
+    margin-top: functions.rem(50);
+    font-size: functions.rem(30);
+    font-family: settings.$font-bold;
   }
   .image-wrapper {
-    margin-top: rem(30);
-    width: rem(220);
+    margin-top: functions.rem(30);
+    width: functions.rem(220);
   }
 }

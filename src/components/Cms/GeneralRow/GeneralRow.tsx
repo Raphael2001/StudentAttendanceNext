@@ -1,148 +1,191 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import GeneralInfoInput from "../GeneralInfoInput/GeneralInfoInput";
 
 import usePopup from "utils/hooks/usePopup";
-import POPUP_TYPES from "constants/popup-types";
-import TableCreator from "components/TableCreator/TableCreator";
+import POPUP_TYPES from "constants/PopupTypes";
+import TableCreator from "components/General/TableCreator/TableCreator";
 import TABLE_CELL_TYPES from "constants/TableCellType";
 
-import XIcon from "/public/assets/icons/close-icon.svg";
-import Pencil from "/public/assets/icons/pencil.svg";
-import Trash from "/public/assets/icons/trash.svg";
 import styles from "./GeneralRow.module.scss";
-import useGeneralInfo from "utils/hooks/useGeneralInfo";
+
 import GeneralInfoInputTypes from "constants/GeneralInfoInputTypes";
 import { useAppSelector } from "utils/hooks/useRedux";
 
 import { copy } from "utils/functions";
-import { generalInfoItem } from "utils/types/init";
+import { GeneralInfo, GeneralInfoValue } from "utils/types/init";
 import useDeleteItem from "utils/hooks/useDeleteItem";
-import Api from "api/requests";
+import Api from "api";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import useNotificationsHandler from "utils/hooks/useNotificationsHandler";
+import Icon from "components/General/Icon/Icon";
+import Trash from "components/General/Svg/Trash";
+import EditPencil from "components/General/Svg/EditPencil";
+import TABLE_COLORS from "constants/TableColors";
 
 type Props = {
-  name: string;
+	item: GeneralInfo;
 };
 
 function GeneralRow(props: Props) {
-  const { name } = props;
-  const { cmsTitle } = useGeneralInfo(name);
-  const openPopup = usePopup();
-  const deleteItem = useDeleteItem();
+	const { item } = props;
+	const { cmsTitle, _id } = item;
 
-  function deleteItemHandler() {
-    deleteItem("למחוק את הגדרה הזו?", callback);
-    function callback(onSuccess) {
-      const payload = { name: name };
-      Api.deleteGeneralInfo({ payload, onSuccess });
-    }
-  }
+	const openPopup = usePopup();
+	const deleteItem = useDeleteItem();
+	const translate = useCMSTranslate();
 
-  return (
-    <div className={styles["general-row-wrapper"]}>
-      <div className={styles["title-wrapper"]}>
-        <h3 className={styles["general-info-title"]}>{cmsTitle}</h3>
-        <button
-          className={styles["icon-wrapper"]}
-          onClick={() => openPopup(POPUP_TYPES.EDIT_GENERAL_INFO, { name })}
-        >
-          <img src={Pencil.src} />
-        </button>
-        <button className={styles["icon-wrapper"]} onClick={deleteItemHandler}>
-          <img src={Trash.src} />
-        </button>
-      </div>
-      <RenderInputs name={name} />
-    </div>
-  );
+	function deleteItemHandler() {
+		deleteItem(translate("delete_param"), callback);
+		function callback(onSuccess) {
+			const payload = { _id };
+			Api.cms.generalInfo.DELETE({ payload, config: { onSuccess } });
+		}
+	}
+
+	return (
+		<div className={styles["general-row-wrapper"]}>
+			<div className={styles["title-wrapper"]}>
+				<h3 className={styles["general-info-title"]}>{cmsTitle}</h3>
+				<button
+					className={styles["icon-wrapper"]}
+					onClick={() => openPopup(POPUP_TYPES.EDIT_GENERAL_INFO, { dataItem: item })}
+				>
+					<Icon
+						src={EditPencil}
+						className={"tag-icon green"}
+					/>
+				</button>
+				<button
+					className={styles["icon-wrapper"]}
+					onClick={deleteItemHandler}
+				>
+					<Icon
+						src={Trash}
+						className={"tag-icon red"}
+					/>
+				</button>
+			</div>
+			<RenderInputs item={item} />
+		</div>
+	);
 }
 
 export default GeneralRow;
 
 type inputsProps = {
-  name: string;
+	item: GeneralInfo;
 };
 
 function RenderInputs(props: inputsProps) {
-  const { name } = props;
-  const media = useAppSelector((store) => store.init.media);
-  const links = useAppSelector((store) => store.init.links);
-  const files = useAppSelector((store) => store.init.files);
+	const { item } = props;
+	const { value, inputType } = item;
+	const media = useAppSelector((store) => store.init.media);
+	const links = useAppSelector((store) => store.init.links);
+	const files = useAppSelector((store) => store.init.files);
+	const translate = useCMSTranslate();
 
-  const { multiValues, value, removeItemById, inputType } =
-    useGeneralInfo(name);
+	const { onSuccessNotification } = useNotificationsHandler();
 
-  const deleteAction = {
-    icon: XIcon.src,
-    onClick: onDelete,
-  };
+	const latestValue = useRef<GeneralInfoValue>(value);
 
-  const formatHeader = useCallback(() => {
-    switch (inputType) {
-      case GeneralInfoInputTypes.MEDIA._id:
-        return {
-          data: {
-            title: "שם",
-            type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
-            dataset: Object.values(media),
-            displayField: "name",
-          },
-        };
-      case GeneralInfoInputTypes.FILE._id:
-        return {
-          data: {
-            title: "שם",
-            type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
-            dataset: Object.values(files),
-            displayField: "name",
-          },
-        };
+	useEffect(() => {
+		latestValue.current = value;
+	}, [value]);
 
-      case GeneralInfoInputTypes.LINK._id:
-        return {
-          data: {
-            title: "שם",
-            type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
-            dataset: links,
-            displayField: "name",
-          },
-        };
+	const deleteAction = {
+		icon: Trash,
+		color: TABLE_COLORS.RED,
+		onClick: (current: GeneralInfo) => onDelete(current),
+	};
 
-      case GeneralInfoInputTypes.TEXT._id:
-      default:
-        return { data: { title: "תוכן", type: TABLE_CELL_TYPES.TEXT } };
-    }
-  }, [inputType, media, links]);
+	const formatHeader = useCallback(() => {
+		switch (inputType) {
+			case GeneralInfoInputTypes.MEDIA._id:
+				return {
+					data: {
+						title: translate("param_name"),
+						type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
+						dataset: media,
+						displayField: "name",
+					},
+				};
+			case GeneralInfoInputTypes.FILE._id:
+				return {
+					data: {
+						title: translate("param_name"),
+						type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
+						dataset: files,
+						displayField: "name",
+					},
+				};
 
-  const tableData = useMemo(() => copy(value), [value]);
+			case GeneralInfoInputTypes.LINK._id:
+				return {
+					data: {
+						title: translate("param_name"),
+						type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
+						dataset: links,
+						displayField: "name",
+					},
+				};
 
-  const [tableHeader, setTableHeader] = useState({
-    actions: {
-      title: "פעולות",
-      type: TABLE_CELL_TYPES.ACTION_BUTTONS,
-      actions: [deleteAction],
-    },
-  });
+			case GeneralInfoInputTypes.TEXT._id:
+			default:
+				return {
+					data: {
+						title: translate("param_content"),
+						type: TABLE_CELL_TYPES.TEXT,
+					},
+				};
+		}
+	}, [inputType, media, links]);
 
-  useEffect(() => {
-    if (multiValues) {
-      const header = formatHeader();
-      setTableHeader((prevState) => {
-        return { ...header, ...prevState };
-      });
-    }
-  }, [formatHeader, multiValues]);
+	const tableData = copy(value);
 
-  function onDelete(item: generalInfoItem) {
-    removeItemById(item._id);
-  }
+	const [tableHeader, setTableHeader] = useState({
+		actions: {
+			title: translate("actions"),
+			type: TABLE_CELL_TYPES.ACTION_BUTTONS,
+			actions: [deleteAction],
+		},
+	});
 
-  return (
-    <div className={styles["inputs"]}>
-      <GeneralInfoInput name={name} />
-      {multiValues && <TableCreator header={tableHeader} data={tableData} />}
-    </div>
-  );
+	useEffect(() => {
+		if (Array.isArray(latestValue.current)) {
+			const header = formatHeader();
+			setTableHeader((prevState) => {
+				return { ...header, ...prevState };
+			});
+		}
+	}, [formatHeader, latestValue.current]);
+
+	function removeById(id: string) {
+		if (Array.isArray(latestValue.current)) {
+			return latestValue.current.filter((i) => i._id !== id);
+		}
+		return latestValue.current;
+	}
+
+	function onDelete(current: GeneralInfo) {
+		const newValue = removeById(current._id);
+		Api.cms.generalInfo.PUT({
+			payload: { _id: item._id, value: newValue },
+			config: { onSuccess: onSuccessNotification },
+		});
+	}
+
+	return (
+		<div className={styles["inputs"]}>
+			<GeneralInfoInput item={item} />
+			{Array.isArray(latestValue.current) && (
+				<TableCreator
+					header={tableHeader}
+					data={tableData}
+				/>
+			)}
+		</div>
+	);
 }

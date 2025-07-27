@@ -1,6 +1,0 @@
-const SERVER_RESPONSES = {
-  SUCCESS: "SUCCESS",
-
-  ERROR: "ERROR",
-};
-export default SERVER_RESPONSES;

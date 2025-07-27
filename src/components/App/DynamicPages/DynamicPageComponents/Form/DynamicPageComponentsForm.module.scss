@@ -1,0 +1,18 @@
+@use "styles/functions";
+
+.dynamic-page-components-form {
+	margin-block: functions.rem(30);
+	max-width: 80%;
+	margin-inline: auto;
+
+	.add-component-wrapper {
+		display: flex;
+		align-items: center;
+		gap: functions.rem(10);
+		margin-top: functions.rem(20);
+
+		.add-component-select {
+			flex: 1;
+		}
+	}
+}

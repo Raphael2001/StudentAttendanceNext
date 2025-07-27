@@ -1,0 +1,10 @@
+@use "styles/functions";
+
+.selected-options-wrapper {
+	display: flex;
+	gap: functions.rem(5);
+	padding-block: functions.rem(5);
+	padding-inline-start: functions.rem(3);
+	flex-wrap: wrap;
+	position: absolute;
+}

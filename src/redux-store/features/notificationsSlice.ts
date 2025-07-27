@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { copy } from "utils/functions";
-import { notification } from "utils/types/notification";
+import { Notification } from "utils/types/notification";
 
-type NotificationsState = notification[];
+type NotificationsState = Notification[];
 const initialState: NotificationsState = [];
 export const notificationsSlice = createSlice({
   name: "notificationsArray",
@@ -10,7 +10,7 @@ export const notificationsSlice = createSlice({
   reducers: {
     addNotification: (
       state: NotificationsState,
-      action: PayloadAction<notification>
+      action: PayloadAction<Notification>,
     ) => {
       const id: string = crypto.randomUUID();
       state.push({
@@ -20,11 +20,11 @@ export const notificationsSlice = createSlice({
     },
     removeNotification: (
       state: NotificationsState,
-      action: PayloadAction<string>
+      action: PayloadAction<string>,
     ) => {
-      const notificationsArray: Array<notification> = copy(state);
+      const notificationsArray: Array<Notification> = copy(state);
       return notificationsArray.filter(
-        (item) => item.payload.id !== action.payload
+        (item) => item.payload.id !== action.payload,
       );
     },
   },

@@ -28,13 +28,13 @@ const DeviceState = (function () {
   function getScreenBasedOnMediaQuery() {
     const mobile = window.matchMedia("(max-width:767px)").matches;
     const tablet = window.matchMedia(
-      "(min-width:768px) and (max-width:1199px)"
+      "(min-width:768px) and (max-width:1199px)",
     ).matches;
     const desktop = window.matchMedia(
-      "(min-width:1200px) and (max-width:1499px)"
+      "(min-width:1200px) and (max-width:1499px)",
     ).matches;
     const desktopLarge = window.matchMedia(
-      "(min-width:1500px) and (max-width:1919px)"
+      "(min-width:1500px) and (max-width:1919px)",
     ).matches;
     const desktopMax = window.matchMedia("(min-width:1920px").matches;
 

@@ -1,0 +1,59 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.ck-editor {
+	width: 100%;
+	flex: 1;
+
+	position: relative;
+
+	.ck-editor-container {
+		width: 100%;
+
+		&.disabled {
+			* {
+				color: settings.$grey !important;
+			}
+		}
+		:global(.ck-dropdown__panel) {
+			max-height: functions.rem(300);
+			overflow-y: scroll;
+			:global(.ck-list) {
+				// height: 100%;
+				// overflow: scroll;
+			}
+		}
+
+		:global(.ck.ck-toolbar.ck-toolbar_grouping) > :global(.ck-toolbar__items) {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			flex-basis: auto;
+			height: fit-content;
+
+			:global(.ck-button),
+			:global(.ck-dropdown) {
+				:global(.ck-button__icon) {
+					width: functions.rem(16);
+					height: functions.rem(16);
+				}
+
+				:global(.ck-dropdown__arrow) {
+					width: functions.rem(10);
+					height: auto;
+				}
+			}
+		}
+
+		:global(.ck.ck-editor__editable_inline) {
+			padding-inline: functions.rem(20);
+		}
+		:global(.ck.ck-content) {
+			font-family: settings.$font;
+			p {
+				word-break: break-all;
+			}
+		}
+	}
+}

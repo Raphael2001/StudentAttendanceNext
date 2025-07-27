@@ -1,31 +1,66 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
+
 .media-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: rem(20);
+  padding-block: functions.rem(20);
+  position: relative;
 
   .switch-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: rem(10) 0;
+    margin: functions.rem(10) 0;
+    gap: functions.rem(15);
 
     .switch {
-      margin-inline: rem(10);
+    }
+  }
+
+  .media-viewer {
+    margin: 0 auto;
+    border: 1px dashed #222222;
+    aspect-ratio: 16/9;
+
+    width: functions.rem(370);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    padding: functions.rem(10);
+    .file-upload-icon {
+      width: functions.rem(30);
+      height: functions.rem(30);
+    }
+    .drag-text {
+      font-size: functions.rem(16);
+      margin-top: functions.rem(5);
+    }
+    .drag-text-or {
+      font-size: functions.rem(12);
+      font-family: settings.$font-light;
+    }
+    .browse-media-button {
+      margin-top: functions.rem(10);
+      .browse-media-button-input {
+        font-size: functions.rem(16);
+      }
     }
   }
 
   .media-chooser {
     margin: 0 auto;
     border: 1px solid black;
-    height: rem(250);
-    width: rem(250);
+    height: functions.rem(250);
+    width: functions.rem(250);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 9px;
-    padding: rem(10);
+    padding: functions.rem(10);
 
     .url-wrapper {
       display: flex;
@@ -40,19 +75,19 @@
     }
   }
   .media {
-    width: rem(200);
+    width: functions.rem(200);
   }
   .input-wrapper {
-    margin-top: rem(30);
-    width: rem(230);
+    margin-top: functions.rem(30);
+    width: functions.rem(230);
   }
   .actions {
     display: flex;
     flex-direction: column;
-    gap: rem(15);
-    margin-top: rem(25);
+    gap: functions.rem(15);
+    margin-top: functions.rem(25);
   }
   .button {
-    width: rem(180);
+    width: functions.rem(180);
   }
 }

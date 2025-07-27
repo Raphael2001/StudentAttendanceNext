@@ -1,3 +1,5 @@
+import useCMSTranslate from "./useCMSTranslate";
+
 type Props = {
   showError: boolean;
   required: boolean;
@@ -5,10 +7,12 @@ type Props = {
   ariaLabel: string;
   name: string;
 };
-const REQUIRED_INPUT_SUFFIX = "(חובה)";
 
 function useInputAccessibility(props: Props) {
+  const translate = useCMSTranslate();
   const { showError, required, placeholder, name, ariaLabel } = props;
+
+  const REQUIRED_INPUT_SUFFIX = translate("required_input_suffix");
 
   const requiredSuffix =
     required && placeholder !== "" ? ` ${REQUIRED_INPUT_SUFFIX}` : "";

@@ -2,39 +2,42 @@
 
 import React from "react";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
+import { FormData } from "utils/types/form";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
 import { useAppSelector } from "utils/hooks/useRedux";
-import Api from "api/requests";
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
+import Api from "api";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 
-function CreateUserPopup() {
+function CreateUserPopup({ popupIndex }: { popupIndex: number }) {
   const roles = useAppSelector((store) => store.init.iamRoles);
+  const translate = useCMSTranslate();
 
   function onSubmit(payload, onSuccess) {
-    Api.createUser({ payload, onSuccess });
+    Api.cms.cmsUsers.POST({ payload, config: { onSuccess } });
   }
 
-  const formData: FormDataType = {
+  const formData: FormData = {
     inputs: [
       {
         name: "username",
-        label: "שם משתמש",
+        label: translate("username"),
         inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty", ["alphanumeric", 4]],
+        schema: VALIDATION_SCHEMES.Username,
       },
       {
         name: "password",
-        label: "סיסמא",
+        label: translate("password"),
         inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty", "password"],
+        schema: VALIDATION_SCHEMES.Password,
       },
       {
         name: "roleId",
-        label: "תפקיד",
+        label: translate("user_role"),
         inputType: FORM_INPUTS_TYPES.SELECT,
         options: roles,
-        rules: ["not_empty"],
+        schema: VALIDATION_SCHEMES.RequiredString,
         field: "title",
       },
     ],
@@ -42,6 +45,7 @@ function CreateUserPopup() {
 
   return (
     <GeneralFormPopup
+      popupIndex={popupIndex}
       formData={formData}
       onSubmit={onSubmit}
       hasDataItem={false}

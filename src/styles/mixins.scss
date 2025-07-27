@@ -1,5 +1,9 @@
-@import "./settings.scss";
-@import "./functions.scss";
+@use "sass:color";
+@use "sass:math";
+@use "sass:map";
+
+@use "settings.scss";
+@use "functions.scss";
 
 @mixin hideScrollbar() {
   -ms-overflow-style: none;
@@ -9,66 +13,50 @@
     display: none;
   }
 }
+@mixin recolor($color-name, $opacity: 1) {
+  $filter: map.get(settings.$color-filters, $color-name);
 
-@mixin recolor($color: #000, $opacity: 1) {
-  $r: red($color) / 255;
-  $g: green($color) / 255;
-  $b: blue($color) / 255;
-  $a: $opacity;
-
-  // grayscale fallback if SVG from data URL is not supported
-  $lightness: lightness($color);
-  filter: saturate(0%) brightness(0%) invert($lightness) opacity($opacity);
-
-  // color filter
-  $svg-filter-id: "recolor";
-  filter: url('data:image/svg+xml;utf8,\
-    <svg xmlns="http://www.w3.org/2000/svg">\
-      <filter id="#{$svg-filter-id}" color-interpolation-filters="sRGB">\
-        <feColorMatrix type="matrix" values="\
-          0 0 0 0 #{$r}\
-          0 0 0 0 #{$g}\
-          0 0 0 0 #{$b}\
-          0 0 0 #{$a} 0\
-        "/>\
-      </filter>\
-    </svg>\
-    ##{$svg-filter-id}');
+  @if $filter {
+    filter: #{$filter};
+    opacity: $opacity;
+  } @else {
+    @warn "No filter found for '#{$color-name}'. Please add it to the \$color-filters map.";
+  }
 }
 
 @mixin placeholder() {
-  color: $grey;
-  font-family: $font;
-  font-size: rem(16);
+  color: settings.$grey;
+  font-family: settings.$font;
+  font-size: functions.rem(16);
 
-  @media (min-width: em($desktop)) {
-    font-size: rem(20);
+  @media (min-width: functions.em(settings.$desktop)) {
+    font-size: functions.rem(20);
   }
 }
 
 @mixin placeholder-focus() {
-  font-size: rem(14);
+  font-size: functions.rem(14);
 
-  @media (min-width: em($desktop)) {
-    font-size: rem(18);
+  @media (min-width: functions.em(settings.$desktop)) {
+    font-size: functions.rem(18);
   }
 }
 
 @mixin input() {
   color: black;
-  font-family: $font;
-  font-size: rem(16);
+  font-family: settings.$font;
+  font-size: functions.rem(16);
   background-color: transparent;
 
-  @media (min-width: em($desktop)) {
-    font-size: rem(20);
+  @media (min-width: functions.em(settings.$desktop)) {
+    font-size: functions.rem(20);
   }
 }
 
 @mixin focus-border() {
   &:focus,
   &:focus-visible {
-    border-color: $input-focus-color;
+    border-color: settings.$input-focus-color;
   }
 }
 @mixin input-disabled() {
@@ -86,19 +74,20 @@
 }
 
 @mixin text-shadow() {
-  text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+  text-shadow:
+    2px 7px 5px rgba(0, 0, 0, 0.3),
     0px -4px 10px rgba(255, 255, 255, 0.3);
 }
 
 @mixin multi-inputs-placeholder() {
-  font-size: rem(18);
-  font-family: $font;
+  font-size: functions.rem(18);
+  font-family: settings.$font;
 }
 
 @mixin input-text() {
-  font-size: rem(14);
+  font-size: functions.rem(14);
 
-  font-family: $font-light;
+  font-family: settings.$font-light;
 }
 
 @mixin glass-effect($color, $opacity: 0.57) {
@@ -107,28 +96,4 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba($color, $opacity);
-}
-
-@mixin left($value) {
-  :global(.rtl) & {
-    left: $value;
-    right: unset;
-  }
-
-  :global(.ltr) & {
-    right: $value;
-    left: unset;
-  }
-}
-
-@mixin right($value) {
-  :global(.rtl) & {
-    right: $value;
-    left: unset;
-  }
-
-  :global(.ltr) & {
-    left: $value;
-    right: unset;
-  }
 }

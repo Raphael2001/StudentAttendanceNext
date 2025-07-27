@@ -3,78 +3,100 @@
 import React, { useRef, useState } from "react";
 
 import styles from "./MediaPopup.module.scss";
-import Switch from "components/forms/Switch/Switch";
-import AnimatedInput from "components/forms/AnimatedInput";
-import CmsButton from "components/CmsButton/CmsButton";
-import { inputEvent } from "utils/types/inputs";
+import Switch from "components/General/Forms/Switch/Switch";
+import AnimatedInput from "components/General/Forms/AnimatedInput/AnimatedInput";
+import CmsButton from "components/Cms/CmsButton/CmsButton";
+import { InputEvent } from "utils/types/inputs";
 import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-import Api from "api/requests";
-import UploadFileButton from "components/forms/UploadFileButton/UploadFileButton";
+import Api from "api";
 import { SlidePopupRef } from "utils/types/popup";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import MediaUploadBox from "components/Cms/MediaUploadBox/MediaUploadBox";
+import { fileToBase64 } from "utils/functions";
 
-export default function MediaPopup() {
-  const [currentMedia, setCurrentMedia] = useState<string | null>(null);
-  const [uploadUrl, setUploadUrl] = useState(false);
-  const [mediaType, setMediaType] = useState<string>("image");
+export default function MediaPopup({ popupIndex }: { popupIndex: number }) {
+  const [mediaType, setMediaType] = useState<"image" | "video">("image");
   const [alt, setAlt] = useState("");
   const [name, setName] = useState("");
-  const [base64, setBase64] = useState<string | ArrayBuffer | null>("");
+
+  const [isLocalFile, setIsLocalFile] = useState<boolean>(true);
+
+  const [currentFile, setCurrentFile] = useState<File | null>(null);
   const [url, setUrl] = useState("");
 
-  const ref = useRef<SlidePopupRef>();
+  const [isLoading, setIsLoading] = useState(false);
 
-  function onMediaChange(e: inputEvent) {
-    const fileList = e.target.files;
-    if (fileList) {
-      for (let i = 0; i < fileList.length; i++) {
-        if (
-          fileList[i].type.match(/^image\//) ||
-          fileList[i].type.match(/^video\//)
-        ) {
-          const file = fileList[i];
-          if (file !== null) {
-            const url = URL.createObjectURL(file);
-            getBase64(file, (result) => {
-              setBase64(result);
-            });
-            setMediaType(file.type.split("/")[0]);
-            setCurrentMedia(url);
-          }
-          return;
-        }
-      }
-    }
-  }
+  const translate = useCMSTranslate();
 
-  function onUrlChange(e: inputEvent) {
+  const ref = useRef<SlidePopupRef>(null);
+
+  function onUrlChange(e: InputEvent) {
     const { value } = e.target;
     setUrl(value);
-    setCurrentMedia(value);
   }
 
-  function onBlurUrl() {
-    if (url.startsWith("https://www.youtube.com")) {
-      const paramsString = url.split("?")?.[1];
-      const searchParams = new URLSearchParams(paramsString);
-      setCurrentMedia(`https://www.youtube.com/embed/${searchParams.get("v")}`);
+  function onAltTextChange(event: InputEvent) {
+    const { value } = event.target;
+
+    setAlt(value);
+  }
+
+  function onNameChange(event: InputEvent) {
+    const { value } = event.target;
+
+    setName(value);
+  }
+
+  function onSuccess(data) {
+    setIsLoading(false);
+    ref.current?.animateOut();
+  }
+  async function addMediaHandler() {
+    setIsLoading(true);
+    const payload = {
+      alt: alt,
+      name: name,
+      type: mediaType,
+    };
+    if (currentFile) {
+      const base64 = await fileToBase64(currentFile);
+      payload["photobase64"] = base64;
+    } else if (url) {
+      let currentUrl = url;
+      if (currentUrl.startsWith("https://www.youtube.com")) {
+        const paramsString = currentUrl.split("?")?.[1];
+        const searchParams = new URLSearchParams(paramsString);
+        currentUrl = `https://www.youtube.com/embed/${searchParams.get("v")}`;
+      }
+      payload["url"] = currentUrl;
     }
+    Api.cms.media.POST({
+      payload,
+      config: { onSuccess, onFailure: () => setIsLoading(false) },
+    });
+  }
+
+  function changeMediaType() {
+    setUrl("");
+    setMediaType("image");
+    setCurrentFile(null);
+    setIsLocalFile((prev) => !prev);
   }
 
   function showUrl() {
     return (
       <div className={styles["url-wrapper"]}>
         <AnimatedInput
-          placeholder="קישור למדיה"
+          placeholder={translate("media_from_url")}
           className={styles["input-wrapper"]}
           value={url}
           name="url"
           onChange={onUrlChange}
           type="text"
-          onBlur={onBlurUrl}
         />
 
         <div className={styles["switch-wrapper"]}>
-          <div>תמונה</div>
+          <div>{translate("image")}</div>
           <Switch
             className={styles["switch"]}
             state={mediaType === "video"}
@@ -82,141 +104,64 @@ export default function MediaPopup() {
               setMediaType((prev) => (prev === "video" ? "image" : "video"))
             }
           />
-          <div>סרטון</div>
+          <div>{translate("video")}</div>
         </div>
       </div>
     );
   }
 
-  function showMedia() {
-    if (currentMedia) {
-      switch (mediaType) {
-        case "image":
-          return <img className={styles["media"]} src={currentMedia} />;
-        case "video":
-          if (base64) {
-            return <video className={styles["media"]} src={currentMedia} />;
-          } else {
-            <iframe className={styles["media"]} src={currentMedia} />;
-          }
-      }
-    } else {
-      return (
-        <UploadFileButton
-          placeholder="נא לבחור מדיה"
-          accept="image/heic, image/*, video/*"
-          onChange={onMediaChange}
-        />
-      );
-    }
-  }
-
-  function onAltTextChange(event: inputEvent) {
-    const { value } = event.target;
-
-    setAlt(value);
-  }
-
-  function onNameChange(event: inputEvent) {
-    const { value } = event.target;
-
-    setName(value);
-  }
-
-  function getBase64(
-    file: File,
-    cb: (base64: string | ArrayBuffer | null) => void
-  ) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  }
-
-  function onSuccess(data) {
-    ref.current?.animateOut();
-  }
-  function addMediaHandler() {
-    const payload = {
-      alt: alt,
-      name: name,
-      type: mediaType,
-    };
-    if (base64) {
-      payload["photobase64"] = base64;
-    } else if (url) {
-      payload["url"] = url;
-    }
-    Api.addMedia({ payload, onSuccess });
-  }
-
-  function removeMedia() {
-    setCurrentMedia(null);
-  }
-
-  function onUploadUrlChange() {
-    setUploadUrl((prev) => {
-      if (prev) {
-        setUrl("");
-      } else {
-        setBase64("");
-      }
-      setCurrentMedia(null);
-      return !prev;
-    });
-  }
-
   return (
-    <SlidePopup className={styles["media-popup"]} ref={ref}>
+    <SlidePopup
+      className={styles["media-popup"]}
+      ref={ref}
+      isLoading={isLoading}
+      popupIndex={popupIndex}
+      showCloseIcon
+    >
       <div className={styles["media-container"]}>
         <div className={styles["switch-wrapper"]}>
-          <div>העלאת מדיה</div>
+          <div>{translate("media_from_url")}</div>
+
           <Switch
             className={styles["switch"]}
-            state={uploadUrl}
-            onClick={onUploadUrlChange}
+            state={isLocalFile}
+            onClick={changeMediaType}
           />
-          <div>מדיה מקישור</div>
-        </div>
-        <div className={styles["media-chooser"]}>
-          {uploadUrl ? showUrl() : showMedia()}
+
+          <div>{translate("upload_media_title")}</div>
         </div>
 
+        {isLocalFile ? (
+          <MediaUploadBox
+            accept="image/heic, image/*, video/*"
+            currentFile={currentFile}
+            onFileChange={(file: File | null) => setCurrentFile(file)}
+          />
+        ) : (
+          showUrl()
+        )}
+
         <AnimatedInput
-          placeholder="שם"
+          placeholder={translate("media_name")}
           value={name}
           name="name"
           onChange={onNameChange}
           type="text"
           className={styles["input-wrapper"]}
         />
-
         <AnimatedInput
-          placeholder="טקסט חלופי"
+          placeholder={translate("media_alt")}
           value={alt}
           name="alt"
           onChange={onAltTextChange}
           type="text"
           className={styles["input-wrapper"]}
         />
-
         <div className={styles["actions"]}>
           <CmsButton
-            text={"הוסף"}
+            text={translate("add_action")}
             onClick={addMediaHandler}
-            isDisabled={!currentMedia}
-            className={styles["button"]}
-          />
-
-          <CmsButton
-            text={"הסר מדיה"}
-            onClick={removeMedia}
-            isDisabled={!currentMedia}
-            color="red"
+            isDisabled={!currentFile && !url}
             className={styles["button"]}
           />
         </div>

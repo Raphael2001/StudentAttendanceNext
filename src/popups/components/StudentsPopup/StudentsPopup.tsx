@@ -1,84 +1,86 @@
 "use client";
 
+import Api from "api";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 import React from "react";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
 import { useAppSelector } from "utils/hooks/useRedux";
-
-import Api from "api/requests";
-import { StudentType } from "utils/types/student";
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
+import { FormData } from "utils/types/form";
+import { Student } from "utils/types/student";
 
 type Payload = {
-  dataItem?: StudentType;
+	dataItem?: Student;
 };
 
 type Props = {
-  payload: Payload;
+	payload: Payload;
+	popupIndex: number;
 };
 
 function StudentPopup(props: Props) {
-  const { payload = {} } = props;
-  const { dataItem } = payload;
+	const { payload = {}, popupIndex } = props;
+	const { dataItem } = payload;
 
-  const teachers = useAppSelector((store) => store.init.teachers);
+	const teachers = useAppSelector((store) => store.init.teachers);
 
-  function onSubmit(payload, onSuccess) {
-    if (dataItem) {
-      return Api.updateStudent({ payload, onSuccess });
-    }
+	function onSubmit(payload, onSuccess) {
+		if (dataItem) {
+			Api.cms.student.PUT({ payload, config: { onSuccess } });
+		} else {
+			Api.cms.student.POST({ payload, config: { onSuccess } });
+		}
+	}
 
-    Api.addStudent({ payload, onSuccess });
-  }
+	const formData: FormData = {
+		inputs: [
+			{
+				name: "_id",
+				label: "תעודת זהות",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+				isDisabled: !!dataItem,
+			},
+			{
+				name: "name",
+				label: "שם תלמיד",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "className",
+				label: "שם כיתה",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
+			{
+				name: "schoolName",
+				label: "שם בית ספר",
+				inputType: FORM_INPUTS_TYPES.INPUT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+			},
 
-  const formData: FormDataType = {
-    inputs: [
-      {
-        name: "_id",
-        label: "תעודת זהות",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-        isDisabled: !!dataItem,
-      },
-      {
-        name: "name",
-        label: "שם תלמיד",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-      },
-      {
-        name: "className",
-        label: "שם כיתה",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-      },
-      {
-        name: "schoolName",
-        label: "שם בית ספר",
-        inputType: FORM_INPUTS_TYPES.INPUT,
-        rules: ["not_empty"],
-      },
+			{
+				name: "teacherId",
+				label: "מורה",
+				inputType: FORM_INPUTS_TYPES.AUTO_COMPLETE,
+				schema: VALIDATION_SCHEMES.RequiredString,
+				options: teachers,
+				field: "name",
+			},
+		],
+		initialData: dataItem,
+	};
 
-      {
-        name: "teacherId",
-        label: "מורה",
-        inputType: FORM_INPUTS_TYPES.AUTO_COMPLETE,
-        rules: ["not_empty"],
-        options: teachers,
-        field: "name",
-      },
-    ],
-    initialData: dataItem,
-  };
-
-  return (
-    <GeneralFormPopup
-      hasDataItem={!!dataItem}
-      formData={formData}
-      onSubmit={onSubmit}
-    />
-  );
+	return (
+		<GeneralFormPopup
+			hasDataItem={!!dataItem}
+			formData={formData}
+			onSubmit={onSubmit}
+			popupIndex={popupIndex}
+		/>
+	);
 }
 
 export default StudentPopup;

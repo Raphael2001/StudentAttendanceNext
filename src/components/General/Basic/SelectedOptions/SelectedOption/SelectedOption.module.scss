@@ -1,0 +1,20 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.selected-option {
+	background-color: #eff3f8;
+	padding-inline: functions.rem(13);
+	padding-block: functions.rem(3);
+
+	border-radius: functions.rem(55);
+	display: flex;
+	gap: functions.rem(5);
+	.icon {
+		width: functions.rem(12);
+	}
+	.text {
+		font-family: settings.$font-light;
+		font-size: functions.rem(12);
+	}
+}

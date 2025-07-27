@@ -1,25 +1,28 @@
-import ServerApiManager from "api/ServerApiManager";
-import ApiValidationService from "services/ApiValidationService";
-import { serverProps } from "utils/types/api";
+import ApiValidationService from "api/base/ApiValidationService";
+import ServerApiManager from "api/base/ServerApiManager";
 
-const ApiServer = (function () {
-  function init(props: serverProps) {
+import { ServerProps } from "utils/types/api";
+
+const server = {
+  init: (props: ServerProps) => {
     return ServerApiManager.execute(props, "init");
-  }
+  },
 
-  function metaTags(props: serverProps) {
+  metaTags: (props: ServerProps) => {
     return ServerApiManager.execute(props, "metaTags");
-  }
+  },
 
-  function serverValidation(props: serverProps = {}) {
-    props.settings = props.settings || {};
+  serverValidation: (props: ServerProps = {}) => {
+    const url = ApiValidationService.validationURL + "/" + "init";
 
-    props.settings.url = ApiValidationService.vaildationURL || "";
+    return ServerApiManager.execute(props, url);
+  },
+  dynamicPage: (props: ServerProps = {}) => {
+    return ServerApiManager.execute(props, "dynamicPageData");
+  },
+  dynamicPageRoutes: (props: ServerProps = {}) => {
+    return ServerApiManager.execute(props, "dynamicPageRoutes");
+  },
+};
 
-    return ServerApiManager.execute(props, "init");
-  }
-
-  return { init, metaTags, serverValidation };
-})();
-
-export default ApiServer;
+export default server;

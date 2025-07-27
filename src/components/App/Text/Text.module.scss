@@ -1,0 +1,8 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+.text {
+  font-family: settings.$font;
+  margin-block: 0;
+  font-weight: normal;
+}
