@@ -7,6 +7,7 @@ import PageGenerator from "../PageGenerator/PageGenerator";
 import CMS_MODULES from "constants/CMSModules";
 import Api from "api";
 import { ApiResponse } from "utils/types/api";
+import POPUP_TYPES from "constants/PopupTypes";
 
 type Props = {
 	courseId: string;
@@ -26,6 +27,7 @@ export default function CourseLessons(props: Props) {
 				const mappedLessons = lessons.map((lesson) => {
 					return {
 						...lesson,
+						courseId:lesson._id,
 						_id: lesson.randomKey,
 					};
 				});
@@ -53,6 +55,7 @@ export default function CourseLessons(props: Props) {
 			module={CMS_MODULES.COURSES}
 			addNew={false}
 			pagination={false}
+			popup={POPUP_TYPES.LESSON_ATTENDANCE}
 		/>
 	);
 }

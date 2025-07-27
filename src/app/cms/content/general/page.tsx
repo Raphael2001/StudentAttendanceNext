@@ -25,8 +25,6 @@ export default function GeneralPage() {
 
 	const translate = useCMSTranslate();
 
-	console.log("generalInfo", generalInfo);
-
 	return (
 		<div className={styles["general-info-wrapper"]}>
 			<Languages />

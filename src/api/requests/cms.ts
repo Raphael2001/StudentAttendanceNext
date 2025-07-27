@@ -129,6 +129,18 @@ const cms = {
 			useBasicCMSOnSuccess: false,
 		},
 	]),
+	cmsLessonAttendance: createCMSApiMethods("cmsLessonAttendance", [
+		{
+			method: API_METHODS.GET,
+			useBasicCMSOnSuccess: false,
+		},
+	]),
+	cmsAttendance: createCMSApiMethods("cmsAttendance", [
+		{
+			method: API_METHODS.POST,
+			useBasicCMSOnSuccess: false,
+		},
+	]),
 };
 
 export default cms;

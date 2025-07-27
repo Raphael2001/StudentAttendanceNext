@@ -29,6 +29,7 @@ import InstructorPopup from "./components/InstructorPopup/InstructorPopup";
 import UploadExcelFilePopup from "./components/UploadExcelFilePopup/UploadExcelFilePopup";
 import CoursePopup from "./components/CoursePopup/CoursePopup";
 import LeadSentSuccess from "./components/LeadSentSuccess/LeadSentSuccess";
+import LessonAttendancePopup from "popups/components/LessonAttendance/LessonAttendance";
 
 const popupComponentsMap = {
 	[POPUP_TYPES.API_ERROR]: ApiErrorPopup,
@@ -51,6 +52,7 @@ const popupComponentsMap = {
 	[POPUP_TYPES.COURSE]: CoursePopup,
 	[POPUP_TYPES.UPLOAD_EXCEL_FILE]: UploadExcelFilePopup,
 	[POPUP_TYPES.LEAD_SENT_SUCCESS]: LeadSentSuccess,
+	[POPUP_TYPES.LESSON_ATTENDANCE]: LessonAttendancePopup,
 };
 
 export default function Popups({ className = "" }) {
