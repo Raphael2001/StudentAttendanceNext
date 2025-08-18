@@ -15,11 +15,13 @@ type Params = {
 
 export async function generateStaticParams() {
   const pages = await ISR.getDynamicPagesRoutes();
-
+   if(pages){
   return pages.map((page) => ({
     route: page.route.split("/"),
     locale: page.language,
   }));
+}
+return[]
 }
 
 export default async function DynamicPage(props: Props) {
