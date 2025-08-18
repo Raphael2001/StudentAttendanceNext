@@ -5,44 +5,44 @@ import DP_Page from "components/App/DynamicPages/DynamicPage/Page/DP_Page";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: Promise<Params>;
+	params: Promise<Params>;
 };
 
 type Params = {
-  route: Array<string>;
-  locale: string;
+	route: Array<string>;
+	locale: string;
 };
 
 export async function generateStaticParams() {
-  const pages = await ISR.getDynamicPagesRoutes();
-   if(pages){
-  return pages.map((page) => ({
-    route: page.route.split("/"),
-    locale: page.language,
-  }));
-}
-return[]
+	const pages = await ISR.getDynamicPagesRoutes();
+	if (pages) {
+		return pages.map((page) => ({
+			route: page.route.split("/"),
+			locale: page.language,
+		}));
+	}
+	return [];
 }
 
 export default async function DynamicPage(props: Props) {
-  const { params } = props;
-  const { route, locale } = await params;
+	const { params } = props;
+	const { route, locale } = await params;
 
-  setRequestLocale(locale);
+	setRequestLocale(locale);
 
-  const fullRoute = route.join("/");
+	const fullRoute = route.join("/");
 
-  const payload = {
-    route: fullRoute,
-    language: locale,
-  };
+	const payload = {
+		route: fullRoute,
+		language: locale,
+	};
 
-  const body = await ISR.getDynamicPage(payload);
+	const body = await ISR.getDynamicPage(payload);
 
-  if (!body) {
-    notFound();
-  }
-  const sections = body.sections;
+	if (!body) {
+		notFound();
+	}
+	const sections = body.sections;
 
-  return <DP_Page sections={sections} />;
+	return <DP_Page sections={sections} />;
 }
