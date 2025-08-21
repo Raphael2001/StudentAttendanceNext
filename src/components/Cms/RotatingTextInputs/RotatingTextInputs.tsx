@@ -3,164 +3,168 @@
 import React, { useState } from "react";
 
 import styles from "./RotatingTextInputs.module.scss";
-import TextInput from "components/forms/TextInput/TextInput";
+import TextInput from "components/General/Forms/TextInput/TextInput";
 
-import { inputEvent, optionColorType } from "utils/types/inputs";
-import CmsButton from "components/CmsButton/CmsButton";
-import TableCreator from "components/TableCreator/TableCreator";
+import { InputEvent, OptionColor } from "utils/types/inputs";
+import CmsButton from "components/Cms/CmsButton/CmsButton";
+import TableCreator from "components/General/TableCreator/TableCreator";
 import TABLE_CELL_TYPES from "constants/TableCellType";
 import { generateUniqueId } from "utils/functions";
 import { TableAction, TableHeader } from "utils/types/table";
 
-import XIcon from "/public/assets/icons/close-icon.svg";
-import {
-  RotatingTextItem,
-  RotatingTextItemOption,
-} from "utils/types/rotatingText";
-import Select from "components/forms/Select/Select";
+import { RotatingTextItem, RotatingTextItemOption } from "utils/types/rotatingText";
+import Select from "components/General/Forms/Select/Select";
 import COLOR_OPTIONS from "constants/ColorOptions";
-import useGeneralInfo from "utils/hooks/useGeneralInfo";
-import { generalInfoValue } from "utils/types/init";
+
+import { GeneralInfo, GeneralInfoValue } from "utils/types/init";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import Api from "api";
+import useNotificationsHandler from "utils/hooks/useNotificationsHandler";
+import Trash from "components/General/Svg/Trash";
+import TABLE_COLORS from "constants/TableColors";
 
 type Props = {
-  name: string;
-  currentValue: generalInfoValue;
-  onChange: (text: string, options: Array<RotatingTextItemOption>) => void;
+	item: GeneralInfo;
+	currentValue: GeneralInfoValue;
+	onChange: (text: string, options: Array<RotatingTextItemOption>) => void;
 };
 
-function isRotatingTextItem(
-  value: generalInfoValue
-): value is RotatingTextItem {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "text" in value &&
-    "options" in value &&
-    Array.isArray((value as RotatingTextItem).options)
-  );
+function isRotatingTextItem(value: GeneralInfoValue): value is RotatingTextItem {
+	return typeof value === "object" && value !== null && "text" in value && "options" in value && Array.isArray((value as RotatingTextItem).options);
 }
 
-function RotatingTextInputs({ name, onChange, currentValue }: Props) {
-  const { value, upsertGeneralInfo } = useGeneralInfo(name);
-  const { options, text } = isRotatingTextItem(currentValue)
-    ? currentValue
-    : { options: [], text: "" };
+function RotatingTextInputs({ item, onChange, currentValue }: Props) {
+	const { _id } = item;
+	const { options, text } = isRotatingTextItem(currentValue) ? currentValue : { options: [], text: "" };
 
-  const [newOption, setNewOption] = useState({
-    text: {
-      value: "",
-    },
-    color: {
-      value: "",
-    },
-  });
+	const translate = useCMSTranslate();
 
-  function onChangeInput(e: inputEvent) {
-    const { value } = e.target;
+	const { onSuccessNotification } = useNotificationsHandler();
 
-    onChange(value, options);
-  }
+	const [newOption, setNewOption] = useState({
+		text: {
+			value: "",
+		},
+		color: {
+			value: "",
+		},
+	});
 
-  function onChangeInputOption(e: inputEvent) {
-    const { value } = e.target;
-    const newState = { ...newOption };
-    newState.text.value = value;
-    setNewOption(newState);
-  }
+	function onChangeInput(e: InputEvent) {
+		const { value } = e.target;
 
-  function onChangeSelect(name: string, item: optionColorType) {
-    const newState = { ...newOption };
-    newState.color.value = item._id;
-    setNewOption(newState);
-  }
+		onChange(value, options);
+	}
 
-  function addNewOption() {
-    const newData: RotatingTextItemOption = {
-      text: newOption.text.value,
-      _id: generateUniqueId(8),
-      color: newOption.color.value,
-    };
-    onChange(text, [...options, newData]);
-    resetNewOption();
-  }
+	function onChangeInputOption(e: InputEvent) {
+		const { value } = e.target;
+		const newState = { ...newOption };
+		newState.text.value = value;
+		setNewOption(newState);
+	}
 
-  function resetNewOption() {
-    const newState = { ...newOption };
-    newState.text.value = "";
-    newState.color.value = "";
-    setNewOption(newState);
-  }
+	function onChangeSelect(name: string, item: OptionColor) {
+		const newState = { ...newOption };
+		newState.color.value = item._id;
+		setNewOption(newState);
+	}
 
-  function onDelete(item: RotatingTextItemOption) {
-    const updatedOptions = options.filter(
-      (option: RotatingTextItemOption) => option._id !== item._id
-    );
-    onChange(text, updatedOptions);
-  }
+	function addNewOption() {
+		const newData: RotatingTextItemOption = {
+			text: newOption.text.value,
+			_id: generateUniqueId(8),
+			color: newOption.color.value,
+		};
+		onChange(text, [...options, newData]);
+		resetNewOption();
+	}
 
-  function updateValue() {
-    upsertGeneralInfo(currentValue);
-  }
+	function resetNewOption() {
+		const newState = { ...newOption };
+		newState.text.value = "";
+		newState.color.value = "";
+		setNewOption(newState);
+	}
 
-  const deleteAction: TableAction = {
-    icon: XIcon.src,
-    onClick: onDelete,
-  };
+	function onDelete(item: RotatingTextItemOption) {
+		const updatedOptions = options.filter((option: RotatingTextItemOption) => option._id !== item._id);
+		onChange(text, updatedOptions);
+	}
 
-  const tableHeader: TableHeader = {
-    text: {
-      title: "טקטס",
-      type: TABLE_CELL_TYPES.TEXT,
-    },
-    color: {
-      title: "צבע",
-      type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
-      dataset: COLOR_OPTIONS,
-      displayField: "text",
-    },
-    actions: {
-      title: "פעולות",
-      type: TABLE_CELL_TYPES.ACTION_BUTTONS,
-      actions: [deleteAction],
-    },
-  };
+	function updateValue() {
+		Api.cms.generalInfo.PUT({
+			payload: { _id, value: currentValue },
+			config: { onSuccess: onSuccessNotification },
+		});
+	}
 
-  return (
-    <div className={styles["rotating-texts-inputs-wrapper"]}>
-      <div className={styles["row"]}>
-        <TextInput
-          name="text"
-          onChange={onChangeInput}
-          value={text}
-          placeholder="טקטס קבוע"
-        />
-        <CmsButton text="עדכון" onClick={updateValue} color="green" />
-      </div>
-      <div className={styles["row"]}>
-        <TextInput
-          placeholder="אופציה"
-          value={newOption.text.value}
-          onChange={onChangeInputOption}
-          name="option"
-        />
-        <Select
-          placeholder="צבע"
-          options={COLOR_OPTIONS}
-          name="color"
-          value={newOption.color.value}
-          onChange={onChangeSelect}
-        />
+	const deleteAction: TableAction = {
+		icon: Trash,
+		color: TABLE_COLORS.RED,
+		onClick: onDelete,
+	};
 
-        <CmsButton
-          color="blue"
-          text="הוספה"
-          onClick={addNewOption}
-          isDisabled={!newOption.color.value || !newOption.text.value}
-        />
-      </div>
-      <TableCreator header={tableHeader} data={options} />
-    </div>
-  );
+	const tableHeader: TableHeader = {
+		text: {
+			title: translate("rotating_text_text"),
+			type: TABLE_CELL_TYPES.TEXT,
+		},
+		color: {
+			title: translate("rotating_text_color"),
+			type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
+			dataset: COLOR_OPTIONS,
+			displayField: "text",
+		},
+		actions: {
+			title: translate("actions"),
+			type: TABLE_CELL_TYPES.ACTION_BUTTONS,
+			actions: [deleteAction],
+		},
+	};
+
+	return (
+		<div className={styles["rotating-texts-inputs-wrapper"]}>
+			<div className={styles["row"]}>
+				<TextInput
+					name="text"
+					onChange={onChangeInput}
+					value={text}
+					placeholder={translate("rotating_text_constant_text")}
+				/>
+				<CmsButton
+					text={translate("update_action")}
+					onClick={updateValue}
+					color="green"
+				/>
+			</div>
+			<div className={styles["row"]}>
+				<TextInput
+					placeholder={translate("rotating_text_option")}
+					value={newOption.text.value}
+					onChange={onChangeInputOption}
+					name="option"
+				/>
+				<Select
+					placeholder={translate("rotating_text_color")}
+					options={COLOR_OPTIONS}
+					name="color"
+					value={newOption.color.value}
+					onChange={onChangeSelect}
+				/>
+
+				<CmsButton
+					color="blue"
+					text={translate("add_action")}
+					onClick={addNewOption}
+					isDisabled={!newOption.color.value || !newOption.text.value}
+				/>
+			</div>
+			<TableCreator
+				header={tableHeader}
+				data={options}
+			/>
+		</div>
+	);
 }
 
 export default RotatingTextInputs;

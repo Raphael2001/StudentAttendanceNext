@@ -1,0 +1,6 @@
+const SERVER_STATUS_RESPONSE = {
+  SUCCESS: "SUCCESS",
+  ERROR: "ERROR",
+};
+
+export default SERVER_STATUS_RESPONSE;

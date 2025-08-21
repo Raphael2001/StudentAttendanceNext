@@ -1,0 +1,33 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.option {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: functions.rem(40);
+	width: 100%;
+	padding-inline: functions.rem(10);
+
+	border-bottom: #d3d3d3;
+	&.highlight {
+		background-color: settings.$input-background-color;
+	}
+	.color-item {
+		width: functions.rem(20);
+		height: functions.rem(20);
+		margin-inline-end: functions.rem(10);
+		border-radius: 100%;
+	}
+
+	.option-text {
+		font-size: functions.rem(16);
+		font-family: settings.$font;
+		.bold {
+			font-weight: 600;
+		}
+	}
+}

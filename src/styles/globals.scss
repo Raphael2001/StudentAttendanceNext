@@ -1,73 +1,77 @@
-@import "imports";
-@import "input";
-@import "popup";
-@import "themes";
-@import "item-colors";
-@import "fonts.scss";
+@use "settings";
+@use "input";
+@use "themes";
+@use "item-colors";
+@use "fonts";
 
 button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 button:focus,
 button:hover,
 :focus {
-  outline: none;
+	outline: none;
 }
 a,
 a:focus,
 a:active {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 ul {
-  list-style: none;
+	list-style: none;
 }
 img {
-  display: block;
-  width: 100%;
+	display: block;
+	width: 100%;
 }
 
 html {
-  background: $background-color;
-  box-sizing: border-box;
-  font-size: $main-html-font-size;
+	background: settings.$background-color;
+	box-sizing: border-box;
+	font-size: settings.$main-html-font-size;
 }
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
 
 html,
 body {
-  direction: rtl;
-  max-width: 100vw;
-  overflow-x: hidden;
-  height: 100%;
-  white-space: pre-line;
+	direction: rtl;
+	max-width: 100vw;
+	height: 100%;
+	white-space: pre-line;
+}
+html {
 }
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 .rtl {
-  direction: rtl;
+	direction: rtl;
 }
 .ltr {
-  direction: ltr;
+	direction: ltr;
+}
+
+.ck.ck-balloon-panel.ck-balloon-panel_visible.ck-powered-by-balloon {
+	display: none;
 }

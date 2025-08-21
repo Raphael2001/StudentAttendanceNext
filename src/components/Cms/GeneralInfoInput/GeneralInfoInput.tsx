@@ -1,42 +1,42 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import styles from "./GeneralInfoInput.module.scss";
 import GeneralInfoInputTypes from "constants/GeneralInfoInputTypes";
-import TextInput from "components/forms/TextInput/TextInput";
-import { inputEvent } from "utils/types/inputs";
+import TextInput from "components/General/Forms/TextInput/TextInput";
+import { InputEvent } from "utils/types/inputs";
 
 import GeneralInfoActions from "../GeneralInfoActions/GeneralInfoActions";
 
-import MediaAutoComplete from "../MediaAutoComplete/MediaAutoComplete";
-import useGeneralInfo from "utils/hooks/useGeneralInfo";
-import LinksAutoComplete from "../LinksAutoComplete/LinkAutoComplete";
-import {
-  RotatingTextItem,
-  RotatingTextItemOption,
-} from "utils/types/rotatingText";
+import { RotatingTextItemOption } from "utils/types/rotatingText";
 import RotatingTextInputs from "../RotatingTextInputs/RotatingTextInputs";
-import { generalInfoItem, generalInfoValue } from "utils/types/init";
+import {
+  GeneralInfo,
+  GeneralInfoItem,
+  GeneralInfoValue,
+} from "utils/types/init";
 import { generateUniqueId } from "utils/functions";
-import FileAutoComplete from "../FileAutoComplete/FileAutoComplete";
+import MediaAutoComplete from "components/General/Forms/PreBuiltData/AutoComplete/MediaAutoComplete";
+import LinksAutoComplete from "components/General/Forms/PreBuiltData/AutoComplete/LinkAutoComplete";
+import FileAutoComplete from "components/General/Forms/PreBuiltData/AutoComplete/FileAutoComplete";
 
 type Props = {
-  name: string;
-  id?: string;
+  item: GeneralInfo;
 };
 
-function GeneralInfoInput({ name, id }: Props) {
-  const { multiValues, inputType, value } = useGeneralInfo(name);
+function GeneralInfoInput({ item }: Props) {
+  const { name, inputType, value } = item;
+  const isMultiValues = Array.isArray(value);
 
-  const initialValue = multiValues
+  const initialValue = isMultiValues
     ? { _id: "", data: "" }
-    : value ?? { _id: "", data: "" };
+    : (value ?? { _id: "", data: "" });
 
   const [currentValue, setCurrentValue] =
-    useState<generalInfoValue>(initialValue);
+    useState<GeneralInfoValue>(initialValue);
 
-  function onChange(e: inputEvent) {
+  function onChange(e: InputEvent) {
     const { value } = e.target;
     const data = { _id: generateUniqueId(16), data: value };
 
@@ -58,7 +58,7 @@ function GeneralInfoInput({ name, id }: Props) {
 
   function onChangeRotatingText(
     text: string,
-    options: Array<RotatingTextItemOption>
+    options: Array<RotatingTextItemOption>,
   ) {
     setCurrentValue({
       text: text,
@@ -67,7 +67,7 @@ function GeneralInfoInput({ name, id }: Props) {
   }
 
   const formattedValue = useMemo(() => {
-    if ((currentValue as generalInfoItem) && "data" in currentValue) {
+    if ((currentValue as GeneralInfoItem) && "data" in currentValue) {
       return currentValue.data;
     }
     return "";
@@ -82,7 +82,7 @@ function GeneralInfoInput({ name, id }: Props) {
             onChange={onChangeAutoComplete}
           />
           <GeneralInfoActions
-            name={name}
+            item={item}
             inputValue={currentValue}
             resetValue={resetValue}
           />
@@ -96,7 +96,7 @@ function GeneralInfoInput({ name, id }: Props) {
             onChange={onChangeAutoComplete}
           />
           <GeneralInfoActions
-            name={name}
+            item={item}
             inputValue={currentValue}
             resetValue={resetValue}
           />
@@ -110,7 +110,7 @@ function GeneralInfoInput({ name, id }: Props) {
             onChange={onChangeAutoComplete}
           />
           <GeneralInfoActions
-            name={name}
+            item={item}
             inputValue={currentValue}
             resetValue={resetValue}
           />
@@ -119,7 +119,7 @@ function GeneralInfoInput({ name, id }: Props) {
     case GeneralInfoInputTypes.ROTATING_TEXT._id:
       return (
         <RotatingTextInputs
-          name={name}
+          item={item}
           onChange={onChangeRotatingText}
           currentValue={currentValue}
         />
@@ -130,7 +130,7 @@ function GeneralInfoInput({ name, id }: Props) {
         <div className={styles["row"]}>
           <TextInput onChange={onChange} value={formattedValue} />
           <GeneralInfoActions
-            name={name}
+            item={item}
             inputValue={currentValue}
             resetValue={resetValue}
           />

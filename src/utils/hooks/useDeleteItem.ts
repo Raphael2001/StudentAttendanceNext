@@ -1,6 +1,6 @@
 "use client";
 
-import POPUP_TYPES from "constants/popup-types";
+import POPUP_TYPES from "constants/PopupTypes";
 import usePopup from "./usePopup";
 
 function useDeleteItem() {

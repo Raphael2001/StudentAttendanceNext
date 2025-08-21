@@ -1,0 +1,22 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.cms-form {
+	display: flex;
+	flex-direction: column;
+	gap: functions.rem(40);
+	.cms-form-row {
+		display: flex;
+		flex-direction: row;
+		gap: functions.rem(20);
+	}
+	.actions {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

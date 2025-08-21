@@ -2,15 +2,18 @@
 
 import React from "react";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
+import { FormData } from "utils/types/form";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
 import { useAppSelector } from "utils/hooks/useRedux";
-import Api from "api/requests";
+import Api from "api";
 import { UserType } from "utils/types/user";
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 
 type Props = {
   payload: Payload;
+  popupIndex: number;
 };
 
 type Payload = {
@@ -18,24 +21,26 @@ type Payload = {
 };
 
 function UpdateUserPopup(props: Props) {
-  const { payload } = props;
+  const { payload, popupIndex } = props;
   const { dataItem } = payload;
+
+  const translate = useCMSTranslate();
 
   const roles = useAppSelector((store) => store.init.iamRoles);
 
   function onSubmit(payload, onSuccess) {
-    payload["id"] = dataItem._id;
-    Api.updateUser({ payload, onSuccess });
+    payload["_id"] = dataItem._id;
+    Api.cms.cmsUsers.PUT({ payload, config: { onSuccess } });
   }
 
-  const formData: FormDataType = {
+  const formData: FormData = {
     inputs: [
       {
         name: "roleId",
-        label: "תפקיד",
+        label: translate("user_role"),
         inputType: FORM_INPUTS_TYPES.SELECT,
         options: roles,
-        rules: ["not_empty"],
+        schema: VALIDATION_SCHEMES.RequiredString,
         field: "title",
       },
     ],
@@ -44,6 +49,7 @@ function UpdateUserPopup(props: Props) {
 
   return (
     <GeneralFormPopup
+      popupIndex={popupIndex}
       hasDataItem={true}
       formData={formData}
       onSubmit={onSubmit}

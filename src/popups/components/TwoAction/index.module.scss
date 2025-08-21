@@ -1,7 +1,9 @@
-@import "src/styles/imports";
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
 .two-action-popup {
   :global(.popup_content) {
-    padding: rem(20) rem(15);
+    padding: functions.rem(20) functions.rem(15);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +18,7 @@
 
     .actions-wrapper {
       margin-top: auto;
-      margin-bottom: rem(15);
+      margin-bottom: functions.rem(15);
       display: flex;
       justify-content: space-around;
       width: 100%;
@@ -24,37 +26,37 @@
   }
 }
 
-@media (min-width: em($tablet)) {
+@media (min-width: functions.em(settings.$tablet)) {
   .two-action-popup {
     :global(.popup_content) {
-      padding: rem(20) rem(30);
+      padding: functions.rem(20) functions.rem(30);
 
       .actions-wrapper {
-        margin-bottom: rem(15);
+        margin-bottom: functions.rem(15);
       }
     }
   }
 }
 
-@media (min-width: em($desktop)) {
+@media (min-width: functions.em(settings.$desktop)) {
   .two-action-popup {
     :global(.popup_content) {
-      padding: rem(20) rem(30);
+      padding: functions.rem(20) functions.rem(30);
 
       .actions-wrapper {
-        margin-bottom: rem(15);
+        margin-bottom: functions.rem(15);
       }
     }
   }
 }
 
-@media (min-width: em($desktop_large)) {
+@media (min-width: functions.em(settings.$desktop_large)) {
   .two-action-popup {
     :global(.popup_content) {
-      padding: rem(20) rem(30);
+      padding: functions.rem(20) functions.rem(30);
 
       .actions-wrapper {
-        margin-bottom: rem(15);
+        margin-bottom: functions.rem(15);
       }
     }
   }

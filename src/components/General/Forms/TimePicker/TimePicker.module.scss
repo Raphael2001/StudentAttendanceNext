@@ -1,0 +1,133 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+$width: 220;
+
+.time-picker-container {
+	.placeholder {
+		@include mixins.placeholder();
+	}
+	.time-picker-wrapper {
+		width: functions.rem($width);
+		height: functions.rem(40);
+		position: relative;
+
+		&.disabled {
+			opacity: 0.3;
+		}
+		&.active {
+			.time-picked-button {
+				z-index: 20;
+			}
+		}
+		.time-picked-button {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			padding-inline: functions.rem(12);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border: 1px solid settings.$grey;
+			border-radius: functions.rem(3);
+			background-color: settings.$white;
+
+			.time-picked {
+				font-family: settings.$font-light;
+				font-size: functions.rem(17);
+			}
+			.clock-icon {
+				width: functions.rem(20);
+				height: functions.rem(20);
+				object-fit: contain;
+			}
+		}
+
+		.time-picker-container {
+			position: absolute;
+			width: functions.rem($width);
+			background-color: settings.$white;
+			height: 0;
+			transition: all 300ms ease-in-out;
+			z-index: -1;
+
+			&.active {
+				height: functions.rem(270);
+				z-index: 30;
+				box-shadow:
+					0 6px 16px 0 rgba(0, 0, 0, 0.08),
+					0 3px 6px -4px rgba(0, 0, 0, 0.12),
+					0 9px 28px 8px rgba(0, 0, 0, 0.05);
+				border-radius: functions.rem(8);
+				.actions {
+					display: flex;
+				}
+			}
+
+			.time-lists {
+				width: functions.rem($width);
+				display: flex;
+				flex-direction: row-reverse;
+				height: 87%;
+				overflow: hidden;
+				.time-panel-column {
+					width: 50%;
+					overflow: auto;
+					margin-block: functions.rem(4);
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					@include mixins.hideScrollbar;
+					&:nth-of-type(1) {
+						border-right: 1px solid rgba(5, 5, 5, 0.06);
+					}
+
+					list-style-type: none;
+					.time-cell {
+						border: 1px solid white;
+						@include mixins.focus-border();
+						width: 90%;
+						height: functions.rem(30);
+						margin: 0 2px;
+						border-radius: functions.rem(8);
+
+						display: flex;
+						align-items: center;
+						justify-content: center;
+
+						&.selected {
+							background-color: settings.$input-background-color;
+							.time-cell-inner {
+								font-family: settings.$font-medium;
+							}
+						}
+						.time-cell-inner {
+							font-size: functions.rem(16);
+							font-family: settings.$font-light;
+							color: settings.$grey;
+						}
+					}
+				}
+			}
+			.actions {
+				height: 13%;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				margin-inline: functions.rem(4);
+				border-top: 1px solid rgba(5, 5, 5, 0.06);
+				.ok-button {
+					font-family: settings.$font-light;
+					font-size: functions.rem(16);
+					background-color: settings.$cms-main-color;
+					color: white;
+					padding: functions.rem(5) functions.rem(10);
+					border-radius: functions.rem(5);
+				}
+			}
+		}
+	}
+}

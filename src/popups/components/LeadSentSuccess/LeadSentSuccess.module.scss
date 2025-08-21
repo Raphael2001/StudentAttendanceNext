@@ -1,24 +1,25 @@
-@import "src/styles/imports.scss";
+@use "styles/functions";
+@use "styles/settings";
 .lead-sent-popup {
-  .lead-sent-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 30vh;
-    .title {
-      font-family: $font-medium;
-      .name {
-        color: $basic-color-blue;
-      }
-    }
-    .content {
-      font-family: $font;
-      margin-top: rem(10);
-      font-size: rem(16);
-    }
-    .btn {
-      margin-top: rem(50);
-    }
-  }
+	.lead-sent-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 30vh;
+		.title {
+			font-family: settings.$font-medium;
+			.name {
+				color: settings.$basic-color-blue;
+			}
+		}
+		.content {
+			font-family: settings.$font;
+			margin-top: functions.rem(10);
+			font-size: functions.rem(16);
+		}
+		.btn {
+			margin-top: functions.rem(50);
+		}
+	}
 }

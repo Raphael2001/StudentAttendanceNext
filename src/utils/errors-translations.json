@@ -1,0 +1,15 @@
+{
+  "any.required": "שדה חובה",
+  "string.empty": "השדה אינו יכול להיות ריק",
+  "string.min": "מינימום {limit} תווים",
+  "string.max": "מקסימום {limit} תווים",
+  "string.email": "איימיל אינו תקין",
+  "number.base": "הערך אינו מספר תקין",
+  "number.min": "הערך צריך להיות מינימום {limit}",
+  "number.max": "הערך צריך להיות מקסימום {limit}",
+  "array.base": "הערך אינו מערך תקין",
+  "boolean.base": "הערך אינו בוליאן תקין",
+  "date.base": "הערך אינו תאריך תקין",
+  "string.pattern.base.password": "אותיות באנגלית, תווים מיוחדים ומספרים בלבד",
+  "generalInfoName.invalid": "_ - אותיות באנגלית,ומספרים בלבד"
+}

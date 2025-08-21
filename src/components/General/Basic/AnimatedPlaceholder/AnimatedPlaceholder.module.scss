@@ -1,0 +1,31 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+@use "styles/locale";
+
+.placeholder {
+	position: absolute;
+	pointer-events: none;
+	transition: all 250ms ease-out;
+	top: 0;
+	@include mixins.placeholder();
+	@include locale.right(0);
+	&.focused {
+		color: settings.$input-focus-color;
+	}
+	&.animated {
+		transform: translate(0, functions.rem(-20));
+		@include mixins.placeholder-focus();
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.placeholder {
+		&.animated {
+			transform: translate(0, functions.rem(-20));
+		}
+	}
+}

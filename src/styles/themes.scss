@@ -1,53 +1,57 @@
-@import "mixins";
+@use "sass:color";
+@use "mixins";
+
+// --- Mixin to spit out every CSS var from one “base” color
+@mixin theme-variables($input-color, $cms-color) {
+	--input-focus-color: #{$input-color};
+	--input-background-color: #{color.adjust($input-color, $lightness: 45%)};
+	--input-background-hover-color-light: #{color.adjust($input-color, $lightness: 20%)};
+	--input-background-hover-color-dark: #{color.adjust($input-color, $lightness: -20%)};
+
+	--cms-main-color: #{$cms-color};
+	--cms-secondary-color: #{color.adjust($cms-color, $lightness: 25%)};
+	--cms-main-light-color: #{color.adjust($cms-color, $lightness: 47%)};
+	--cms-main-min-light-color: #{color.adjust($cms-color, $lightness: 40%)};
+}
+
 :root {
-  --input-focus-color: #017aff;
-  --input-background-color: #{lighten(#017aff, 45%)};
+	@include theme-variables(#017aff, #2c698f);
 
-  --cms-basic-white: #fffff0;
+	--cms-basic-white: #ffffff;
 
-  --cms-main-color: #2c698f;
-  --cms-main-light-color: #{lighten(#2c698f, 60%)};
-  --cms-main-min-light-color: #{lighten(#2c698f, 55%)};
+	--font: "Heebo-Regular";
+	--font-light: "Heebo-Light";
+	--font-medium: "Heebo-Medium";
+	--font-semibold: "Heebo-SemiBold";
+	--font-bold: "Heebo-Bold";
 
-  --cms-secondary-color: #{lighten(#2c698f, 25%)};
-
-  --font: "Heebo-Regular";
-  --font-light: "Heebo-Light";
-  --font-medium: "Heebo-Medium";
-  --font-semibold: "Heebo-SemiBold";
-  --font-bold: "Heebo-Bold";
-
-  .input-icon-mark {
-    @include recolor(#017aff);
-  }
+	.input-icon-mark {
+		@include mixins.recolor("cms-blue");
+	}
 }
 
 .green {
-  --input-focus-color: #4caf50;
+	@include theme-variables(#4caf50, #4caf50);
 
-  --input-background-color: #{lighten(#4caf50, 45%)};
-
-  --cms-main-color: #4caf50;
-  --cms-secondary-color: #{lighten(#4caf50, 25%)};
-
-  --cms-main-light-color: #{lighten(#4caf50, 47%)};
-  --cms-main-min-light-color: #{lighten(#4caf50, 40%)};
-
-  .input-icon-mark {
-    @include recolor(#4caf50);
-  }
+	.input-icon-mark {
+		@include mixins.recolor("cms-green");
+	}
 }
 .orange {
-  --input-focus-color: #ff6d00;
-  --input-background-color: #{lighten(#ff6d00, 45%)};
+	@include theme-variables(#ff6d00, #ff6d00);
 
-  --cms-main-color: #ff6d00;
+	.input-icon-mark {
+		@include mixins.recolor("cms-orange");
+	}
+}
 
-  --cms-secondary-color: #{lighten(#ff6d00, 25%)};
-  --cms-main-light-color: #{lighten(#ff6d00, 47%)};
-  --cms-main-min-light-color: #{lighten(#ff6d00, 40%)};
-
-  .input-icon-mark {
-    @include recolor(#ff6d00);
-  }
+.ck-editor {
+	--ck-color-button-on-color: var(--input-focus-color);
+	--ck-color-focus-border: var(--input-focus-color);
+	--ck-color-list-button-on-background: var(--input-focus-color);
+	--ck-color-button-on-background: var(--input-background-color);
+	--ck-color-list-button-on-background-focus: var(--input-background-hover-color-dark);
+	--ck-color-base-active-focus: var(--input-focus-color);
+	--ck-color-base-active: var(--input-focus-color);
+	--ck-focus-ring: 1px solid var(--input-focus-color);
 }

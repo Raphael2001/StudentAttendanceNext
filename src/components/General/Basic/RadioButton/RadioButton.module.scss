@@ -1,0 +1,73 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.radio-button {
+	display: flex;
+	&:hover {
+		.radio-content {
+			background-color: settings.$input-background-color;
+		}
+	}
+	&.selected {
+		.radio-content {
+			background-color: settings.$input-background-color;
+			.radio-outer-circle {
+				background-color: settings.$input-focus-color;
+
+				.radio-inner-circle {
+					background-color: white;
+				}
+			}
+		}
+	}
+	.input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+		&.disabled {
+			@include mixins.input-disabled();
+		}
+		&:focus,
+		&:focus-visible {
+			+ .radio-content {
+				background-color: settings.$input-background-color;
+
+				.radio-outer-circle {
+					border: 1px solid settings.$input-focus-color;
+				}
+			}
+		}
+	}
+
+	.radio-content {
+		display: flex;
+		padding: functions.rem(5) functions.rem(10);
+		border-radius: functions.rem(33);
+		transition: 0.5s all ease-in-out;
+
+		.radio-outer-circle {
+			width: functions.rem(20);
+			height: functions.rem(20);
+			border: 1px solid black;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: 0.5s all ease-in-out;
+
+			.radio-inner-circle {
+				width: 50%;
+				height: 50%;
+				border-radius: 50%;
+				transition: 0.5s all ease-in-out;
+			}
+		}
+		.radio-text {
+			margin-inline-start: functions.rem(5);
+			@include mixins.input-text();
+		}
+	}
+}

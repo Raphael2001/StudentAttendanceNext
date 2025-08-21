@@ -1,0 +1,25 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.multi-auto-complete {
+	width: 100%;
+
+	align-items: center;
+	flex: 1;
+	display: flex;
+	gap: functions.rem(8);
+
+	.plus-icon {
+		width: functions.rem(20);
+		height: functions.rem(20);
+		&:focus-visible,
+		&:focus {
+			path {
+				stroke: settings.$input-focus-color;
+			}
+		}
+	}
+}

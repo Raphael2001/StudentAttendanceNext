@@ -1,57 +1,80 @@
-import { AxiosRequestConfig } from "axios";
+import API_METHODS from "constants/ApiMethods";
 
-export type serverSettings = {
-  next?: NextFetchRequestConfig;
-  cache?: RequestCache;
-  url?: string;
+export type ServerSettings = {
+	next?: NextFetchRequestConfig;
+	cache?: RequestCache;
 };
-export type serverProps = {
-  settings?: serverSettings | undefined;
-  payload?: any;
-};
-
-export type clientSettings = {
-  method: string;
-  url: string;
-  headers: any;
-  withCredentials: boolean;
-  data?: any;
-  params?: any;
+export type ServerProps = {
+	settings?: ServerSettings | undefined;
+	payload?: any;
 };
 
-export type onSuccessFunction = (a: any) => void;
-export type onFailureFunction = (a: any) => void;
+export type ClientSettings = {
+	method: string;
+	url: string;
+	headers: any;
+	withCredentials: boolean;
+	data?: any;
+	params?: any;
+};
+
+export type OnSuccessFunction = (a: any) => void;
+export type OnFailureFunction = (a: any) => void;
+
+export type ApiConfig = {
+	url?: string;
+	isFormData?: boolean;
+};
+
+export type UpdateStatusPayload = {
+	_id: string;
+	status: string;
+};
+
+export type ApiMethodType = keyof typeof API_METHODS;
+
+type BasicAPIMethodData = {
+	method: ApiMethodType;
+	onSuccess?: OnSuccessFunction;
+};
+
+export type APIMethodData = BasicAPIMethodData & {
+	authHeader?: string;
+};
+
+export type CMSApiMethodData = BasicAPIMethodData & {
+	useBasicCMSOnSuccess?: boolean;
+};
+
+export type APIMethodsData = Array<APIMethodData>;
+
+export type APIMethodDefinition = {
+	[method in ApiMethodType]: (props?: ApiProps) => Promise<any>;
+};
+
+export type ApiHeaders = Record<string, string>;
+
+export type ClientPayload = Record<string, any>;
+
+export type ClientConfig = {
+	isFormData?: boolean;
+	headers?: Record<string, string>;
+	onSuccess?: (data: any) => void;
+	onFailure?: (error: any) => void;
+};
+
+export type ApiResponse<T = any> = {
+	body: T;
+	status: "SUCCESS" | "ERROR";
+	message: string;
+};
+
+export type ExtraApiData = {
+	onSuccess?: (data: any) => void;
+	onFailure?: (error: any) => void;
+};
 
 export type ApiProps = {
-  config?: apiConfig;
-  headers?: Object;
-  payload?: any;
-  callback?: (response: any) => void;
-  onSuccess?: onSuccessFunction;
-  onFailure?: onFailureFunction;
-};
-
-export type apiConfig = {
-  showLoader?: boolean;
-  url?: string;
-  isFormData?: boolean;
-};
-
-export type ApiCallData = {
-  settings: AxiosRequestConfig;
-  config: apiConfig;
-  onSuccess?: onSuccessFunction;
-  onFailure?: onFailureFunction;
-  status: string;
-  _id: string;
-  callback?: (response: any) => void;
-};
-
-export type updateStatusPayload = {
-  _id: string;
-  status: string;
-};
-
-export type ApiResponse = {
-  body: any;
+	payload?: ClientPayload;
+	config?: ClientConfig;
 };

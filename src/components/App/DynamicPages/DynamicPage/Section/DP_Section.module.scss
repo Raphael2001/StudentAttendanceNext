@@ -1,0 +1,115 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.dynamic-page-section {
+	color: settings.$dp-text;
+	font-family: settings.$font;
+	font-size: functions.rem(18);
+	display: flex;
+	flex-direction: column;
+	word-break: break-all;
+	width: 100%;
+	justify-content: space-between;
+	gap: functions.rem(10);
+
+	h1 {
+		font-size: functions.rem(35);
+		font-family: settings.$font-bold;
+		text-align: center;
+		color: settings.$dp-title;
+	}
+	h2 {
+		font-size: functions.rem(28);
+		font-family: settings.$font-semibold;
+		color: settings.$dp-title;
+	}
+
+	h3 {
+		font-size: functions.rem(25);
+		font-family: settings.$font-medium;
+		color: settings.$dp-title;
+	}
+	h4 {
+		font-size: functions.rem(22);
+		font-family: settings.$font-medium;
+		color: settings.$dp-title;
+	}
+	h5 {
+		font-size: functions.rem(20);
+		font-family: settings.$font-medium;
+		color: settings.$dp-title;
+	}
+	h6 {
+		font-size: functions.rem(18);
+		font-family: settings.$font-medium;
+		color: settings.$dp-title;
+	}
+	p {
+		font-size: functions.rem(16);
+	}
+	a {
+		text-decoration: underline;
+		color: settings.$dp-link;
+	}
+	strong {
+		font-family: settings.$font-semibold;
+	}
+	ul {
+		list-style: disc;
+		padding-inline-start: functions.rem(25);
+	}
+	.row {
+		display: flex;
+		flex-direction: column;
+		gap: functions.rem(10);
+	}
+
+	.col {
+		flex: 1;
+
+		display: flex;
+		flex-direction: column;
+	}
+	.media {
+		border-radius: functions.rem(5);
+		overflow: hidden;
+
+		box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+	}
+	.rating {
+		padding: functions.rem(5) functions.rem(10);
+		border-radius: functions.rem(25);
+
+		box-shadow:
+			rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+			rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+		width: fit-content;
+	}
+	.carousel {
+		width: 100%;
+		height: functions.rem(250);
+		flex-grow: 1;
+	}
+	.slider {
+		width: 100%;
+		height: functions.rem(350);
+		flex-grow: 1;
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.dynamic-page-section {
+		.row {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+		}
+		.carousel {
+			height: functions.rem(340);
+		}
+		.slider {
+			height: functions.rem(460);
+		}
+	}
+}

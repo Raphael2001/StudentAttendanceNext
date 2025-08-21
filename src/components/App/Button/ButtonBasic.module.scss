@@ -1,0 +1,136 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+@use "sass:color";
+@use "sass:map";
+
+@mixin loader($color) {
+	.loader {
+		width: functions.rem(12);
+		height: functions.rem(12);
+		position: absolute;
+
+		border: 1px solid $color;
+		border-bottom-color: transparent;
+		border-radius: 50%;
+		display: inline-block;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+@mixin theme($color) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.primary {
+		background-color: $color;
+		color: white;
+
+		&:hover {
+			background-color: color.adjust($color: $color, $lightness: -10%);
+		}
+		&:active {
+			background-color: color.adjust($color: $color, $lightness: -20%);
+		}
+		.icon {
+			@include mixins.recolor("white");
+		}
+		@include loader(white);
+	}
+	&.secondary {
+		border: 2px solid $color;
+
+		color: black;
+		&:hover {
+			background-color: color.adjust($color, $lightness: 40%);
+		}
+		&:active {
+			background-color: color.adjust($color: $color, $lightness: 35%);
+		}
+		.icon {
+			@include mixins.recolor("black");
+		}
+		@include loader(black);
+	}
+	&.tertiary {
+		color: $color;
+		&:hover {
+			background-color: color.adjust($color: $color, $lightness: 40%);
+		}
+		&:active {
+			background-color: color.adjust($color: $color, $lightness: 35%);
+		}
+		.icon {
+			@include mixins.recolor(#{$color});
+		}
+		@include loader($color);
+	}
+	&.loading {
+		position: relative;
+		.icon,
+		.text {
+			opacity: 0;
+		}
+	}
+	&:focus,
+	&:focus-visible {
+		outline: 2px solid color.adjust($color: $color, $lightness: 30%);
+		outline-offset: 1px;
+	}
+}
+
+.basic-button {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+	transition: all 300ms ease-in-out;
+	&.default {
+		@include theme(map.get(settings.$button-colors, "default"));
+	}
+	&.success {
+		@include theme(map.get(settings.$button-colors, "success"));
+	}
+	&.info {
+		@include theme(map.get(settings.$button-colors, "info"));
+	}
+	&.warning {
+		@include theme(map.get(settings.$button-colors, "warning"));
+	}
+	&.help {
+		@include theme(map.get(settings.$button-colors, "help"));
+	}
+	&.danger {
+		@include theme(map.get(settings.$button-colors, "danger"));
+	}
+
+	&.disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+	&.shadow {
+		box-shadow:
+			0 3px 1px -2px rgba(0, 0, 0, 0.2),
+			0 2px 2px 0 rgba(0, 0, 0, 0.14),
+			0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+	&.round {
+		border-radius: functions.rem(44);
+	}
+	&.rounded {
+		border-radius: functions.rem(5);
+	}
+	&.sharp {
+		border-radius: 0;
+	}
+}

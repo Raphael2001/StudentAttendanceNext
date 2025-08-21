@@ -4,84 +4,69 @@ import styles from "./FilesPopup.module.scss";
 
 import React, { useRef, useState } from "react";
 
-import AnimatedInput from "components/forms/AnimatedInput";
+import AnimatedInput from "components/General/Forms/AnimatedInput/AnimatedInput";
 import SlidePopup from "popups/Presets/SlidePopup/SlidePopup";
-import CmsButton from "components/CmsButton/CmsButton";
-import { inputEvent } from "utils/types/inputs";
-import UploadFileButton from "components/forms/UploadFileButton/UploadFileButton";
+import CmsButton from "components/Cms/CmsButton/CmsButton";
+import { InputEvent } from "utils/types/inputs";
 import { SlidePopupRef } from "utils/types/popup";
-import Api from "api/requests";
+import Api from "api";
+import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import MediaUploadBox from "components/Cms/MediaUploadBox/MediaUploadBox";
+import { fileToBase64 } from "utils/functions";
 
-function FilesPopup() {
-  const [currentMedia, setCurrentMedia] = useState<File>();
+function FilesPopup({ popupIndex }: { popupIndex: number }) {
+  const [currentFile, setCurrentFile] = useState<File | null>();
 
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const ref = useRef<SlidePopupRef>();
+  const translate = useCMSTranslate();
 
-  function onMediaChange(e: inputEvent) {
-    const fileList = e.target.files;
-    if (fileList) {
-      for (let i = 0; i < fileList.length; i++) {
-        const file = fileList[i];
-        setCurrentMedia(file);
-        return;
-      }
-    }
-  }
+  const ref = useRef<SlidePopupRef>(null);
 
-  function onNameChange(event: inputEvent) {
+  function onNameChange(event: InputEvent) {
     const { value } = event.target;
 
     setName(value);
   }
 
-  function getBase64(
-    file: File,
-    cb: (base64: string | ArrayBuffer | null) => void
-  ) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  }
-
-  function onSuccess(data) {
+  function onSuccess() {
+    setIsLoading(false);
     ref.current?.animateOut();
   }
-  function addMediaHandler() {
-    if (currentMedia) {
-      getBase64(currentMedia, (base64) => {
-        const payload = {
-          name: name,
+  async function addMediaHandler() {
+    setIsLoading(true);
+    if (currentFile) {
+      const base64 = await fileToBase64(currentFile);
+      const payload = {
+        name: name,
+        file: base64,
+      };
 
-          file: base64,
-        };
-
-        Api.addFile({ payload, onSuccess });
+      Api.cms.file.POST({
+        payload,
+        config: { onSuccess, onFailure: () => setIsLoading(false) },
       });
     }
   }
 
   return (
-    <SlidePopup className={styles["media-popup"]} ref={ref}>
+    <SlidePopup
+      popupIndex={popupIndex}
+      className={styles["media-popup"]}
+      ref={ref}
+      isLoading={isLoading}
+      showCloseIcon
+    >
       <div className={styles["media-container"]}>
-        <div className={styles["media-chooser"]}>
-          <UploadFileButton
-            placeholder="נא לבחור מדיה"
-            accept=".pdf, .doc, .docx, .txt"
-            onChange={onMediaChange}
-            value={currentMedia}
-            inputClassName={styles["media-input"]}
-          />
-        </div>
+        <MediaUploadBox
+          accept=".pdf, .doc, .docx, .txt"
+          currentFile={currentFile}
+          onFileChange={(file: File | null) => setCurrentFile(file)}
+        />
 
         <AnimatedInput
-          placeholder="שם"
+          placeholder={translate("media_name")}
           value={name}
           name="name"
           onChange={onNameChange}
@@ -91,9 +76,9 @@ function FilesPopup() {
 
         <div className={styles["actions"]}>
           <CmsButton
-            text={"הוסף"}
+            text={translate("add_action")}
             onClick={addMediaHandler}
-            isDisabled={!currentMedia}
+            isDisabled={!currentFile}
             className={styles["button"]}
           />
         </div>

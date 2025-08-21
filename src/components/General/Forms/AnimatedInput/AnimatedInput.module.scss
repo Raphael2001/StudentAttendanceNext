@@ -1,0 +1,10 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.animated-input-wrapper {
+	position: relative;
+	width: 100%;
+}

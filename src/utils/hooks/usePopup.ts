@@ -9,7 +9,7 @@ function usePopup() {
         type,
         payload,
         priority,
-      })
+      }),
     );
   };
 }

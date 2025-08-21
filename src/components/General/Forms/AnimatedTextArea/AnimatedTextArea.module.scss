@@ -1,0 +1,32 @@
+@use "styles/functions";
+
+@use "styles/locale";
+
+@use "styles/settings";
+
+@use "../../Basic/AnimatedPlaceholder/AnimatedPlaceholder.module";
+
+.animated-textarea-wrapper {
+	position: relative;
+	width: 100%;
+	.placeholder {
+		top: functions.rem(3);
+		@include locale.right(functions.rem(3));
+
+		&.animated {
+			transform: translate(0, functions.rem(-18));
+			top: functions.rem(0);
+			@include locale.right(0);
+		}
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.animated-textarea-wrapper {
+		.placeholder {
+			&.animated {
+				transform: translate(0, functions.rem(-23));
+			}
+		}
+	}
+}

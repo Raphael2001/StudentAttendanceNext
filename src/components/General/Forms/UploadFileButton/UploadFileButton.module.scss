@@ -1,0 +1,42 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.file-input-wrapper {
+	position: relative;
+	.media-file {
+		display: none;
+	}
+	.media-file-label {
+		border-radius: functions.rem(5);
+		width: functions.rem(130);
+		height: functions.rem(30);
+		cursor: pointer;
+		font-size: functions.rem(16);
+		background: settings.$input-focus-color;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&.disabled {
+			opacity: 0.4;
+			pointer-events: none;
+		}
+	}
+	.file-name-title {
+		font-size: functions.rem(16);
+		font-family: settings.$font-light;
+		position: absolute;
+		top: 100%;
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.file-input-wrapper {
+		.media-file-label {
+			width: functions.rem(150);
+			height: functions.rem(35);
+			font-size: functions.rem(18);
+		}
+	}
+}

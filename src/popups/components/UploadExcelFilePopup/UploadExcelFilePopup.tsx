@@ -1,55 +1,58 @@
 "use client";
 
+import Api from "api";
+import GeneralFormPopup from "components/General/GeneralFormPopup/GeneralFormPopup";
+import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
+import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
 import React from "react";
 
-import { FormDataType } from "utils/types/form";
-import FORM_INPUTS_TYPES from "constants/form-inputs-types";
-
-import Api from "api/requests";
-import GeneralFormPopup from "components/GeneralFormPopup/GeneralFormPopup";
 import useNotificationsHandler from "utils/hooks/useNotificationsHandler";
+import { FormData } from "utils/types/form";
 
 type Payload = {
-  moduleName: string;
+	moduleName: string;
 };
 
 type Props = {
-  payload: Payload;
+	payload: Payload;
+	popupIndex: number;
 };
 
 export default function UploadExcelFilePopup(props: Props) {
-  const { payload } = props;
-  const { moduleName } = payload;
+	const { payload, popupIndex } = props;
+	const { moduleName } = payload;
 
-  const { onSuccessNotification } = useNotificationsHandler();
+	const { onSuccessNotification } = useNotificationsHandler();
 
-  function onSubmit(payload, onSuccess) {
-    payload.moduleName = moduleName;
+	function onSubmit(payload, onSuccess) {
+		payload.moduleName = moduleName;
 
-    function onSuccessHandler() {
-      onSuccessNotification();
-      onSuccess();
-    }
-    Api.uploadExcelFile({ payload, onSuccess: onSuccessHandler });
-  }
+		function onSuccessHandler() {
+			onSuccessNotification();
+			onSuccess();
+		}
+		Api.cms.excelFile.POST({ payload, config: { onSuccess: onSuccessHandler } });
+	}
 
-  const formData: FormDataType = {
-    inputs: [
-      {
-        name: "file",
-        label: "בחרו קובץ",
-        inputType: FORM_INPUTS_TYPES.FILE_UPLOAD,
-        rules: ["not_empty"],
-        accept: ".xlsx",
-      },
-    ],
-  };
+	const formData: FormData = {
+		inputs: [
+			{
+				name: "file",
+				label: "בחרו קובץ",
+				inputType: FORM_INPUTS_TYPES.FILE_UPLOAD,
+				schema: VALIDATION_SCHEMES.RequiredString,
 
-  return (
-    <GeneralFormPopup
-      hasDataItem={false}
-      formData={formData}
-      onSubmit={onSubmit}
-    />
-  );
+				accept: ".xlsx",
+			},
+		],
+	};
+
+	return (
+		<GeneralFormPopup
+			hasDataItem={false}
+			formData={formData}
+			onSubmit={onSubmit}
+			popupIndex={popupIndex}
+		/>
+	);
 }

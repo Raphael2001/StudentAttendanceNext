@@ -1,12 +1,12 @@
 @use "sass:math";
-@import "./settings.scss";
+@use "settings.scss";
 
 @function strip-units($number) {
-  @return $number / ($number * 0 + 1);
+  @return math.div($number, $number * 0 + 1);
 }
 
 @function relative_size($size) {
-  $percentage: math.div($main-html-font-size, 62.5%) * 10;
+  $percentage: math.div(settings.$main-html-font-size, 62.5%) * 10;
   $relative_size: math.div(strip-units($size), $percentage);
   @return $relative_size;
 }

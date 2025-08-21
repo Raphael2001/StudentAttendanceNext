@@ -15,7 +15,7 @@ export const tokensSlice = createSlice({
     setRefreshToken: (state, action) => {
       return { ...state, refreshToken: action.payload };
     },
-    resetTokens: (state, action) => initialState,
+    resetTokens: () => initialState,
   },
 });
 

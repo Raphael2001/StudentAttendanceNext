@@ -1,0 +1,18 @@
+@use "styles/functions";
+
+.input-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	.input-wrapper {
+		display: flex;
+		gap: functions.rem(10);
+		align-items: flex-end;
+		justify-content: space-between;
+
+		.delete-input-button {
+			min-width: functions.rem(20);
+			min-height: functions.rem(20);
+		}
+	}
+}

@@ -1,7 +1,10 @@
 import { StoreProvider } from "app/StoreProvider";
-import Notifications from "components/Notifications/notifications";
-import ScreenLoader from "components/ScreenLoader/ScreenLoader";
-import Popups from "popups/popup";
+import Notifications from "components/General/Notifications/notifications";
+import ScreenLoader from "components/General/ScreenLoader/ScreenLoader";
+import dynamic from "next/dynamic";
+
+const Popups = dynamic(() => import("popups/popup"));
+
 import React from "react";
 import { clsx } from "utils/functions";
 
@@ -13,7 +16,7 @@ function AppWrapper({
   apiValidationData,
 }) {
   return (
-    <body className={clsx(color, className)}>
+    <div className={clsx(color, className)}>
       <StoreProvider data={data} apiValidationData={apiValidationData}>
         {children}
 
@@ -22,7 +25,7 @@ function AppWrapper({
 
         <ScreenLoader />
       </StoreProvider>
-    </body>
+    </div>
   );
 }
 

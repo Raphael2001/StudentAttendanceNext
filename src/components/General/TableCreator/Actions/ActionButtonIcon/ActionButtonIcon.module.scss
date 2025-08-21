@@ -1,0 +1,18 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+.action-button-icon {
+	width: functions.rem(18);
+	height: functions.rem(18);
+	svg {
+		stroke-width: 1.5;
+	}
+}
+
+@media (min-width: functions.em(settings.$desktop)) {
+	.action-button-icon {
+		width: functions.rem(24);
+		height: functions.rem(24);
+	}
+}

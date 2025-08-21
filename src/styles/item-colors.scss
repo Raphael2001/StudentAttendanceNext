@@ -1,31 +1,68 @@
-@import "settings";
+@use "mixins";
+@use "sass:color";
+@use "settings";
+@use "sass:map"; // at the top of the file
+
 $colors: (
-  blue: $basic-color-blue,
-  red: $basic-color-red,
-  green: $basic-color-green,
-  yellow: $basic-color-yellow,
-  purple: $basic-color-purple,
-  pink: $basic-color-pink,
-  orange: $basic-color-orange,
+	"blue": settings.$basic-color-blue,
+	"red": settings.$basic-color-red,
+	"green": settings.$basic-color-green,
+	"yellow": settings.$basic-color-yellow,
+	"purple": settings.$basic-color-purple,
+	"pink": settings.$basic-color-pink,
+	"orange": settings.$basic-color-orange,
+);
+
+$tags-colors: (
+	red: (
+		text: #611521,
+		background: #fad8da,
+	),
+	green: (
+		text: #315d45,
+		background: #c4f3dc,
+	),
+	blue: (
+		text: #3b498e,
+		background: #d5e5ff,
+	),
+	grey: (
+		text: #2c2f32,
+		background: #e4e5e7,
+	),
+	yellow: (
+		text: #745620,
+		background: #f9efde,
+	),
 );
 
 @each $name, $color in $colors {
-  .item.#{$name} {
-    background-color: $color;
-  }
-  .light-item.#{$name} {
-    background-color: lighten($color, 30);
-  }
-  .border.#{$name} {
-    border: 1px solid $color;
-  }
-  .text.#{$name} {
-    color: $color;
-  }
-  .icon.#{$name} {
-    @include recolor($color);
-  }
-  .glass.#{$name} {
-    @include glass-effect($color);
-  }
+	.item.#{"" + $name} {
+		background-color: $color;
+	}
+	.text.#{"" + $name} {
+		color: $color;
+	}
+}
+@mixin tag-color($name, $text-color, $bg-color) {
+	.tag.#{"" + $name} {
+		color: $text-color;
+		background-color: $bg-color;
+	}
+	.tag-icon.#{"" + $name} {
+		&[stroke]:not([stroke="none"]) {
+			stroke: $text-color;
+		}
+
+		&[fill]:not([fill="none"]) {
+			fill: $text-color;
+		}
+	}
+	.tag-glass.#{"" + $name} {
+		@include mixins.glass-effect($bg-color);
+	}
+}
+
+@each $name, $colors in $tags-colors {
+	@include tag-color($name, map.get($colors, text), map.get($colors, background));
 }

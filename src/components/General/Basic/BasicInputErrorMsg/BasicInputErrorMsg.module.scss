@@ -1,0 +1,15 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/locale";
+
+.error-message {
+	position: absolute;
+	top: 100%;
+
+	font-size: functions.rem(12);
+	color: settings.$appleRed;
+	font-family: settings.$font;
+	@include locale.right(0);
+}

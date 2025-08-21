@@ -1,0 +1,23 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+@use "../../Basic/BasicTextArea/BasicTextArea.module";
+@use "../../Basic/BasicInputErrorMsg/BasicInputErrorMsg.module";
+
+.text-area-wrapper {
+	position: relative;
+	width: 100%;
+
+	.text-area {
+		overflow: hidden;
+		border: none;
+		border-bottom: 1px solid settings.$grey;
+		border-radius: 0;
+		&:focus {
+			border-bottom: 1px solid settings.$input-focus-color;
+		}
+	}
+}

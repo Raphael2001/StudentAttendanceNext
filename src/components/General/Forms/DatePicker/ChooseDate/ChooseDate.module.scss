@@ -1,0 +1,26 @@
+@use "styles/functions";
+
+@use "styles/settings";
+
+@use "styles/mixins";
+
+.choose-date-wrapper {
+	width: functions.rem(277);
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+	height: functions.rem(164);
+	overflow-y: scroll;
+	.option-card {
+		flex-basis: 33%;
+		font-size: functions.rem(16);
+		line-height: functions.rem(18);
+		color: settings.$cms-main-color;
+		margin-top: functions.rem(23);
+		font-family: settings.$font-light;
+
+		&.selected {
+			font-family: settings.$font-bold;
+		}
+	}
+}
