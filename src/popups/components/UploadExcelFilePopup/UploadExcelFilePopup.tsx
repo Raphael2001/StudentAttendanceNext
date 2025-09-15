@@ -31,7 +31,7 @@ export default function UploadExcelFilePopup(props: Props) {
 			onSuccessNotification();
 			onSuccess();
 		}
-		Api.cms.excelFile.POST({ payload, config: { onSuccess: onSuccessHandler } });
+		Api.cms.excelFile.POST({ payload, config: { onSuccess: onSuccessHandler, isFormData: true } });
 	}
 
 	const formData: FormData = {
@@ -40,7 +40,7 @@ export default function UploadExcelFilePopup(props: Props) {
 				name: "file",
 				label: "בחרו קובץ",
 				inputType: FORM_INPUTS_TYPES.FILE_UPLOAD,
-				schema: VALIDATION_SCHEMES.RequiredString,
+				schema: VALIDATION_SCHEMES.NoValidation,
 
 				accept: ".xlsx",
 			},
