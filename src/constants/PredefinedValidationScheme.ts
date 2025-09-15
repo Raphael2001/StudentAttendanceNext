@@ -30,6 +30,13 @@ const VALIDATION_SCHEMES = {
 		})
 		.required(),
 	Boolean: Joi.boolean(),
+	File: Joi.object({
+		name: Joi.string(),
+		type: Joi.string(),
+		size: Joi.number().integer(),
+		lastModified: Joi.number().integer().required(),
+	}).unknown(true),
+	NoValidation: Joi.any().empty(""),
 };
 
 export default VALIDATION_SCHEMES;
