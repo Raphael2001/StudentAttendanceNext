@@ -7,11 +7,10 @@ const withNextIntl = createNextIntlPlugin();
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    useLightningcss: true,
-    reactCompiler: true,
-  },
-  reactStrictMode: false,
+	experimental: {
+		reactCompiler: true,
+	},
+	reactStrictMode: false,
 };
 
 module.exports = withNextIntl(nextConfig);
