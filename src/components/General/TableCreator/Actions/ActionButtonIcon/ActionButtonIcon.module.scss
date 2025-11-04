@@ -2,17 +2,21 @@
 
 @use "styles/settings";
 
-.action-button-icon {
-	width: functions.rem(18);
-	height: functions.rem(18);
-	svg {
+.action-button-icon svg {
+	svg,
+	img {
+		width: functions.rem(18);
+		height: functions.rem(18);
 		stroke-width: 1.5;
 	}
 }
 
 @media (min-width: functions.em(settings.$desktop)) {
 	.action-button-icon {
-		width: functions.rem(24);
-		height: functions.rem(24);
+		svg,
+		img {
+			width: functions.rem(24);
+			height: functions.rem(24);
+		}
 	}
 }
