@@ -2,8 +2,11 @@
 @use "styles/settings";
 @use "styles/mixins";
 .general-info-wrapper {
-  padding-block: functions.rem(30);
-  .sync-db-btn {
-    margin-top: functions.rem(15);
-  }
+	padding-block: functions.rem(30);
+	.sync-db-btn {
+		margin-top: functions.rem(15);
+	}
+	.sync-attendance-btn {
+		margin-top: functions.rem(15);
+	}
 }
