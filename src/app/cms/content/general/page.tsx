@@ -13,6 +13,7 @@ import CMS_MODULES from "constants/CMSModules";
 import usePermission from "utils/hooks/usePermission";
 import { useAppSelector } from "utils/hooks/useRedux";
 import useCMSTranslate from "utils/hooks/useCMSTranslate";
+import Api from "api";
 export default function GeneralPage() {
 	const generalInfo = useAppSelector((store) => store.init.generalInfo);
 
@@ -44,6 +45,13 @@ export default function GeneralPage() {
 						/>
 					);
 				})}
+
+			<div className={styles["sync-attendance-btn"]}>
+				<CmsButton
+					text={translate("sync_attendance")}
+					onClick={() => Api.cms.syncAttendance.POST({})}
+				/>
+			</div>
 
 			{hasSyncOptions && (
 				<div className={styles["sync-db-btn"]}>

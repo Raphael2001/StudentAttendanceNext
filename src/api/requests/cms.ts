@@ -141,6 +141,12 @@ const cms = {
 			useBasicCMSOnSuccess: false,
 		},
 	]),
+	syncAttendance: createCMSApiMethods("syncAttendance", [
+		{
+			method: API_METHODS.POST,
+			useBasicCMSOnSuccess: false,
+		},
+	]),
 };
 
 export default cms;
