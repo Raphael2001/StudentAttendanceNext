@@ -14,6 +14,7 @@ import AutoComplete from "components/General/Forms/AutoComplete/AutoComplete";
 import CustomDatePicker from "components/General/Forms/DatePicker/CustomDatePicker";
 import CmsButton from "../CmsButton/CmsButton";
 import TableCreator from "components/General/TableCreator/TableCreator";
+import { Attedance } from "utils/types/attendance";
 type option = {
 	_id: string;
 	name: string;
@@ -25,13 +26,17 @@ type Props = {
 	dateFilter?: boolean;
 };
 
+type Summary = {
+	totalStudents: number;
+};
+
 function StudentAttendanceView({ options, apiCall, extraHeaders = {}, dateFilter = false }: Props) {
 	usePermission(CMS_MODULES.ATTENDANCE);
 
 	const [value, setValue] = useState<string>("");
 	const [startDate, setStartDate] = useState<Date>();
 	const [endDate, setEndDate] = useState<Date>();
-	const [data, setData] = useState();
+	const [data, setData] = useState<Array<Attedance>>();
 
 	function onChange(name: string, option: any) {
 		if (option) {
@@ -58,7 +63,7 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {}, dateFilter
 			extra["endDate"] = formatDate(endDate);
 		}
 
-		apiCall(value, extra,(response)=>{
+		apiCall(value, extra, (response) => {
 			setData(response.body);
 		});
 	}
@@ -67,6 +72,23 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {}, dateFilter
 		studentId: { title: "תעודת זהות", type: TABLE_CELL_TYPES.TEXT },
 		studentName: { title: "שם", type: TABLE_CELL_TYPES.TEXT },
 		...extraHeaders,
+		totalPresent: { title: "סהכ נוכחות", type: TABLE_CELL_TYPES.TEXT },
+		totalAbsent: { title: "סהכ חיסורים", type: TABLE_CELL_TYPES.TEXT },
+	};
+
+	const summaryData: any = [];
+	if (Array.isArray(data) && data.length > 0) {
+		const summaryItem = {
+			_id: "summary",
+			totalStudents: data.length,
+			totalPresent: data.reduce((total, curr) => total + curr.totalPresent, 0),
+			totalAbsent: data.reduce((total, curr) => total + curr.totalAbsent, 0),
+		};
+		summaryData.push(summaryItem);
+	}
+
+	const summaryHeader = {
+		totalStudents: { title: "סהכ תלמידים", type: TABLE_CELL_TYPES.TEXT },
 		totalPresent: { title: "סהכ נוכחות", type: TABLE_CELL_TYPES.TEXT },
 		totalAbsent: { title: "סהכ חיסורים", type: TABLE_CELL_TYPES.TEXT },
 	};
@@ -116,11 +138,19 @@ function StudentAttendanceView({ options, apiCall, extraHeaders = {}, dateFilter
 			</div>
 
 			{data && (
-				<TableCreator
-					data={data}
-					header={basicHeader}
-					className={styles["table"]}
-				/>
+				<div className={styles["data-wrapper"]}>
+					<TableCreator
+						data={data}
+						header={basicHeader}
+						className={styles["table"]}
+					/>
+
+					<TableCreator
+						data={summaryData}
+						header={summaryHeader}
+						className={styles["table"]}
+					/>
+				</div>
 			)}
 		</div>
 	);
