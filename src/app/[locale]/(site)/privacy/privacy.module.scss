@@ -1,0 +1,8 @@
+@use "styles/functions";
+@use "styles/settings";
+@use "styles/mixins";
+.privacy-text {
+	padding-inline: functions.rem(30);
+	padding-block: functions.rem(50);
+	font-size: functions.rem(16);
+}
