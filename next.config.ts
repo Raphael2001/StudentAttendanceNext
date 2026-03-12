@@ -1,16 +1,11 @@
 import createNextIntlPlugin from "next-intl/plugin";
+import { NextConfig } from "next";
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
-
-import { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
-	experimental: {
-		reactCompiler: true,
-	},
+	reactCompiler: true,
 	reactStrictMode: false,
 };
 
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);
