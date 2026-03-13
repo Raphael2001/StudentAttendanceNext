@@ -6,4 +6,5 @@ export type Course = {
   time: string;
   days: string;
   name: string;
+  semester: string;
 };
