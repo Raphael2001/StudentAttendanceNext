@@ -14,6 +14,7 @@ import { Routes } from "constants/routes";
 import Api from "api";
 import { Course } from "utils/types/course";
 import POPUP_TYPES from "constants/PopupTypes";
+import SEMESTERS from "constants/Semesters";
 
 export default function CoursePage(props) {
 	const courses = useAppSelector((store) => store.init.courses);
@@ -28,6 +29,12 @@ export default function CoursePage(props) {
 		name: {
 			title: "שם",
 			type: TABLE_CELL_TYPES.TEXT,
+		},
+		semester: {
+			title: "סמסטר",
+			type: TABLE_CELL_TYPES.TEXT_FROM_DATASET,
+			dataset: SEMESTERS,
+			displayField: "name",
 		},
 		days: {
 			title: "ימי הקורס",
