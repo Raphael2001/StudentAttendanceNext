@@ -12,6 +12,7 @@ import Api from "api";
 import { FormData } from "utils/types/form";
 import FORM_INPUTS_TYPES from "constants/FormInputsTypes";
 import VALIDATION_SCHEMES from "constants/PredefinedValidationScheme";
+import SEMESTERS from "constants/Semesters";
 
 type Payload = {
 	dataItem?: Course;
@@ -21,6 +22,29 @@ type Props = {
 	payload: Payload;
 	popupIndex: number;
 };
+
+function transformInitialData(initialData?: Course) {
+	if (initialData) {
+		const data = JSON.parse(JSON.stringify(initialData));
+		data.endDate = convertStringToDate(initialData.endDate);
+		data.startDate = convertStringToDate(initialData.startDate);
+		const [hour, minute] = initialData.time.split(":");
+		data.time = { hour, minute };
+		if (initialData.semester) {
+			data.semester = String(initialData.semester);
+		}
+		return data;
+	}
+	return undefined;
+}
+
+function formatPayload(formPayload) {
+	const payload = { ...formPayload };
+	payload.endDate = formatDate(formPayload.endDate);
+	payload.startDate = formatDate(formPayload.startDate);
+	payload.time = `${formPayload.time.hour}:${formPayload.time.minute}`;
+	return payload;
+}
 
 function CoursePopup(props: Props) {
 	const { payload, popupIndex } = props;
@@ -35,26 +59,6 @@ function CoursePopup(props: Props) {
 		} else {
 			Api.cms.course.POST({ payload, config: { onSuccess } });
 		}
-	}
-
-	function transformInitialData(initialData?: Course) {
-		if (initialData) {
-			const data = JSON.parse(JSON.stringify(initialData));
-			data.endDate = convertStringToDate(initialData.endDate);
-			data.startDate = convertStringToDate(initialData.startDate);
-			const [hour, minute] = initialData.time.split(":");
-			data.time = { hour, minute };
-			return data;
-		}
-		return undefined;
-	}
-
-	function formatPayload(formPayload) {
-		const payload = { ...formPayload };
-		payload.endDate = formatDate(formPayload.endDate);
-		payload.startDate = formatDate(formPayload.startDate);
-		payload.time = `${formPayload.time.hour}:${formPayload.time.minute}`;
-		return payload;
 	}
 
 	const initialData = useMemo(() => transformInitialData(dataItem), [dataItem]);
@@ -99,7 +103,14 @@ function CoursePopup(props: Props) {
 				inputType: FORM_INPUTS_TYPES.INPUT,
 				schema: VALIDATION_SCHEMES.RequiredString,
 			},
-
+			{
+				name: "semester",
+				label: "סמסטר",
+				inputType: FORM_INPUTS_TYPES.SELECT,
+				schema: VALIDATION_SCHEMES.RequiredString,
+				options: SEMESTERS,
+				field: "name",
+			},
 			{
 				name: "instructorId",
 				label: "מדריך",

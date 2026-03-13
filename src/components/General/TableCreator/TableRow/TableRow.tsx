@@ -140,7 +140,7 @@ function RenderCell({ item, value, name, data, onChangeCheckBox, selectedCheckbo
 
 			case TABLE_CELL_TYPES.TEXT_FROM_DATASET:
 				if (Array.isArray(dataset)) {
-					const foundItem = dataset.find((item) => item[searchField] === value);
+					const foundItem = dataset.find((item) => String(item[searchField]) === String(value));
 					if (foundItem && Object.hasOwn(foundItem, displayField)) {
 						return foundItem[displayField];
 					}
